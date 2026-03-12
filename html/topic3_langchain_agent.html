@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VMSBWR95XP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VMSBWR95XP');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topic 3 — Build Your First Agent with LangChain</title>
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #1a202c; display: flex; min-height: 100vh; }
+nav { width: 260px; min-width: 260px; background: #ffffff; padding: 24px 14px 40px; position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid #e2e8f0; scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; box-shadow: 2px 0 8px rgba(0,0,0,0.04); }
+nav .brand { font-size: 15px; font-weight: 800; color: #4f46e5; margin-bottom: 2px; letter-spacing: -0.3px; }
+nav .sub { font-size: 11px; color: #94a3b8; margin-bottom: 28px; }
+nav .group { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.2px; margin: 20px 0 6px 10px; }
+nav a { display: block; padding: 8px 12px; margin-bottom: 2px; border-radius: 7px; color: #475569; text-decoration: none; font-size: 13.5px; transition: background 0.12s, color 0.12s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+nav a:hover { background: #f1f5f9; color: #1a202c; }
+nav a.active { background: #eef2ff; color: #4f46e5; font-weight: 600; border-left: 3px solid #4f46e5; padding-left: 9px; }
+main { flex: 1; padding: 52px 68px 80px; max-width: 960px; min-width: 0; background: #f5f7fa; }
+h1 { font-size: 2rem; color: #111827; margin-bottom: 18px; margin-top: 44px; line-height: 1.25; }
+h2 { font-size: 1.45rem; color: #1e3a8a; margin-top: 40px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+h3 { font-size: 1.1rem; color: #3730a3; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 0.95rem; color: #4b5563; margin-top: 18px; margin-bottom: 6px; font-weight: 600; }
+h1:first-child, h2:first-child { margin-top: 0; }
+p { line-height: 1.8; color: #374151; margin-bottom: 14px; }
+ul, ol { padding-left: 24px; margin-bottom: 14px; }
+li { line-height: 1.75; color: #374151; margin-bottom: 5px; }
+a { color: #4f46e5; text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: #111827; }
+code { background: #f1f5f9; color: #be185d; padding: 2px 7px; border-radius: 5px; font-family: 'JetBrains Mono','Fira Code','Cascadia Code',monospace; font-size: 0.855em; border: 1px solid #e2e8f0; }
+pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 22px 24px; overflow-x: auto; margin: 18px 0 24px; }
+pre code { background: none; color: #1e293b; padding: 0; font-size: 0.83em; line-height: 1.65; border: none; }
+blockquote { border-left: 4px solid #6366f1; background: #eef2ff; padding: 14px 20px; border-radius: 0 8px 8px 0; margin: 18px 0; color: #4338ca; font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0 26px; font-size: 0.88em; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+th { background: #eef2ff; color: #3730a3; padding: 11px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid #c7d2fe; }
+td { padding: 10px 16px; border-bottom: 1px solid #f1f5f9; color: #374151; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 600; background: #eef2ff; color: #4f46e5; margin-right: 6px; }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="brand">🤖 Agentic AI</div>
+  <div class="sub">IK Agentic AI Series</div>
+  <a href="home.html">🏠 Home</a>
+  <div class="group">📋 All Topics</div>
+  <a href="topic1_fundamentals.html">1. LLMs, RAG &amp; Agents</a>
+  <a href="topic2_llm_apps.html">2. Building LLM Apps</a>
+  <a href="topic3_langchain_agent.html" class="active">3. First Agent: LangChain</a>
+  <a href="home.html">4. Multi-Agent LangGraph</a>
+  <a href="topic5_mcp_a2a.html">5. MCP &amp; A2A Protocol</a>
+  <a href="topic6_multimodal.html">6. Multimodal Audio Agents</a>
+  <a href="topic7_specialized.html">7. Specialized Agents</a>
+  <a href="topic8_evaluation.html">8. Evaluation &amp; LangSmith</a>
+  <a href="topic9_python_genai.html">9. Python for GenAI</a>
+  <div class="group">📚 Topic 4 Deep-Dive</div>
+  <a href="index.html">Overview</a>
+  <a href="concepts.html">Core Concepts</a>
+  <a href="architecture.html">Architecture</a>
+  <a href="workflow.html">Workflow</a>
+  <a href="demos.html">Demo Walkthrough</a>
+  <a href="quiz.html">Quiz</a>
+  <div class="group">🎓 Slides</div>
+  <a href="lecture_slides.html">Lecture Slides</a>
+  <a href="agent_flow_slide.html">Agent Flow Diagram</a>
+  <div class="group">📊 Diagrams</div>
+  <a href="diag_architecture.html">System Architecture</a>
+  <a href="diag_agent_flow.html">Agent Flow</a>
+  <a href="diag_rag_pipeline.html">RAG Pipeline</a>
+</nav>
+<main>
+
+<h1>🦜 Build Your First Agent with Python: LangChain</h1>
+<p><span class="badge">Topic 3</span> <span class="badge">LangChain</span> <span class="badge">Tools</span> <span class="badge">Memory</span> <span class="badge">Agents</span></p>
+<p><strong>Prerequisites:</strong> Python intermediate · Basic LLM familiarity<br/>
+<strong>Outcome:</strong> Build a fully functional, deployable LangChain agent with tools and memory</p>
+
+<blockquote>"LangChain is the scaffolding that transforms a raw LLM into a capable software agent. Understand its architecture and you understand how modern AI agents are built."</blockquote>
+
+<h2>🎯 Learning Objectives</h2>
+<ul>
+  <li>Map out LangChain's architecture: LLMs, Prompts, Chains, Tools, Memory, Agents</li>
+  <li>Build a modular agent capable of reasoning, tool use, and decision-making</li>
+  <li>Implement tool invocation, function calling, and conversational memory</li>
+  <li>Wire everything into a functional, deployable Python agent</li>
+</ul>
+
+<h2>1. LangChain Architecture Overview</h2>
+
+<h3>The Six Core Abstractions</h3>
+<table>
+  <tr><th>Abstraction</th><th>What it is</th><th>Analogy</th></tr>
+  <tr><td><strong>LLM / ChatModel</strong></td><td>The reasoning engine. Wraps OpenAI, Anthropic, etc.</td><td>The brain</td></tr>
+  <tr><td><strong>PromptTemplate</strong></td><td>Reusable, parameterized prompt structure</td><td>A fill-in-the-blank form</td></tr>
+  <tr><td><strong>Chain</strong></td><td>Sequence of components composed together</td><td>Assembly line</td></tr>
+  <tr><td><strong>Tool</strong></td><td>Python function the agent can choose to call</td><td>A specialized skill</td></tr>
+  <tr><td><strong>Memory</strong></td><td>State persisted across LLM calls</td><td>Notepad</td></tr>
+  <tr><td><strong>Agent</strong></td><td>LLM-driven loop that selects tools and actions</td><td>The decision-maker</td></tr>
+</table>
+
+<h3>How They Fit Together</h3>
+<pre><code>User Input
+    │
+    ▼
+PromptTemplate ──► formats input + memory + tools description
+    │
+    ▼
+ChatModel (LLM) ──► generates Thought + Action
+    │
+    ├─► Tool Call? ──► Tool.run(input) ──► Observation ──► back to LLM
+    │
+    └─► Final Answer? ──► Response to user
+         │
+         ▼
+       Memory.save_context(input, output)</code></pre>
+
+<h2>2. LLMs and Prompts in LangChain</h2>
+
+<pre><code>from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.messages import HumanMessage, SystemMessage
+
+# Initialize the LLM
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    temperature=0,          # Deterministic for agents
+    max_tokens=1000,
+    timeout=30,
+)
+
+# Basic prompt template
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a helpful assistant specializing in {domain}. Be concise and technical."),
+    MessagesPlaceholder(variable_name="chat_history"),  # Memory slot
+    ("human", "{input}"),
+    MessagesPlaceholder(variable_name="agent_scratchpad"),  # Agent reasoning slot
+])
+
+# Invoke directly
+messages = prompt.format_messages(
+    domain="software engineering",
+    chat_history=[],
+    input="What is a context manager in Python?",
+    agent_scratchpad=[]
+)
+response = llm.invoke(messages)
+print(response.content)</code></pre>
+
+<h2>3. Defining Tools</h2>
+
+<h3>Three Ways to Define a Tool</h3>
+
+<h4>Method 1: @tool decorator (simplest)</h4>
+<pre><code>from langchain.tools import tool
+
+@tool
+def calculate(expression: str) -> str:
+    """Evaluate a mathematical expression. Input must be a valid Python expression.
+    Example: '(15 * 24) / 3 + 100'"""
+    try:
+        # Use ast.literal_eval for safety — never eval() raw LLM output
+        import ast
+        tree = ast.parse(expression, mode='eval')
+        # Only allow safe math operations
+        allowed_nodes = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Num,
+                        ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Pow,
+                        ast.USub, ast.Constant)
+        for node in ast.walk(tree):
+            if not isinstance(node, allowed_nodes):
+                return "Error: Only arithmetic expressions allowed."
+        result = eval(compile(tree, '<string>', 'eval'))  # noqa
+        return str(result)
+    except Exception as e:
+        return f"Calculation error: {str(e)}"
+
+@tool
+def get_current_date(_: str = "") -> str:
+    """Get the current date and time."""
+    from datetime import datetime
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S UTC")
+
+@tool
+def search_wikipedia(query: str) -> str:
+    """Search Wikipedia for factual information about a topic."""
+    import wikipedia
+    try:
+        return wikipedia.summary(query, sentences=3)
+    except Exception:
+        return f"No Wikipedia article found for: {query}"</code></pre>
+
+<h4>Method 2: StructuredTool with Pydantic schema</h4>
+<pre><code>from langchain.tools import StructuredTool
+from pydantic import BaseModel, Field
+
+class WeatherInput(BaseModel):
+    city: str = Field(description="The city name to get weather for")
+    units: str = Field(default="celsius", description="Temperature units: 'celsius' or 'fahrenheit'")
+
+def get_weather(city: str, units: str = "celsius") -> str:
+    """Get real weather data via API."""
+    # In production, call a real weather API
+    return f"Weather in {city}: 22°{'C' if units == 'celsius' else 'F'}, partly cloudy"
+
+weather_tool = StructuredTool.from_function(
+    func=get_weather,
+    name="get_weather",
+    description="Get the current weather for a city.",
+    args_schema=WeatherInput
+)</code></pre>
+
+<h2>4. Conversational Memory</h2>
+
+<pre><code>from langchain.memory import ConversationBufferWindowMemory
+
+# Keep only the last N exchanges (prevents unbounded context growth)
+memory = ConversationBufferWindowMemory(
+    k=5,                      # Keep last 5 turns
+    return_messages=True,     # Return Message objects, not strings
+    memory_key="chat_history", # Must match MessagesPlaceholder name in prompt
+    output_key="output"
+)</code></pre>
+
+<h4>Persistent Memory (Redis)</h4>
+<pre><code>from langchain_community.chat_message_histories import RedisChatMessageHistory
+from langchain.memory import ConversationBufferMemory
+
+def get_session_memory(session_id: str) -> ConversationBufferMemory:
+    """Load or create persistent memory for a user session."""
+    history = RedisChatMessageHistory(
+        session_id=session_id,
+        url="redis://localhost:6379",
+        ttl=3600  # 1 hour TTL
+    )
+    return ConversationBufferMemory(
+        chat_memory=history,
+        return_messages=True,
+        memory_key="chat_history",
+        output_key="output"
+    )</code></pre>
+
+<h2>5. Building the Complete Agent</h2>
+
+<h3>Function Calling Agent (Recommended for Production)</h3>
+<pre><code>from langchain_openai import ChatOpenAI
+from langchain.agents import AgentExecutor, create_openai_functions_agent
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+
+# --- Tools ---
+from langchain_community.tools.tavily_search import TavilySearchResults
+tools = [
+    TavilySearchResults(max_results=3),
+    calculate,
+    get_current_date,
+    weather_tool
+]
+
+# --- LLM ---
+llm = ChatOpenAI(model="gpt-4o", temperature=0)
+
+# --- Prompt ---
+prompt = ChatPromptTemplate.from_messages([
+    ("system", """You are a helpful, precise assistant. Use your tools when you need
+real-time information or calculations. Always cite your sources."""),
+    MessagesPlaceholder("chat_history"),
+    ("human", "{input}"),
+    MessagesPlaceholder("agent_scratchpad"),
+])
+
+# --- Memory ---
+memory = ConversationBufferWindowMemory(
+    k=10, return_messages=True,
+    memory_key="chat_history", output_key="output"
+)
+
+# --- Agent ---
+agent = create_openai_functions_agent(llm=llm, tools=tools, prompt=prompt)
+executor = AgentExecutor(
+    agent=agent,
+    tools=tools,
+    memory=memory,
+    verbose=True,
+    max_iterations=6,
+    handle_parsing_errors=True,   # Don't crash on malformed tool calls
+    return_intermediate_steps=True
+)
+
+# --- Run ---
+def chat(user_message: str) -> str:
+    result = executor.invoke({"input": user_message})
+    return result["output"]
+
+print(chat("What's the weather in London, and what's 15% of 847?"))
+print(chat("Wait, I meant Paris. Also, what date did we first start chatting?"))
+# Memory ensures the agent recalls the context of previous messages</code></pre>
+
+<h2>6. The LCEL Way: LangChain Expression Language</h2>
+
+<p>Modern LangChain uses LCEL (<code>|</code> pipe operator) to compose chains declaratively:</p>
+
+<pre><code>from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+
+# Simple chain: prompt | llm | parser
+simple_chain = (
+    ChatPromptTemplate.from_template("Explain {concept} in one sentence.")
+    | ChatOpenAI(model="gpt-4o-mini")
+    | StrOutputParser()
+)
+
+result = simple_chain.invoke({"concept": "vector embeddings"})
+print(result)
+
+# Agents as LCEL runnables
+from langchain.agents import AgentExecutor
+from langchain_core.runnables import RunnableLambda
+
+agent_chain = (
+    RunnablePassthrough.assign(
+        agent_scratchpad=lambda x: format_to_openai_function_messages(x["intermediate_steps"])
+    )
+    | prompt
+    | llm.bind_tools(tools)
+    | OpenAIFunctionsAgentOutputParser()
+)</code></pre>
+
+<h2>7. Full Deployable Agent (Single File)</h2>
+
+<pre><code># agent_app.py — copy-paste ready
+import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain.agents import AgentExecutor, create_openai_functions_agent
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain.memory import ConversationBufferWindowMemory
+from langchain.tools import tool
+from langchain_community.tools.tavily_search import TavilySearchResults
+
+load_dotenv()  # Load OPENAI_API_KEY and TAVILY_API_KEY from .env
+
+@tool
+def calculate(expression: str) -> str:
+    """Evaluate a safe arithmetic expression like '15 * 24 + 100'."""
+    import ast
+    try:
+        tree = ast.parse(expression, mode='eval')
+        return str(eval(compile(tree, '<string>', 'eval')))  # noqa
+    except Exception as e:
+        return f"Error: {e}"
+
+tools = [TavilySearchResults(max_results=3), calculate]
+
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a helpful research assistant. Use tools for real-time info and math."),
+    MessagesPlaceholder("chat_history"),
+    ("human", "{input}"),
+    MessagesPlaceholder("agent_scratchpad"),
+])
+memory = ConversationBufferWindowMemory(
+    k=10, return_messages=True, memory_key="chat_history", output_key="output"
+)
+agent = create_openai_functions_agent(llm, tools, prompt)
+executor = AgentExecutor(agent=agent, tools=tools, memory=memory, verbose=True)
+
+if __name__ == "__main__":
+    print("Agent ready. Type 'quit' to exit.")
+    while True:
+        user_input = input("You: ").strip()
+        if user_input.lower() == "quit":
+            break
+        response = executor.invoke({"input": user_input})
+        print(f"Agent: {response['output']}\n")</code></pre>
+
+<h2>8. LangChain vs. Raw OpenAI SDK</h2>
+<table>
+  <tr><th>Aspect</th><th>Raw OpenAI SDK</th><th>LangChain</th></tr>
+  <tr><td>Boilerplate</td><td>More code for tool loops, memory, retries</td><td>Handled by framework</td></tr>
+  <tr><td>Flexibility</td><td>Full control</td><td>Abstractions hide details (can be a drawback)</td></tr>
+  <tr><td>Model switching</td><td>Manual refactor</td><td>Swap one line: <code>ChatAnthropic()</code></td></tr>
+  <tr><td>Debug visibility</td><td>Everything is explicit</td><td>Use <code>verbose=True</code> or LangSmith</td></tr>
+  <tr><td>Best for</td><td>Simple, performance-critical apps</td><td>Complex agent workflows, rapid prototyping</td></tr>
+</table>
+
+<h2>🧪 Self-Check Questions</h2>
+<ol>
+  <li>What are the six core abstractions in LangChain and what does each do?</li>
+  <li>Why is <code>temperature=0</code> recommended for agents?</li>
+  <li>What is the difference between <code>ConversationBufferMemory</code> and <code>ConversationBufferWindowMemory</code>?</li>
+  <li>Why should you never use Python's <code>eval()</code> directly on LLM-generated code? What is safer?</li>
+  <li>What is <code>agent_scratchpad</code> in a LangChain prompt, and what does it contain?</li>
+  <li>What is LCEL and how does it differ from the legacy <code>Chain</code> approach?</li>
+  <li>You have a support agent that uses 5 tools. A user asks a question that requires 3 tool calls in sequence. Walk through the execution step by step.</li>
+</ol>
+
+</main>
+</body>
+</html>

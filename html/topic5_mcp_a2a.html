@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VMSBWR95XP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VMSBWR95XP');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topic 5 — MCP &amp; Agent-to-Agent Protocol</title>
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #1a202c; display: flex; min-height: 100vh; }
+nav { width: 260px; min-width: 260px; background: #ffffff; padding: 24px 14px 40px; position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid #e2e8f0; scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; box-shadow: 2px 0 8px rgba(0,0,0,0.04); }
+nav .brand { font-size: 15px; font-weight: 800; color: #4f46e5; margin-bottom: 2px; letter-spacing: -0.3px; }
+nav .sub { font-size: 11px; color: #94a3b8; margin-bottom: 28px; }
+nav .group { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.2px; margin: 20px 0 6px 10px; }
+nav a { display: block; padding: 8px 12px; margin-bottom: 2px; border-radius: 7px; color: #475569; text-decoration: none; font-size: 13.5px; transition: background 0.12s, color 0.12s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+nav a:hover { background: #f1f5f9; color: #1a202c; }
+nav a.active { background: #eef2ff; color: #4f46e5; font-weight: 600; border-left: 3px solid #4f46e5; padding-left: 9px; }
+main { flex: 1; padding: 52px 68px 80px; max-width: 960px; min-width: 0; background: #f5f7fa; }
+h1 { font-size: 2rem; color: #111827; margin-bottom: 18px; margin-top: 44px; line-height: 1.25; }
+h2 { font-size: 1.45rem; color: #1e3a8a; margin-top: 40px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+h3 { font-size: 1.1rem; color: #3730a3; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 0.95rem; color: #4b5563; margin-top: 18px; margin-bottom: 6px; font-weight: 600; }
+h1:first-child, h2:first-child { margin-top: 0; }
+p { line-height: 1.8; color: #374151; margin-bottom: 14px; }
+ul, ol { padding-left: 24px; margin-bottom: 14px; }
+li { line-height: 1.75; color: #374151; margin-bottom: 5px; }
+a { color: #4f46e5; text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: #111827; }
+code { background: #f1f5f9; color: #be185d; padding: 2px 7px; border-radius: 5px; font-family: 'JetBrains Mono','Fira Code','Cascadia Code',monospace; font-size: 0.855em; border: 1px solid #e2e8f0; }
+pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 22px 24px; overflow-x: auto; margin: 18px 0 24px; }
+pre code { background: none; color: #1e293b; padding: 0; font-size: 0.83em; line-height: 1.65; border: none; }
+blockquote { border-left: 4px solid #6366f1; background: #eef2ff; padding: 14px 20px; border-radius: 0 8px 8px 0; margin: 18px 0; color: #4338ca; font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0 26px; font-size: 0.88em; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+th { background: #eef2ff; color: #3730a3; padding: 11px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid #c7d2fe; }
+td { padding: 10px 16px; border-bottom: 1px solid #f1f5f9; color: #374151; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 600; background: #eef2ff; color: #4f46e5; margin-right: 6px; }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="brand">🤖 Agentic AI</div>
+  <div class="sub">IK Agentic AI Series</div>
+  <a href="home.html">🏠 Home</a>
+  <div class="group">📋 All Topics</div>
+  <a href="topic1_fundamentals.html">1. LLMs, RAG &amp; Agents</a>
+  <a href="topic2_llm_apps.html">2. Building LLM Apps</a>
+  <a href="topic3_langchain_agent.html">3. First Agent: LangChain</a>
+  <a href="home.html">4. Multi-Agent LangGraph</a>
+  <a href="topic5_mcp_a2a.html" class="active">5. MCP &amp; A2A Protocol</a>
+  <a href="topic6_multimodal.html">6. Multimodal Audio Agents</a>
+  <a href="topic7_specialized.html">7. Specialized Agents</a>
+  <a href="topic8_evaluation.html">8. Evaluation &amp; LangSmith</a>
+  <a href="topic9_python_genai.html">9. Python for GenAI</a>
+  <div class="group">📚 Topic 4 Deep-Dive</div>
+  <a href="index.html">Overview</a>
+  <a href="concepts.html">Core Concepts</a>
+  <a href="architecture.html">Architecture</a>
+  <a href="workflow.html">Workflow</a>
+  <a href="demos.html">Demo Walkthrough</a>
+  <a href="quiz.html">Quiz</a>
+  <div class="group">🎓 Slides</div>
+  <a href="lecture_slides.html">Lecture Slides</a>
+  <a href="agent_flow_slide.html">Agent Flow Diagram</a>
+  <div class="group">📊 Diagrams</div>
+  <a href="diag_architecture.html">System Architecture</a>
+  <a href="diag_agent_flow.html">Agent Flow</a>
+  <a href="diag_rag_pipeline.html">RAG Pipeline</a>
+</nav>
+<main>
+
+<h1>🔗 Build Multi-Agents with MCP and Agent-to-Agent Protocol</h1>
+<p><span class="badge">Topic 5</span> <span class="badge">MCP</span> <span class="badge">A2A</span> <span class="badge">LangGraph</span> <span class="badge">Communication</span></p>
+<p><strong>Prerequisites:</strong> Topic 4 (Multi-Agent Systems) · LangGraph basics<br/>
+<strong>Outcome:</strong> Build structured agent-to-agent communication pipelines using MCP and A2A</p>
+
+<blockquote>"MCP is the USB-C of AI tools — a universal standard so agents can plug into any tool without custom integration code."</blockquote>
+
+<h2>🎯 Learning Objectives</h2>
+<ul>
+  <li>Explain what MCP (Model Context Protocol) is and why it was created</li>
+  <li>Understand the A2A (Agent-to-Agent) Protocol for inter-agent communication</li>
+  <li>Define shared context, message passing, and goal synchronization between agents</li>
+  <li>Build cooperative multi-agent workflows using Python and LangGraph</li>
+</ul>
+
+<h2>1. Model Context Protocol (MCP)</h2>
+
+<h3>The Problem MCP Solves</h3>
+<p>Before MCP, every AI agent needed custom integration code for each tool or data source — GitHub, Slack, databases, filesystems. An agent using 10 tools needed 10 different integrations. This created an explosion of fragile, unmaintainable connector code.</p>
+
+<p><strong>MCP</strong> (introduced by Anthropic, November 2024) standardizes how AI agents communicate with tools and data sources using a single, unified protocol.</p>
+
+<h3>MCP Architecture</h3>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│                    MCP Client (Agent)                   │
+│   "I need to read a file, query a DB, search the web"  │
+└──────────────────────┬──────────────────────────────────┘
+                       │  MCP Protocol (JSON-RPC 2.0)
+                       │  over stdio / HTTP / WebSocket
+       ┌───────────────┼───────────────┐
+       ▼               ▼               ▼
+┌──────────────┐ ┌────────────┐ ┌──────────────┐
+│  MCP Server  │ │ MCP Server │ │  MCP Server  │
+│  (Filesystem)│ │ (GitHub)   │ │  (PostgreSQL)│
+└──────────────┘ └────────────┘ └──────────────┘</code></pre>
+
+<h3>MCP Primitives</h3>
+<table>
+  <tr><th>Primitive</th><th>Direction</th><th>Purpose</th><th>Example</th></tr>
+  <tr><td><strong>Tools</strong></td><td>Agent → Server</td><td>Execute actions</td><td><code>run_query</code>, <code>read_file</code>, <code>send_email</code></td></tr>
+  <tr><td><strong>Resources</strong></td><td>Agent ← Server</td><td>Read data/context</td><td>File contents, DB schemas, API docs</td></tr>
+  <tr><td><strong>Prompts</strong></td><td>Agent ← Server</td><td>Reusable prompt templates</td><td>Domain-specific system prompts</td></tr>
+  <tr><td><strong>Sampling</strong></td><td>Server → Agent</td><td>Server requests LLM generation</td><td>Server needs LLM to decide next step</td></tr>
+</table>
+
+<h3>Building an MCP Server in Python</h3>
+<pre><code># Install: pip install mcp
+from mcp.server import Server
+from mcp.server.stdio import stdio_server
+from mcp import types
+import asyncio
+
+server = Server("my-knowledge-server")
+
+# Define a resource (data the agent can read)
+@server.list_resources()
+async def list_resources() -> list[types.Resource]:
+    return [
+        types.Resource(
+            uri="knowledge://company-docs",
+            name="Company Documentation",
+            description="Internal company policies and procedures",
+            mimeType="text/plain"
+        )
+    ]
+
+@server.read_resource()
+async def read_resource(uri: str) -> str:
+    if uri == "knowledge://company-docs":
+        with open("knowledge_base.txt") as f:
+            return f.read()
+    raise ValueError(f"Unknown resource: {uri}")
+
+# Define a tool (action the agent can call)
+@server.list_tools()
+async def list_tools() -> list[types.Tool]:
+    return [
+        types.Tool(
+            name="search_documents",
+            description="Search internal documents for relevant information",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "Search query"}
+                },
+                "required": ["query"]
+            }
+        )
+    ]
+
+@server.call_tool()
+async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
+    if name == "search_documents":
+        query = arguments["query"]
+        # Perform vector search
+        results = rag_search(query)
+        return [types.TextContent(type="text", text=results)]
+
+async def main():
+    async with stdio_server() as (read_stream, write_stream):
+        await server.run(read_stream, write_stream, server.create_initialization_options())
+
+asyncio.run(main())</code></pre>
+
+<h3>Connecting an Agent to MCP Servers</h3>
+<pre><code>from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain.agents import create_openai_functions_agent, AgentExecutor
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+import asyncio
+
+async def run_mcp_agent():
+    # Connect to multiple MCP servers simultaneously
+    async with MultiServerMCPClient({
+        "knowledge": {
+            "command": "python",
+            "args": ["knowledge_server.py"],
+            "transport": "stdio"
+        },
+        "github": {
+            "url": "http://localhost:8001/mcp",
+            "transport": "http"
+        }
+    }) as client:
+        # All MCP tools auto-discovered — no manual integration!
+        tools = await client.get_tools()
+        print(f"Discovered {len(tools)} tools: {[t.name for t in tools]}")
+
+        llm = ChatOpenAI(model="gpt-4o", temperature=0)
+        prompt = ChatPromptTemplate.from_messages([
+            ("system", "You have access to company knowledge and GitHub. Use them as needed."),
+            ("human", "{input}"),
+            MessagesPlaceholder("agent_scratchpad"),
+        ])
+        agent = create_openai_functions_agent(llm, tools, prompt)
+        executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+        result = await executor.ainvoke({"input": "Find our API documentation and create a GitHub issue for missing endpoint docs"})
+        print(result["output"])
+
+asyncio.run(run_mcp_agent())</code></pre>
+
+<h2>2. Agent-to-Agent (A2A) Protocol</h2>
+
+<h3>What is A2A?</h3>
+<p>The <strong>A2A Protocol</strong> (Google, April 2025) defines how AI agents discover, communicate with, and delegate tasks to each other across different systems, frameworks, and vendors.</p>
+
+<table>
+  <tr><th>Aspect</th><th>MCP</th><th>A2A</th></tr>
+  <tr><td>Purpose</td><td>Agent ↔ Tool/Resource communication</td><td>Agent ↔ Agent communication</td></tr>
+  <tr><td>Typical relationship</td><td>Agent calls a tool</td><td>Agent delegates to another agent</td></tr>
+  <tr><td>Protocol</td><td>JSON-RPC 2.0</td><td>HTTP/HTTPS + JSON</td></tr>
+  <tr><td>Capability discovery</td><td>Server exposes tools list</td><td>Agent Card (/.well-known/agent.json)</td></tr>
+  <tr><td>Creator</td><td>Anthropic (Nov 2024)</td><td>Google (Apr 2025)</td></tr>
+</table>
+
+<h3>A2A Agent Card</h3>
+<p>Each A2A agent publishes a self-description at a well-known URL — like a business card for agents:</p>
+<pre><code>// GET https://your-agent-domain.com/.well-known/agent.json
+{
+  "name": "Research Agent",
+  "description": "Specializes in deep web research and fact synthesis",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": true
+  },
+  "skills": [
+    {
+      "id": "web_research",
+      "name": "Web Research",
+      "description": "Search and synthesize information from multiple web sources",
+      "inputModes": ["text"],
+      "outputModes": ["text"]
+    },
+    {
+      "id": "fact_check",
+      "name": "Fact Checking",
+      "description": "Verify claims against authoritative sources",
+      "inputModes": ["text"],
+      "outputModes": ["text", "data"]
+    }
+  ],
+  "url": "https://research-agent.example.com/a2a"
+}</code></pre>
+
+<h3>A2A Task Lifecycle</h3>
+<pre><code>Orchestrator Agent                    Specialist Agent
+       │                                     │
+       │── POST /a2a (send task) ──────────▶ │
+       │   {id: "task-123",                  │
+       │    message: "Research AI trends"}   │
+       │                                     │── working...
+       │◀── 202 Accepted ─────────────────── │
+       │   {status: "submitted"}             │
+       │                                     │
+       │── GET /a2a/task-123 ───────────────▶│
+       │◀── 200 {status: "working"} ─────────│
+       │                                     │── tool calls...
+       │◀── Streaming events ────────────────│
+       │   {artifact: "Partial results..."}  │
+       │                                     │── complete
+       │── GET /a2a/task-123 ───────────────▶│
+       │◀── 200 {status: "completed",        │
+       │         artifact: "Final report"} ──│</code></pre>
+
+<h2>3. Building A2A Communication with LangGraph</h2>
+
+<h3>Agent-to-Agent Communication via Shared State</h3>
+<pre><code>from typing import TypedDict, Annotated
+from langgraph.graph import StateGraph, END
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage, AIMessage
+import operator
+
+class MultiAgentState(TypedDict):
+    task: str
+    plan: str
+    research_results: str
+    analysis: str
+    final_report: str
+    current_agent: str
+    # Message log for full A2A trace
+    message_log: Annotated[list[dict], operator.add]
+
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+
+def planner_agent(state: MultiAgentState) -> MultiAgentState:
+    """Orchestrator: Break task into subtasks."""
+    response = llm.invoke([
+        HumanMessage(content=f"""You are a Planner agent.
+Task: {state['task']}
+Create a step-by-step research plan with 3-5 specific subtasks.""")
+    ])
+    return {
+        "plan": response.content,
+        "current_agent": "researcher",
+        "message_log": [{"from": "planner", "to": "researcher",
+                          "content": f"Plan created: {response.content[:100]}..."}]
+    }
+
+def researcher_agent(state: MultiAgentState) -> MultiAgentState:
+    """Specialist: Execute research based on the plan."""
+    response = llm.invoke([
+        HumanMessage(content=f"""You are a Research agent.
+Plan: {state['plan']}
+Execute the research plan. Provide detailed findings for each subtask.""")
+    ])
+    return {
+        "research_results": response.content,
+        "current_agent": "analyst",
+        "message_log": [{"from": "researcher", "to": "analyst",
+                          "content": "Research complete, forwarding results."}]
+    }
+
+def analyst_agent(state: MultiAgentState) -> MultiAgentState:
+    """Specialist: Analyze and synthesize research."""
+    response = llm.invoke([
+        HumanMessage(content=f"""You are an Analyst agent.
+Research: {state['research_results']}
+Evaluate the quality and completeness. Identify key insights and gaps.""")
+    ])
+    return {
+        "analysis": response.content,
+        "current_agent": "writer",
+        "message_log": [{"from": "analyst", "to": "writer",
+                          "content": "Analysis complete. Writing final report."}]
+    }
+
+def writer_agent(state: MultiAgentState) -> MultiAgentState:
+    """Specialist: Write final report."""
+    response = llm.invoke([
+        HumanMessage(content=f"""You are a Writer agent.
+Research: {state['research_results']}
+Analysis: {state['analysis']}
+Write a professional 400-word report with executive summary and recommendations.""")
+    ])
+    return {
+        "final_report": response.content,
+        "current_agent": "done",
+        "message_log": [{"from": "writer", "to": "output",
+                          "content": "Report complete."}]
+    }
+
+# Build the graph
+workflow = StateGraph(MultiAgentState)
+workflow.add_node("planner", planner_agent)
+workflow.add_node("researcher", researcher_agent)
+workflow.add_node("analyst", analyst_agent)
+workflow.add_node("writer", writer_agent)
+
+workflow.set_entry_point("planner")
+workflow.add_edge("planner", "researcher")
+workflow.add_edge("researcher", "analyst")
+workflow.add_edge("analyst", "writer")
+workflow.add_edge("writer", END)
+
+graph = workflow.compile()
+
+# Run
+result = graph.invoke({
+    "task": "Research the impact of multi-agent systems on enterprise software development",
+    "plan": "", "research_results": "", "analysis": "",
+    "final_report": "", "current_agent": "planner", "message_log": []
+})
+
+print("=== Final Report ===")
+print(result["final_report"])
+print("\n=== Agent Communication Log ===")
+for msg in result["message_log"]:
+    print(f"  {msg['from']} → {msg['to']}: {msg['content'][:80]}")</code></pre>
+
+<h2>4. Goal Synchronization and Shared Context</h2>
+
+<h3>Patterns for Agent Coordination</h3>
+<table>
+  <tr><th>Pattern</th><th>How it works</th><th>When to use</th></tr>
+  <tr><td>Shared State (LangGraph)</td><td>All agents read/write a common TypedDict</td><td>Sequential pipeline; same process</td></tr>
+  <tr><td>Message Queue</td><td>Agents publish/subscribe to a broker (Redis, Kafka)</td><td>Distributed systems; decoupled agents</td></tr>
+  <tr><td>A2A HTTP</td><td>Agents call each other via REST</td><td>Cross-framework; different machines</td></tr>
+  <tr><td>Supervisor</td><td>One agent manages task assignment and routing</td><td>Dynamic routing; complex decisions</td></tr>
+</table>
+
+<h2>🧪 Self-Check Questions</h2>
+<ol>
+  <li>What problem does MCP solve? How is it different from a regular tool/function call?</li>
+  <li>Name and describe the 4 MCP primitives. Which direction does each flow?</li>
+  <li>What is an Agent Card in the A2A protocol? What does it enable?</li>
+  <li>Compare MCP and A2A: when would you use each?</li>
+  <li>In the LangGraph A2A example, how do agents communicate? What is <code>message_log</code> used for?</li>
+  <li>What is goal synchronization in a multi-agent system? Give a concrete example where it can fail.</li>
+  <li>Design an A2A pipeline for a code review system. What agents would you create and how would they communicate?</li>
+</ol>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VMSBWR95XP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VMSBWR95XP');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topic 8 — Evaluating &amp; Optimizing Agents with LangSmith</title>
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #1a202c; display: flex; min-height: 100vh; }
+nav { width: 260px; min-width: 260px; background: #ffffff; padding: 24px 14px 40px; position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid #e2e8f0; scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; box-shadow: 2px 0 8px rgba(0,0,0,0.04); }
+nav .brand { font-size: 15px; font-weight: 800; color: #4f46e5; margin-bottom: 2px; letter-spacing: -0.3px; }
+nav .sub { font-size: 11px; color: #94a3b8; margin-bottom: 28px; }
+nav .group { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.2px; margin: 20px 0 6px 10px; }
+nav a { display: block; padding: 8px 12px; margin-bottom: 2px; border-radius: 7px; color: #475569; text-decoration: none; font-size: 13.5px; transition: background 0.12s, color 0.12s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+nav a:hover { background: #f1f5f9; color: #1a202c; }
+nav a.active { background: #eef2ff; color: #4f46e5; font-weight: 600; border-left: 3px solid #4f46e5; padding-left: 9px; }
+main { flex: 1; padding: 52px 68px 80px; max-width: 960px; min-width: 0; background: #f5f7fa; }
+h1 { font-size: 2rem; color: #111827; margin-bottom: 18px; margin-top: 44px; line-height: 1.25; }
+h2 { font-size: 1.45rem; color: #1e3a8a; margin-top: 40px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+h3 { font-size: 1.1rem; color: #3730a3; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 0.95rem; color: #4b5563; margin-top: 18px; margin-bottom: 6px; font-weight: 600; }
+h1:first-child, h2:first-child { margin-top: 0; }
+p { line-height: 1.8; color: #374151; margin-bottom: 14px; }
+ul, ol { padding-left: 24px; margin-bottom: 14px; }
+li { line-height: 1.75; color: #374151; margin-bottom: 5px; }
+a { color: #4f46e5; text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: #111827; }
+code { background: #f1f5f9; color: #be185d; padding: 2px 7px; border-radius: 5px; font-family: 'JetBrains Mono','Fira Code','Cascadia Code',monospace; font-size: 0.855em; border: 1px solid #e2e8f0; }
+pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 22px 24px; overflow-x: auto; margin: 18px 0 24px; }
+pre code { background: none; color: #1e293b; padding: 0; font-size: 0.83em; line-height: 1.65; border: none; }
+blockquote { border-left: 4px solid #6366f1; background: #eef2ff; padding: 14px 20px; border-radius: 0 8px 8px 0; margin: 18px 0; color: #4338ca; font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0 26px; font-size: 0.88em; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+th { background: #eef2ff; color: #3730a3; padding: 11px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid #c7d2fe; }
+td { padding: 10px 16px; border-bottom: 1px solid #f1f5f9; color: #374151; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 600; background: #eef2ff; color: #4f46e5; margin-right: 6px; }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="brand">🤖 Agentic AI</div>
+  <div class="sub">IK Agentic AI Series</div>
+  <a href="home.html">🏠 Home</a>
+  <div class="group">📋 All Topics</div>
+  <a href="topic1_fundamentals.html">1. LLMs, RAG &amp; Agents</a>
+  <a href="topic2_llm_apps.html">2. Building LLM Apps</a>
+  <a href="topic3_langchain_agent.html">3. First Agent: LangChain</a>
+  <a href="home.html">4. Multi-Agent LangGraph</a>
+  <a href="topic5_mcp_a2a.html">5. MCP &amp; A2A Protocol</a>
+  <a href="topic6_multimodal.html">6. Multimodal Audio Agents</a>
+  <a href="topic7_specialized.html">7. Specialized Agents</a>
+  <a href="topic8_evaluation.html" class="active">8. Evaluation &amp; LangSmith</a>
+  <a href="topic9_python_genai.html">9. Python for GenAI</a>
+  <div class="group">📚 Topic 4 Deep-Dive</div>
+  <a href="index.html">Overview</a>
+  <a href="concepts.html">Core Concepts</a>
+  <a href="architecture.html">Architecture</a>
+  <a href="workflow.html">Workflow</a>
+  <a href="demos.html">Demo Walkthrough</a>
+  <a href="quiz.html">Quiz</a>
+  <div class="group">🎓 Slides</div>
+  <a href="lecture_slides.html">Lecture Slides</a>
+  <a href="agent_flow_slide.html">Agent Flow Diagram</a>
+  <div class="group">📊 Diagrams</div>
+  <a href="diag_architecture.html">System Architecture</a>
+  <a href="diag_agent_flow.html">Agent Flow</a>
+  <a href="diag_rag_pipeline.html">RAG Pipeline</a>
+</nav>
+<main>
+
+<h1>📊 Evaluating &amp; Optimizing Agents with LangSmith</h1>
+<p><span class="badge">Topic 8</span> <span class="badge">LangSmith</span> <span class="badge">Evaluation</span> <span class="badge">Observability</span> <span class="badge">Optimization</span></p>
+<p><strong>Prerequisites:</strong> Topics 1–4 · LangChain basics<br/>
+<strong>Outcome:</strong> Instrument, evaluate, and continuously optimize a production agent with LangSmith</p>
+
+<blockquote>"You can't improve what you can't measure. Agent evaluation is what separates a demo from a production system."</blockquote>
+
+<h2>🎯 Learning Objectives</h2>
+<ul>
+  <li>Explain why agent evaluation is harder than traditional software testing</li>
+  <li>Set up LangSmith tracing and interpret execution traces</li>
+  <li>Define and implement evaluation metrics for agents</li>
+  <li>Optimize inference latency, model selection, and token costs</li>
+  <li>Compare fine-tuning vs. prompt optimization for improved agent performance</li>
+  <li>Deploy a continuous evaluation pipeline in production</li>
+</ul>
+
+<h2>1. Why Agent Evaluation Is Hard</h2>
+
+<p>Traditional software testing: inputs are deterministic, outputs are binary (pass/fail), test suites run in milliseconds.</p>
+<p>Agent evaluation: outputs are stochastic, correctness is often subjective, evaluation itself may require an LLM, and a single run can take 30+ seconds and cost $0.50.</p>
+
+<table>
+  <tr><th>Challenge</th><th>Traditional Software</th><th>LLM Agents</th></tr>
+  <tr><td>Output determinism</td><td>✅ Always same output</td><td>❌ Varies per run (temperature &gt; 0)</td></tr>
+  <tr><td>Correctness definition</td><td>Exact match / assert</td><td>Semantic correctness (needs human or LLM judge)</td></tr>
+  <tr><td>Failure modes</td><td>Exceptions, wrong values</td><td>Hallucination, wrong tool, infinite loops, unhelpful but valid output</td></tr>
+  <tr><td>Test cost</td><td>Milliseconds, free</td><td>Seconds to minutes, $0.01–$1 per run</td></tr>
+  <tr><td>Multi-step complexity</td><td>Test each function</td><td>Must evaluate entire reasoning chain</td></tr>
+</table>
+
+<h3>What to Measure</h3>
+<table>
+  <tr><th>Metric Category</th><th>Specific Metrics</th></tr>
+  <tr><td><strong>Correctness</strong></td><td>Answer accuracy, factual grounding (citations), task completion rate</td></tr>
+  <tr><td><strong>Faithfulness</strong></td><td>Is the answer supported by retrieved context? No hallucinated facts?</td></tr>
+  <tr><td><strong>Relevance</strong></td><td>Is the answer relevant to the question? No off-topic drift?</td></tr>
+  <tr><td><strong>Efficiency</strong></td><td>Latency (p50, p95, p99), token usage, number of LLM calls, tool call count</td></tr>
+  <tr><td><strong>Safety</strong></td><td>Guardrail bypass rate, PII leakage rate, refusal accuracy</td></tr>
+  <tr><td><strong>User satisfaction</strong></td><td>Thumbs up/down, conversation abandonment rate</td></tr>
+</table>
+
+<h2>2. LangSmith: Setup and Tracing</h2>
+
+<h3>What LangSmith Does</h3>
+<p>LangSmith is LangChain's observability and evaluation platform. It automatically captures every LLM call, tool invocation, and chain step with full inputs, outputs, latencies, and token counts — all in a searchable UI.</p>
+
+<h3>Setup (5 lines)</h3>
+<pre><code># 1. Install
+pip install langsmith
+
+# 2. Set environment variables
+export LANGCHAIN_TRACING_V2=true
+export LANGCHAIN_API_KEY="ls_..."       # Get from smith.langchain.com
+export LANGCHAIN_PROJECT="my-agent-v1"  # Groups traces by project
+
+# That's it. LangChain automatically sends all traces to LangSmith.
+# Run your agent normally:
+result = agent.invoke({"input": "What is the capital of France?"})
+# → Trace automatically appears at smith.langchain.com</code></pre>
+
+<h3>Adding Custom Spans</h3>
+<pre><code">from langsmith import traceable
+
+@traceable(name="rag_retrieval", tags=["retrieval"])
+def retrieve_documents(query: str) -> list[str]:
+    """Custom trace span for RAG retrieval."""
+    docs = vectorstore.similarity_search(query, k=4)
+    return [d.page_content for d in docs]
+
+@traceable(name="full_pipeline", metadata={"version": "1.2.0"})
+def run_pipeline(question: str) -> str:
+    docs = retrieve_documents(question)   # Auto-traced as child span
+    context = "\n".join(docs)
+    response = llm.invoke(f"Context: {context}\n\nQuestion: {question}")
+    return response.content
+
+# Run with trace
+answer = run_pipeline("What is our refund policy?")</code></pre>
+
+<h3>Reading a Trace</h3>
+<pre><code">LangSmith Trace View:
+┌─────────────────────────────────────────────────────────────┐
+│ Run: "What is our refund policy?"          Duration: 3.2s   │
+│ Tokens: 847 input + 213 output = 1060    Cost: $0.0012     │
+├─────────────────────────────────────────────────────────────┤
+│ ▶ AgentExecutor                               2.1s          │
+│   ▶ ChatOpenAI (GPT-4o-mini)                  0.8s          │
+│     Input tokens: 412    Output tokens: 89                  │
+│     Thought: "I need to search the knowledge base."          │
+│     Action: knowledge_base_search("refund policy")           │
+│   ▶ Tool: knowledge_base_search               0.4s          │
+│     Input: "refund policy"                                   │
+│     Output: "30-day money-back guarantee on..."             │
+│   ▶ ChatOpenAI (final answer)                 0.9s          │
+│     Input tokens: 524    Output tokens: 124                  │
+│     Output: "Our refund policy offers a 30-day..."          │
+└─────────────────────────────────────────────────────────────┘</code></pre>
+
+<h2>3. Programmatic Evaluation with LangSmith</h2>
+
+<h3>Creating a Dataset</h3>
+<pre><code>from langsmith import Client
+
+client = Client()
+
+# Create evaluation dataset
+dataset = client.create_dataset(
+    dataset_name="refund-policy-qa-v1",
+    description="Questions about our refund and return policies"
+)
+
+# Add examples (question → expected answer)
+examples = [
+    ("How long is your return window?", "30 days from purchase"),
+    ("Can I return a used item?", "Items must be in original condition"),
+    ("How do I initiate a refund?", "Contact support@acme.com or use the online portal"),
+]
+
+for question, expected in examples:
+    client.create_example(
+        inputs={"input": question},
+        outputs={"output": expected},
+        dataset_id=dataset.id
+    )</code></pre>
+
+<h3>Running an Evaluation</h3>
+<pre><code">from langsmith.evaluation import evaluate, LangChainStringEvaluator
+
+# Define the agent function to evaluate
+def agent_under_test(inputs: dict) -> dict:
+    result = executor.invoke({"input": inputs["input"], "chat_history": []})
+    return {"output": result["output"]}
+
+# Define evaluators
+evaluators = [
+    # Correctness: LLM judges if agent answer matches reference answer
+    LangChainStringEvaluator("labeled_criteria", config={
+        "criteria": "correctness",
+        "llm": ChatOpenAI(model="gpt-4o", temperature=0)
+    }),
+    # Conciseness
+    LangChainStringEvaluator("criteria", config={
+        "criteria": "conciseness",
+        "llm": ChatOpenAI(model="gpt-4o", temperature=0)
+    }),
+]
+
+# Run evaluation
+results = evaluate(
+    agent_under_test,
+    data="refund-policy-qa-v1",
+    evaluators=evaluators,
+    experiment_prefix="agent-v1-baseline",
+    max_concurrency=3
+)
+
+print(f"Correctness: {results.summary_metrics['correctness/score']:.2f}")
+print(f"Conciseness: {results.summary_metrics['conciseness/score']:.2f}")</code></pre>
+
+<h3>RAG-Specific Evaluation (RAGAS)</h3>
+<pre><code">from ragas import evaluate as ragas_evaluate
+from ragas.metrics import (
+    faithfulness,       # Is the answer grounded in retrieved context?
+    answer_relevancy,   # Is the answer relevant to the question?
+    context_precision,  # Are retrieved docs actually relevant?
+    context_recall      # Were all relevant docs retrieved?
+)
+from datasets import Dataset
+
+eval_data = Dataset.from_dict({
+    "question": ["What is our SLA?", "How do I cancel?"],
+    "answer": [agent_output_1, agent_output_2],
+    "contexts": [retrieved_docs_1, retrieved_docs_2],
+    "ground_truth": ["99.9% uptime SLA", "Cancel via account settings or email"]
+})
+
+results = ragas_evaluate(
+    eval_data,
+    metrics=[faithfulness, answer_relevancy, context_precision, context_recall]
+)
+print(results.to_pandas())</code></pre>
+
+<h2>4. Optimizing Latency, Cost, and Token Usage</h2>
+
+<h3>Latency Optimization Strategies</h3>
+<table>
+  <tr><th>Strategy</th><th>Typical Gain</th><th>Trade-off</th></tr>
+  <tr><td>Use GPT-4o-mini instead of GPT-4o</td><td>2–3× faster, 10× cheaper</td><td>Slightly lower quality on complex tasks</td></tr>
+  <tr><td>Semantic caching (repeat queries)</td><td>100× faster, 100% cheaper</td><td>Stale cache if data changes</td></tr>
+  <tr><td>Reduce max_iterations in agent</td><td>1.5–2× faster</td><td>May not complete complex tasks</td></tr>
+  <tr><td>Trim conversation memory (window=3)</td><td>20–40% fewer tokens</td><td>Lose older context</td></tr>
+  <tr><td>Streaming responses</td><td>Same total latency, better UX</td><td>Slightly more complex code</td></tr>
+  <tr><td>Async parallel tool calls</td><td>2–4× faster tool execution</td><td>More complex orchestration</td></tr>
+</table>
+
+<pre><code">from langchain.globals import set_llm_cache
+from langchain_community.cache import RedisSemanticCache
+from langchain_openai import OpenAIEmbeddings
+
+# Semantic cache: if a similar question was answered recently, return cached result
+set_llm_cache(RedisSemanticCache(
+    redis_url="redis://localhost:6379",
+    embedding=OpenAIEmbeddings(),
+    score_threshold=0.95   # 95% semantic similarity = cache hit
+))
+
+# Measure token usage
+from langchain.callbacks import get_openai_callback
+
+with get_openai_callback() as cb:
+    result = executor.invoke({"input": "What are our shipping rates?", "chat_history": []})
+    print(f"Tokens used: {cb.total_tokens}")
+    print(f"Cost: ${cb.total_cost:.4f}")
+    print(f"LLM calls: {cb.successful_requests}")</code></pre>
+
+<h2>5. Fine-Tuning vs. Prompt Optimization</h2>
+
+<table>
+  <tr><th>Aspect</th><th>Prompt Optimization</th><th>Fine-Tuning</th></tr>
+  <tr><td>Cost to implement</td><td>Low ($0)</td><td>High ($100–$10,000+)</td></tr>
+  <tr><td>Time to iterate</td><td>Minutes</td><td>Hours to days</td></tr>
+  <tr><td>Inference cost</td><td>Standard API pricing</td><td>Can be lower with smaller model</td></tr>
+  <tr><td>Portability</td><td>Switch models easily</td><td>Tied to specific model version</td></tr>
+  <tr><td>Custom style/format</td><td>Good</td><td>Excellent</td></tr>
+  <tr><td>New knowledge</td><td>Use RAG instead</td><td>Bakes in, but can go stale</td></tr>
+  <tr><td>Best for</td><td>Most use cases (try first)</td><td>Tone, format, specialized vocab</td></tr>
+</table>
+
+<blockquote>Rule of thumb: Always try prompt optimization first. Fine-tuning is for when you have 1,000+ high-quality examples and prompt engineering has plateaued. Never fine-tune to inject new knowledge — use RAG for that.</blockquote>
+
+<h3>DSPy: Automatic Prompt Optimization</h3>
+<pre><code">import dspy
+
+# DSPy uses LLMs to automatically improve prompts
+lm = dspy.OpenAI(model="gpt-4o-mini", max_tokens=1000)
+dspy.settings.configure(lm=lm)
+
+class QA(dspy.Signature):
+    """Answer questions about company policies accurately and concisely."""
+    question = dspy.InputField()
+    answer = dspy.OutputField(desc="Factual, concise answer in 1-3 sentences")
+
+class PolicyQA(dspy.Module):
+    def __init__(self):
+        self.predictor = dspy.ChainOfThought(QA)
+        self.retriever = dspy.Retrieve(k=3)
+
+    def forward(self, question):
+        context = self.retriever(question).passages
+        return self.predictor(question=question, context=context)
+
+# Optimize prompts automatically using training examples
+from dspy.teleprompt import BootstrapFewShot
+
+optimizer = BootstrapFewShot(metric=your_metric_function, max_bootstrapped_demos=4)
+optimized_program = optimizer.compile(PolicyQA(), trainset=train_examples)
+# Optimized prompts are now baked into the program</code></pre>
+
+<h2>6. Continuous Evaluation in Production</h2>
+
+<pre><code">import asyncio
+from langsmith import Client
+from datetime import datetime, timedelta
+
+client = Client()
+
+async def run_nightly_evaluation():
+    """Run evaluation suite every night at 2 AM."""
+    print(f"Starting evaluation at {datetime.now()}")
+
+    # 1. Run full test suite
+    results = evaluate(
+        agent_under_test,
+        data="production-qa-dataset",
+        evaluators=evaluators,
+        experiment_prefix=f"nightly-{datetime.now().strftime('%Y%m%d')}"
+    )
+
+    # 2. Check for regressions
+    correctness = results.summary_metrics.get("correctness/score", 0)
+    latency_p95 = results.summary_metrics.get("latency/p95", 999)
+
+    alerts = []
+    if correctness < 0.85:
+        alerts.append(f"⚠️ Correctness dropped to {correctness:.2%} (threshold: 85%)")
+    if latency_p95 > 5.0:
+        alerts.append(f"⚠️ P95 latency is {latency_p95:.1f}s (threshold: 5s)")
+
+    # 3. Send alerts if regressions detected
+    if alerts:
+        send_slack_alert("\n".join(alerts))
+        print("ALERT:", alerts)
+    else:
+        print(f"✅ All checks passed. Correctness: {correctness:.2%}, P95: {latency_p95:.1f}s")
+
+    # 4. Sample production traces for human review
+    recent_runs = client.list_runs(
+        project_name="production-agent",
+        start_time=datetime.now() - timedelta(hours=24),
+        filter='and(gt(latency, 8), eq(error, null))'  # Slow runs without errors
+    )
+    # Add to human review queue
+    for run in list(recent_runs)[:10]:
+        client.create_feedback(run.id, key="needs_review", score=0)</code></pre>
+
+<h2>🧪 Self-Check Questions</h2>
+<ol>
+  <li>Why is agent evaluation harder than unit testing? Name 3 specific challenges.</li>
+  <li>What does LangSmith capture in a trace? List 5 pieces of information visible in a trace.</li>
+  <li>What is the difference between <code>faithfulness</code> and <code>answer_relevancy</code> in RAGAS?</li>
+  <li>You notice your agent's P99 latency is 12 seconds. List 4 optimization strategies in order of effort to implement.</li>
+  <li>When should you use fine-tuning instead of prompt optimization? What is the minimum data requirement?</li>
+  <li>What is semantic caching and when does it provide no benefit?</li>
+  <li>Design a continuous evaluation pipeline for a customer support agent with 10,000 daily queries. What metrics would you track and how often would you run full evaluations?</li>
+</ol>
+
+</main>
+</body>
+</html>

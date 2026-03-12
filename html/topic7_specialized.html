@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VMSBWR95XP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VMSBWR95XP');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topic 7 — Specialized Agents</title>
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #1a202c; display: flex; min-height: 100vh; }
+nav { width: 260px; min-width: 260px; background: #ffffff; padding: 24px 14px 40px; position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid #e2e8f0; scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; box-shadow: 2px 0 8px rgba(0,0,0,0.04); }
+nav .brand { font-size: 15px; font-weight: 800; color: #4f46e5; margin-bottom: 2px; letter-spacing: -0.3px; }
+nav .sub { font-size: 11px; color: #94a3b8; margin-bottom: 28px; }
+nav .group { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.2px; margin: 20px 0 6px 10px; }
+nav a { display: block; padding: 8px 12px; margin-bottom: 2px; border-radius: 7px; color: #475569; text-decoration: none; font-size: 13.5px; transition: background 0.12s, color 0.12s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+nav a:hover { background: #f1f5f9; color: #1a202c; }
+nav a.active { background: #eef2ff; color: #4f46e5; font-weight: 600; border-left: 3px solid #4f46e5; padding-left: 9px; }
+main { flex: 1; padding: 52px 68px 80px; max-width: 960px; min-width: 0; background: #f5f7fa; }
+h1 { font-size: 2rem; color: #111827; margin-bottom: 18px; margin-top: 44px; line-height: 1.25; }
+h2 { font-size: 1.45rem; color: #1e3a8a; margin-top: 40px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+h3 { font-size: 1.1rem; color: #3730a3; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 0.95rem; color: #4b5563; margin-top: 18px; margin-bottom: 6px; font-weight: 600; }
+h1:first-child, h2:first-child { margin-top: 0; }
+p { line-height: 1.8; color: #374151; margin-bottom: 14px; }
+ul, ol { padding-left: 24px; margin-bottom: 14px; }
+li { line-height: 1.75; color: #374151; margin-bottom: 5px; }
+a { color: #4f46e5; text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: #111827; }
+code { background: #f1f5f9; color: #be185d; padding: 2px 7px; border-radius: 5px; font-family: 'JetBrains Mono','Fira Code','Cascadia Code',monospace; font-size: 0.855em; border: 1px solid #e2e8f0; }
+pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 22px 24px; overflow-x: auto; margin: 18px 0 24px; }
+pre code { background: none; color: #1e293b; padding: 0; font-size: 0.83em; line-height: 1.65; border: none; }
+blockquote { border-left: 4px solid #6366f1; background: #eef2ff; padding: 14px 20px; border-radius: 0 8px 8px 0; margin: 18px 0; color: #4338ca; font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0 26px; font-size: 0.88em; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+th { background: #eef2ff; color: #3730a3; padding: 11px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid #c7d2fe; }
+td { padding: 10px 16px; border-bottom: 1px solid #f1f5f9; color: #374151; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 600; background: #eef2ff; color: #4f46e5; margin-right: 6px; }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="brand">🤖 Agentic AI</div>
+  <div class="sub">IK Agentic AI Series</div>
+  <a href="home.html">🏠 Home</a>
+  <div class="group">📋 All Topics</div>
+  <a href="topic1_fundamentals.html">1. LLMs, RAG &amp; Agents</a>
+  <a href="topic2_llm_apps.html">2. Building LLM Apps</a>
+  <a href="topic3_langchain_agent.html">3. First Agent: LangChain</a>
+  <a href="home.html">4. Multi-Agent LangGraph</a>
+  <a href="topic5_mcp_a2a.html">5. MCP &amp; A2A Protocol</a>
+  <a href="topic6_multimodal.html">6. Multimodal Audio Agents</a>
+  <a href="topic7_specialized.html" class="active">7. Specialized Agents</a>
+  <a href="topic8_evaluation.html">8. Evaluation &amp; LangSmith</a>
+  <a href="topic9_python_genai.html">9. Python for GenAI</a>
+  <div class="group">📚 Topic 4 Deep-Dive</div>
+  <a href="index.html">Overview</a>
+  <a href="concepts.html">Core Concepts</a>
+  <a href="architecture.html">Architecture</a>
+  <a href="workflow.html">Workflow</a>
+  <a href="demos.html">Demo Walkthrough</a>
+  <a href="quiz.html">Quiz</a>
+  <div class="group">🎓 Slides</div>
+  <a href="lecture_slides.html">Lecture Slides</a>
+  <a href="agent_flow_slide.html">Agent Flow Diagram</a>
+  <div class="group">📊 Diagrams</div>
+  <a href="diag_architecture.html">System Architecture</a>
+  <a href="diag_agent_flow.html">Agent Flow</a>
+  <a href="diag_rag_pipeline.html">RAG Pipeline</a>
+</nav>
+<main>
+
+<h1>🔬 Specialized Agents</h1>
+<p><span class="badge">Topic 7</span> <span class="badge">Domain AI</span> <span class="badge">Coding</span> <span class="badge">Healthcare</span> <span class="badge">Data</span></p>
+<p><strong>Prerequisites:</strong> Topics 1–4 · Domain knowledge in target area<br/>
+<strong>Outcome:</strong> Design and build domain-specific agents with high-accuracy, targeted behavior</p>
+
+<blockquote>"A general-purpose agent is a generalist. A specialized agent is an expert. In production, experts win — because they know the domain vocabulary, constraints, and failure modes."</blockquote>
+
+<h2>🎯 Learning Objectives</h2>
+<ul>
+  <li>Explain when to specialize an agent vs. using a general-purpose LLM</li>
+  <li>Design agents for key verticals: data/analytics, healthcare, software coding, customer support</li>
+  <li>Integrate domain-specific APIs, tools, and knowledge sources</li>
+  <li>Implement modular, composable architectures for focused, high-accuracy behavior</li>
+  <li>Deploy specialized agents that perform targeted, expert-level tasks autonomously</li>
+</ul>
+
+<h2>1. General vs. Specialized Agents</h2>
+
+<table>
+  <tr><th>Aspect</th><th>General Agent (GPT-4o)</th><th>Specialized Agent</th></tr>
+  <tr><td>Knowledge</td><td>Broad but shallow in domains</td><td>Deep in target domain</td></tr>
+  <tr><td>Tool set</td><td>Generic (search, calculator)</td><td>Domain tools (SQL, FHIR, GitHub API)</td></tr>
+  <tr><td>System prompt</td><td>Generic</td><td>Expert persona + domain constraints</td></tr>
+  <tr><td>Model</td><td>Frontier model</td><td>Frontier model OR fine-tuned domain model</td></tr>
+  <tr><td>Guardrails</td><td>General safety</td><td>Domain compliance (HIPAA, SOC2, etc.)</td></tr>
+  <tr><td>Accuracy</td><td>70-80% on domain tasks</td><td>90%+ with domain context</td></tr>
+</table>
+
+<h3>The Specialization Stack</h3>
+<pre><code>Increasing Specialization →
+
+Generic LLM call
+    → System prompt with domain expertise
+        → Domain-specific tools (FHIR API, SQL, Bloomberg)
+            → RAG over domain knowledge (clinical guidelines, codebase, policies)
+                → Fine-tuned domain model (optional, expensive)
+                    → Human-in-the-loop for high-stakes decisions</code></pre>
+
+<h2>2. Data &amp; Analytics Agent</h2>
+
+<h3>Capabilities</h3>
+<ul>
+  <li>Translate natural language to SQL (text-to-SQL)</li>
+  <li>Run Python code for data analysis and visualization</li>
+  <li>Explain data insights in business terms</li>
+  <li>Detect anomalies and generate reports autonomously</li>
+</ul>
+
+<pre><code>from langchain_openai import ChatOpenAI
+from langchain.agents import create_openai_functions_agent, AgentExecutor
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain.tools import StructuredTool
+from pydantic import BaseModel
+import sqlite3
+import pandas as pd
+
+DATA_SYSTEM_PROMPT = """You are a Senior Data Analyst with expertise in SQL and Python.
+You have access to the 'sales' database with tables: orders, customers, products, regions.
+Rules:
+- Only write SELECT queries (no INSERT, UPDATE, DELETE, DROP)
+- When asked for a "report", always include: summary stats, trend, and a key insight
+- Format numbers with commas (e.g., 1,234,567)
+- Always validate that requested columns exist before querying"""
+
+class SQLInput(BaseModel):
+    query: str
+
+def run_sql_query(query: str) -> str:
+    """Execute a read-only SQL query against the sales database."""
+    # Validate: only SELECT statements
+    clean_query = query.strip().upper()
+    if not clean_query.startswith("SELECT"):
+        return "Error: Only SELECT queries are permitted."
+
+    # Block dangerous keywords
+    forbidden = ["DROP", "DELETE", "INSERT", "UPDATE", "TRUNCATE", "ALTER", "CREATE"]
+    for keyword in forbidden:
+        if keyword in clean_query:
+            return f"Error: '{keyword}' operation not allowed."
+
+    conn = sqlite3.connect("sales.db")
+    try:
+        df = pd.read_sql_query(query, conn)
+        return df.to_string(index=False, max_rows=20)
+    except Exception as e:
+        return f"Query error: {str(e)}"
+    finally:
+        conn.close()
+
+class PythonInput(BaseModel):
+    code: str
+
+def run_analysis_code(code: str) -> str:
+    """Execute Python code for data analysis. Returns stdout output."""
+    import io, contextlib
+    stdout = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(stdout):
+            exec(code, {"pd": pd, "print": print})  # noqa
+        return stdout.getvalue() or "Code executed successfully (no output)"
+    except Exception as e:
+        return f"Execution error: {str(e)}"
+
+tools = [
+    StructuredTool.from_function(run_sql_query, name="sql_query",
+        description="Run a SELECT SQL query on the sales database.", args_schema=SQLInput),
+    StructuredTool.from_function(run_analysis_code, name="python_analysis",
+        description="Run Python code for calculations and data analysis.", args_schema=PythonInput)
+]
+
+llm = ChatOpenAI(model="gpt-4o", temperature=0)
+prompt = ChatPromptTemplate.from_messages([
+    ("system", DATA_SYSTEM_PROMPT),
+    MessagesPlaceholder("chat_history"),
+    ("human", "{input}"),
+    MessagesPlaceholder("agent_scratchpad"),
+])
+
+data_agent = AgentExecutor(
+    agent=create_openai_functions_agent(llm, tools, prompt),
+    tools=tools, verbose=True, max_iterations=8
+)
+
+result = data_agent.invoke({"input": "What were the top 5 product categories by revenue last quarter?", "chat_history": []})
+print(result["output"])</code></pre>
+
+<h2>3. Healthcare/Clinical Agent</h2>
+
+<blockquote>⚠️ <strong>Critical:</strong> Healthcare AI agents must include human-in-the-loop for clinical decisions. The agent supports clinicians — it does not replace them. Always comply with HIPAA, HL7 FHIR, and applicable regulations.</blockquote>
+
+<h3>Capabilities</h3>
+<ul>
+  <li>Query FHIR patient records (read-only, consented access)</li>
+  <li>Check drug interactions using formulary APIs</li>
+  <li>Retrieve clinical guidelines (RAG over medical literature)</li>
+  <li>Generate structured clinical summaries for review</li>
+</ul>
+
+<pre><code>CLINICAL_SYSTEM_PROMPT = """You are a clinical decision support assistant.
+CRITICAL RULES:
+1. You ASSIST clinicians — never make autonomous clinical decisions
+2. Always recommend physician review for any clinical suggestion
+3. cite your source for every clinical statement
+4. If unsure, say "I don't have sufficient information — consult a specialist"
+5. Never disclose patient PII beyond what the querying clinician needs
+6. All outputs are for informational purposes only, not medical advice"""
+
+from langchain.tools import tool
+
+@tool
+def check_drug_interactions(drugs: str) -> str:
+    """Check for drug-drug interactions.
+    Input: comma-separated list of drug names, e.g. 'warfarin, aspirin, ibuprofen'"""
+    drug_list = [d.strip().lower() for d in drugs.split(",")]
+    # In production: call RxNorm/OpenFDA API
+    # Example mock response:
+    known_interactions = {
+        ("warfarin", "aspirin"): "MAJOR: Increased bleeding risk. Monitor INR closely.",
+        ("warfarin", "ibuprofen"): "MAJOR: NSAIDs increase anticoagulation effect. Avoid combination.",
+    }
+    results = []
+    for i, d1 in enumerate(drug_list):
+        for d2 in drug_list[i+1:]:
+            key = tuple(sorted([d1, d2]))
+            if key in known_interactions:
+                results.append(f"⚠️ {d1} + {d2}: {known_interactions[key]}")
+    return "\n".join(results) if results else "No known interactions found (always verify with pharmacist)."
+
+@tool
+def get_clinical_guideline(condition_and_question: str) -> str:
+    """Search clinical guidelines for a condition.
+    Input: 'condition | specific question' e.g. 'type 2 diabetes | first-line medication'"""
+    # In production: RAG over UpToDate, NICE guidelines, PubMed
+    return f"[Guideline search for: {condition_and_question}] — Connect to clinical knowledge RAG pipeline."</code></pre>
+
+<h2>4. Software Coding Agent</h2>
+
+<h3>Capabilities</h3>
+<ul>
+  <li>Generate, review, and debug code</li>
+  <li>Run tests and fix failing test cases iteratively</li>
+  <li>Explain existing codebases via RAG over the repo</li>
+  <li>Create PRs and interact with GitHub</li>
+</ul>
+
+<pre><code>CODING_SYSTEM_PROMPT = """You are a Senior Software Engineer.
+Coding standards:
+- Python 3.11+, type hints always, docstrings for public functions
+- Security first: never hardcode secrets, validate all inputs
+- Write tests alongside code (pytest)
+- Use existing patterns in the codebase before introducing new ones
+When debugging: reproduce → isolate → fix → verify. Never guess."""
+
+@tool
+def run_python_tests(test_file: str) -> str:
+    """Run pytest on a specific test file and return results.
+    Input: relative path to test file, e.g. 'tests/test_utils.py'"""
+    import subprocess, os
+    if not test_file.startswith("tests/"):
+        return "Error: test file must be in the tests/ directory"
+    if not os.path.exists(test_file):
+        return f"Error: file not found: {test_file}"
+    result = subprocess.run(
+        ["python", "-m", "pytest", test_file, "-v", "--tb=short"],
+        capture_output=True, text=True, timeout=60, cwd="."
+    )
+    return result.stdout[-3000:] + result.stderr[-500:]  # Limit output
+
+@tool
+def read_file_content(filepath: str) -> str:
+    """Read a source file. Input: relative file path."""
+    import os
+    # Prevent path traversal
+    safe_path = os.path.normpath(os.path.join(".", filepath))
+    if not safe_path.startswith(os.path.abspath(".")):
+        return "Error: path traversal not allowed"
+    try:
+        with open(safe_path) as f:
+            return f.read()[:5000]  # Limit to 5K chars
+    except FileNotFoundError:
+        return f"File not found: {filepath}"
+
+@tool
+def write_file_content(filepath_and_content: str) -> str:
+    """Write content to a file. Input: 'filepath|||content'"""
+    parts = filepath_and_content.split("|||", 1)
+    if len(parts) != 2:
+        return "Error: input must be 'filepath|||content'"
+    filepath, content = parts
+    import os
+    safe_path = os.path.normpath(os.path.join(".", filepath))
+    if not safe_path.startswith(os.path.abspath(".")):
+        return "Error: path traversal not allowed"
+    os.makedirs(os.path.dirname(safe_path), exist_ok=True)
+    with open(safe_path, "w") as f:
+        f.write(content)
+    return f"File written: {filepath} ({len(content)} chars)"</code></pre>
+
+<h2>5. Customer Support Agent</h2>
+
+<pre><code>SUPPORT_SYSTEM_PROMPT = """You are a customer support specialist for AcmeCorp.
+Your goals:
+1. Resolve issues on first contact when possible
+2. Show empathy before jumping to solutions
+3. Escalate to human agent when: customer is very upset, legal/safety issues, request exceeds your tools
+4. Never promise refunds > $50 without manager approval
+5. Always confirm resolution before closing: "Does that resolve your issue?"
+
+Tone: Warm, professional, solution-focused. Max response: 3 paragraphs."""
+
+@tool
+def lookup_order(order_id: str) -> str:
+    """Look up order status and details by order ID."""
+    # Validate format before querying
+    import re
+    if not re.match(r'^ORD-\d{6}$', order_id):
+        return "Invalid order ID format. Expected: ORD-XXXXXX"
+    # In production: query order management system
+    return f"Order {order_id}: Shipped 2025-03-10, estimated delivery 2025-03-14. Tracking: 1Z999AA10123456784"
+
+@tool
+def process_refund(order_id_and_amount: str) -> str:
+    """Process a refund. Input: 'order_id|amount_usd'"""
+    parts = order_id_and_amount.split("|")
+    if len(parts) != 2:
+        return "Error: input must be 'order_id|amount'"
+    order_id, amount_str = parts
+    try:
+        amount = float(amount_str)
+        if amount > 50:
+            return "Refund > $50 requires manager approval. Escalating to senior support."
+        # In production: call payment API
+        return f"Refund of ${amount:.2f} processed for {order_id}. Credit in 3-5 business days."
+    except ValueError:
+        return f"Invalid amount: {amount_str}"
+
+@tool
+def escalate_to_human(reason: str) -> str:
+    """Escalate the conversation to a human agent with a reason."""
+    return f"Escalating to human agent. Reason: {reason}. Transfer ID: ESC-{hash(reason) % 10000:04d}"</code></pre>
+
+<h2>6. Modular Architecture: The Capability Router</h2>
+
+<pre><code>from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+import json
+
+# Route incoming requests to the right specialized agent
+ROUTER_PROMPT = """You are a request router. Classify this request into one category:
+- "data": SQL queries, analytics, reports, data exploration
+- "coding": code generation, debugging, tests, code review
+- "support": order issues, refunds, account problems, product questions
+- "general": anything else
+
+Request: {request}
+Respond with ONLY one word from the list above."""
+
+router_chain = (
+    ChatPromptTemplate.from_template(ROUTER_PROMPT)
+    | ChatOpenAI(model="gpt-4o-mini", temperature=0)
+    | StrOutputParser()
+)
+
+# Agent registry
+AGENTS = {
+    "data": data_agent,
+    "coding": coding_agent,
+    "support": support_agent,
+}
+
+def route_and_execute(user_request: str) -> str:
+    """Route request to correct specialist agent."""
+    category = router_chain.invoke({"request": user_request}).strip().lower()
+    agent = AGENTS.get(category)
+    if agent is None:
+        return general_agent.invoke({"input": user_request})["output"]
+    return agent.invoke({"input": user_request, "chat_history": []})["output"]
+
+# Examples
+print(route_and_execute("Show me revenue by region for Q1 2025"))      # → data agent
+print(route_and_execute("Fix the bug in my authentication middleware")) # → coding agent
+print(route_and_execute("My order ORD-123456 hasn't arrived yet"))     # → support agent</code></pre>
+
+<h2>🧪 Self-Check Questions</h2>
+<ol>
+  <li>When should you use a specialized agent instead of a general-purpose one? Give 3 criteria.</li>
+  <li>Why must a healthcare agent never make autonomous clinical decisions? What safeguards should be in place?</li>
+  <li>In the data agent, why is it critical to validate that the SQL is SELECT-only before executing?</li>
+  <li>What is a capability router and why is it useful in a specialized agent system?</li>
+  <li>Describe the "Specialization Stack" in your own words. What's the trade-off at each level?</li>
+  <li>Design a specialized agent for a legal firm. What tools, knowledge sources, and constraints would it need?</li>
+  <li>How would you test a coding agent's output quality? What metrics would you track?</li>
+</ol>
+
+</main>
+</body>
+</html>

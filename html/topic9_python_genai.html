@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VMSBWR95XP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VMSBWR95XP');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topic 9 — Python for GenAI</title>
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #1a202c; display: flex; min-height: 100vh; }
+nav { width: 260px; min-width: 260px; background: #ffffff; padding: 24px 14px 40px; position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid #e2e8f0; scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; box-shadow: 2px 0 8px rgba(0,0,0,0.04); }
+nav .brand { font-size: 15px; font-weight: 800; color: #4f46e5; margin-bottom: 2px; letter-spacing: -0.3px; }
+nav .sub { font-size: 11px; color: #94a3b8; margin-bottom: 28px; }
+nav .group { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.2px; margin: 20px 0 6px 10px; }
+nav a { display: block; padding: 8px 12px; margin-bottom: 2px; border-radius: 7px; color: #475569; text-decoration: none; font-size: 13.5px; transition: background 0.12s, color 0.12s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+nav a:hover { background: #f1f5f9; color: #1a202c; }
+nav a.active { background: #eef2ff; color: #4f46e5; font-weight: 600; border-left: 3px solid #4f46e5; padding-left: 9px; }
+main { flex: 1; padding: 52px 68px 80px; max-width: 960px; min-width: 0; background: #f5f7fa; }
+h1 { font-size: 2rem; color: #111827; margin-bottom: 18px; margin-top: 44px; line-height: 1.25; }
+h2 { font-size: 1.45rem; color: #1e3a8a; margin-top: 40px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+h3 { font-size: 1.1rem; color: #3730a3; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 0.95rem; color: #4b5563; margin-top: 18px; margin-bottom: 6px; font-weight: 600; }
+h1:first-child, h2:first-child { margin-top: 0; }
+p { line-height: 1.8; color: #374151; margin-bottom: 14px; }
+ul, ol { padding-left: 24px; margin-bottom: 14px; }
+li { line-height: 1.75; color: #374151; margin-bottom: 5px; }
+a { color: #4f46e5; text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: #111827; }
+code { background: #f1f5f9; color: #be185d; padding: 2px 7px; border-radius: 5px; font-family: 'JetBrains Mono','Fira Code','Cascadia Code',monospace; font-size: 0.855em; border: 1px solid #e2e8f0; }
+pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 22px 24px; overflow-x: auto; margin: 18px 0 24px; }
+pre code { background: none; color: #1e293b; padding: 0; font-size: 0.83em; line-height: 1.65; border: none; }
+blockquote { border-left: 4px solid #6366f1; background: #eef2ff; padding: 14px 20px; border-radius: 0 8px 8px 0; margin: 18px 0; color: #4338ca; font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0 26px; font-size: 0.88em; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+th { background: #eef2ff; color: #3730a3; padding: 11px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid #c7d2fe; }
+td { padding: 10px 16px; border-bottom: 1px solid #f1f5f9; color: #374151; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 600; background: #eef2ff; color: #4f46e5; margin-right: 6px; }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="brand">🤖 Agentic AI</div>
+  <div class="sub">IK Agentic AI Series</div>
+  <a href="home.html">🏠 Home</a>
+  <div class="group">📋 All Topics</div>
+  <a href="topic1_fundamentals.html">1. LLMs, RAG &amp; Agents</a>
+  <a href="topic2_llm_apps.html">2. Building LLM Apps</a>
+  <a href="topic3_langchain_agent.html">3. First Agent: LangChain</a>
+  <a href="home.html">4. Multi-Agent LangGraph</a>
+  <a href="topic5_mcp_a2a.html">5. MCP &amp; A2A Protocol</a>
+  <a href="topic6_multimodal.html">6. Multimodal Audio Agents</a>
+  <a href="topic7_specialized.html">7. Specialized Agents</a>
+  <a href="topic8_evaluation.html">8. Evaluation &amp; LangSmith</a>
+  <a href="topic9_python_genai.html" class="active">9. Python for GenAI</a>
+  <div class="group">📚 Topic 4 Deep-Dive</div>
+  <a href="index.html">Overview</a>
+  <a href="concepts.html">Core Concepts</a>
+  <a href="concepts.html">Core Concepts</a>
+  <a href="architecture.html">Architecture</a>
+  <a href="workflow.html">Workflow</a>
+  <a href="demos.html">Demo Walkthrough</a>
+  <a href="quiz.html">Quiz</a>
+  <div class="group">🎓 Slides</div>
+  <a href="lecture_slides.html">Lecture Slides</a>
+  <a href="agent_flow_slide.html">Agent Flow Diagram</a>
+  <div class="group">📊 Diagrams</div>
+  <a href="diag_architecture.html">System Architecture</a>
+  <a href="diag_agent_flow.html">Agent Flow</a>
+  <a href="diag_rag_pipeline.html">RAG Pipeline</a>
+</nav>
+<main>
+
+<h1>🐍 Python for GenAI</h1>
+<p><span class="badge">Topic 9</span> <span class="badge">Python</span> <span class="badge">OpenAI SDK</span> <span class="badge">FastAPI</span> <span class="badge">Pydantic</span> <span class="badge">Async</span></p>
+<p><strong>Prerequisites:</strong> Basic Python (variables, functions, classes, loops)<br/>
+<strong>Outcome:</strong> Master the Python tools and patterns used throughout GenAI and LLM development</p>
+
+<blockquote>"Python is the lingua franca of AI. Mastering the right libraries and patterns means you spend less time fighting the framework and more time building intelligent systems."</blockquote>
+
+<h2>🎯 Learning Objectives</h2>
+<ul>
+  <li>Refresh essential Python foundations for GenAI workflows</li>
+  <li>Use the OpenAI Python SDK with confidence (chat, embeddings, function calling)</li>
+  <li>Build LLM-powered APIs with FastAPI and validate data with Pydantic</li>
+  <li>Work with vector databases (FAISS, Chroma, Pinecone)</li>
+  <li>Write async Python for high-performance LLM pipelines</li>
+  <li>Build and test complete LLM + RAG + Agent pipelines</li>
+</ul>
+
+<h2>1. Python Foundations for GenAI</h2>
+
+<h3>Essential Patterns You'll Use Constantly</h3>
+
+<h4>Dataclasses and TypedDicts (Agent State)</h4>
+<pre><code>from dataclasses import dataclass, field
+from typing import TypedDict, Annotated
+import operator
+
+# For structured data modeling
+@dataclass
+class Document:
+    content: str
+    source: str
+    score: float = 0.0
+    metadata: dict = field(default_factory=dict)
+
+# For LangGraph state (TypedDict preferred)
+class AgentState(TypedDict):
+    query: str
+    retrieved_docs: list[Document]
+    answer: str
+    iteration_count: Annotated[int, operator.add]  # Automatically sums updates</code></pre>
+
+<h4>Context Managers (Resource Cleanup)</h4>
+<pre><code>from contextlib import contextmanager
+import sqlite3
+
+@contextmanager
+def get_db_connection(db_path: str):
+    """Safe database connection — always closes even on exception."""
+    conn = sqlite3.connect(db_path)
+    try:
+        yield conn
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
+
+with get_db_connection("agents.db") as conn:
+    cursor = conn.execute("SELECT * FROM sessions")
+    results = cursor.fetchall()</code></pre>
+
+<h4>Decorators (Retry, Caching, Tracing)</h4>
+<pre><code>import time
+import functools
+from typing import Callable, TypeVar
+
+T = TypeVar("T")
+
+def retry_on_rate_limit(max_retries: int = 3, base_delay: float = 1.0):
+    """Decorator: retry on OpenAI rate limit errors with exponential backoff."""
+    def decorator(func: Callable) -> Callable:
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            last_error = None
+            for attempt in range(max_retries):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    if "rate_limit" in str(e).lower() or "429" in str(e):
+                        delay = base_delay * (2 ** attempt)
+                        print(f"Rate limited. Retrying in {delay}s... (attempt {attempt+1}/{max_retries})")
+                        time.sleep(delay)
+                        last_error = e
+                    else:
+                        raise  # Re-raise non-rate-limit errors immediately
+            raise last_error
+        return wrapper
+    return decorator
+
+@retry_on_rate_limit(max_retries=3)
+def call_llm(prompt: str) -> str:
+    return client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}]
+    ).choices[0].message.content</code></pre>
+
+<h2>2. OpenAI Python SDK</h2>
+
+<h3>Chat Completions</h3>
+<pre><code>from openai import OpenAI
+client = OpenAI()  # Reads OPENAI_API_KEY from environment
+
+# Basic completion
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "You are a concise technical assistant."},
+        {"role": "user", "content": "Explain what a context window is."}
+    ],
+    temperature=0,
+    max_tokens=200,
+    timeout=30
+)
+answer = response.choices[0].message.content
+tokens_used = response.usage.total_tokens
+
+# Streaming (for real-time UI updates)
+stream = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[{"role": "user", "content": "Write a haiku about Python."}],
+    stream=True
+)
+for chunk in stream:
+    delta = chunk.choices[0].delta.content
+    if delta:
+        print(delta, end="", flush=True)</code></pre>
+
+<h3>Function Calling (Structured Output)</h3>
+<pre><code">import json
+
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "extract_entities",
+            "description": "Extract named entities from text",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "people": {"type": "array", "items": {"type": "string"},
+                               "description": "Person names"},
+                    "organizations": {"type": "array", "items": {"type": "string"},
+                                      "description": "Organization names"},
+                    "locations": {"type": "array", "items": {"type": "string"},
+                                  "description": "Location names"},
+                    "dates": {"type": "array", "items": {"type": "string"},
+                              "description": "Date mentions"}
+                },
+                "required": ["people", "organizations", "locations", "dates"]
+            }
+        }
+    }
+]
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[{"role": "user",
+               "content": "Apple's CEO Tim Cook met with Google's Sundar Pichai in San Francisco on March 5th."}],
+    tools=tools,
+    tool_choice={"type": "function", "function": {"name": "extract_entities"}}
+)
+
+tool_call = response.choices[0].message.tool_calls[0]
+entities = json.loads(tool_call.function.arguments)
+print(entities)
+# {"people": ["Tim Cook", "Sundar Pichai"], "organizations": ["Apple", "Google"], ...}</code></pre>
+
+<h3>Embeddings</h3>
+<pre><code>def get_embedding(text: str, model: str = "text-embedding-3-small") -> list[float]:
+    """Get vector embedding for a piece of text."""
+    response = client.embeddings.create(
+        model=model,
+        input=text,
+        encoding_format="float"
+    )
+    return response.data[0].embedding
+
+# 1536-dimensional vector for text-embedding-3-small
+embedding = get_embedding("What is the capital of France?")
+print(f"Dimensions: {len(embedding)}")  # 1536
+
+# Batch embeddings (more efficient)
+texts = ["Hello world", "Python is great", "LLMs are transformative"]
+response = client.embeddings.create(model="text-embedding-3-small", input=texts)
+embeddings = [item.embedding for item in response.data]</code></pre>
+
+<h2>3. Pydantic for Data Validation</h2>
+
+<h3>Why Pydantic in GenAI?</h3>
+<p>LLMs output text. You need structured, validated Python objects. Pydantic bridges the gap — it parses, validates, and type-checks LLM outputs, API request bodies, and agent configurations.</p>
+
+<pre><code">from pydantic import BaseModel, Field, validator, model_validator
+from typing import Optional
+from datetime import datetime
+
+class AgentConfig(BaseModel):
+    model: str = Field(default="gpt-4o-mini", pattern=r"^gpt-|^claude-|^gemini-")
+    temperature: float = Field(default=0.0, ge=0.0, le=2.0)
+    max_tokens: int = Field(default=1000, gt=0, le=16000)
+    max_iterations: int = Field(default=5, ge=1, le=20)
+    system_prompt: str = Field(..., min_length=10, max_length=4000)
+    tools_enabled: list[str] = Field(default_factory=list)
+
+    @validator("tools_enabled", each_item=True)
+    def validate_tool_names(cls, tool):
+        allowed = {"search_web", "python_repl", "knowledge_base", "calculator"}
+        if tool not in allowed:
+            raise ValueError(f"Unknown tool: {tool}. Allowed: {allowed}")
+        return tool
+
+# LLM structured output parsing
+class SearchResult(BaseModel):
+    title: str
+    url: str
+    summary: str = Field(max_length=500)
+    relevance_score: float = Field(ge=0.0, le=1.0)
+
+class SearchResponse(BaseModel):
+    query: str
+    results: list[SearchResult]
+    total_found: int
+
+    @model_validator(mode="after")
+    def validate_counts(self):
+        if len(self.results) > self.total_found:
+            raise ValueError("results count cannot exceed total_found")
+        return self
+
+# Use with OpenAI structured outputs (gpt-4o supports native JSON mode)
+response = client.beta.chat.completions.parse(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Search results for 'Python async programming'"}],
+    response_format=SearchResponse
+)
+search = response.choices[0].message.parsed
+print(f"Found {search.total_found} results")
+for r in search.results:
+    print(f"  [{r.relevance_score:.2f}] {r.title}")</code></pre>
+
+<h2>4. FastAPI for LLM APIs</h2>
+
+<pre><code">from fastapi import FastAPI, HTTPException, Depends, Header
+from pydantic import BaseModel
+from typing import AsyncIterator
+from openai import AsyncOpenAI
+import asyncio
+
+app = FastAPI(title="GenAI API", version="1.0.0")
+async_client = AsyncOpenAI()
+
+# Request/Response schemas
+class ChatRequest(BaseModel):
+    message: str = Field(..., min_length=1, max_length=2000)
+    session_id: str = Field(default="default", pattern=r"^[a-zA-Z0-9_-]{1,64}$")
+    model: str = Field(default="gpt-4o-mini")
+
+class ChatResponse(BaseModel):
+    reply: str
+    tokens_used: int
+    model: str
+
+# API key authentication
+async def verify_api_key(x_api_key: str = Header(...)):
+    """Simple API key auth — use OAuth2/JWT in production."""
+    if x_api_key != "expected-key":
+        raise HTTPException(status_code=401, detail="Invalid API key")
+    return x_api_key
+
+@app.post("/chat", response_model=ChatResponse)
+async def chat(request: ChatRequest, _=Depends(verify_api_key)):
+    """Non-streaming chat endpoint."""
+    response = await async_client.chat.completions.create(
+        model=request.model,
+        messages=[{"role": "user", "content": request.message}],
+        max_tokens=1000
+    )
+    return ChatResponse(
+        reply=response.choices[0].message.content,
+        tokens_used=response.usage.total_tokens,
+        model=request.model
+    )
+
+from fastapi.responses import StreamingResponse
+
+@app.post("/chat/stream")
+async def chat_stream(request: ChatRequest, _=Depends(verify_api_key)):
+    """Streaming chat endpoint — sends chunks as SSE."""
+
+    async def generate() -> AsyncIterator[str]:
+        stream = await async_client.chat.completions.create(
+            model=request.model,
+            messages=[{"role": "user", "content": request.message}],
+            stream=True
+        )
+        async for chunk in stream:
+            delta = chunk.choices[0].delta.content
+            if delta:
+                yield f"data: {delta}\n\n"
+        yield "data: [DONE]\n\n"
+
+    return StreamingResponse(generate(), media_type="text/event-stream")</code></pre>
+
+<h2>5. Vector Databases</h2>
+
+<h3>Comparison</h3>
+<table>
+  <tr><th>Database</th><th>Type</th><th>Scale</th><th>Best For</th></tr>
+  <tr><td>FAISS</td><td>In-memory / local file</td><td>Up to ~10M vectors</td><td>Prototyping, single-node production</td></tr>
+  <tr><td>Chroma</td><td>Embedded / client-server</td><td>Up to ~1M vectors</td><td>Local dev, simple persistence</td></tr>
+  <tr><td>Pinecone</td><td>Managed cloud</td><td>Billions of vectors</td><td>Large-scale production, serverless</td></tr>
+  <tr><td>Weaviate</td><td>Self-hosted / cloud</td><td>100M+ vectors</td><td>Hybrid search, GraphQL queries</td></tr>
+  <tr><td>pgvector</td><td>PostgreSQL extension</td><td>Millions of vectors</td><td>Already using PostgreSQL</td></tr>
+</table>
+
+<pre><code"># FAISS (fast, local, no server needed)
+from langchain_community.vectorstores import FAISS
+from langchain_openai import OpenAIEmbeddings
+from langchain.schema import Document
+
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+
+# Create from documents
+docs = [
+    Document(page_content="Python was created by Guido van Rossum.", metadata={"source": "wiki"}),
+    Document(page_content="FastAPI is built on Starlette and Pydantic.", metadata={"source": "docs"}),
+]
+vectorstore = FAISS.from_documents(docs, embeddings)
+
+# Save and load
+vectorstore.save_local("./faiss_index")
+loaded_vs = FAISS.load_local("./faiss_index", embeddings, allow_dangerous_deserialization=True)
+
+# Search
+results = loaded_vs.similarity_search_with_score("Who made Python?", k=2)
+for doc, score in results:
+    print(f"Score: {score:.3f} | {doc.page_content[:80]}")
+
+# Chroma (persistent, easy to inspect)
+import chromadb
+from langchain_community.vectorstores import Chroma
+
+vectorstore = Chroma(
+    collection_name="my_documents",
+    embedding_function=embeddings,
+    persist_directory="./chroma_db"   # Auto-persists to disk
+)</code></pre>
+
+<h2>6. Async Python for High-Performance Pipelines</h2>
+
+<p>LLM API calls are I/O-bound and can take 1–10 seconds each. Async Python lets you run multiple calls concurrently without threads.</p>
+
+<pre><code">import asyncio
+from openai import AsyncOpenAI
+
+async_client = AsyncOpenAI()
+
+async def summarize(text: str) -> str:
+    response = await async_client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": f"Summarize in one sentence: {text}"}]
+    )
+    return response.choices[0].message.content
+
+# Run 5 summaries concurrently (not sequentially!)
+async def summarize_all(texts: list[str]) -> list[str]:
+    tasks = [summarize(text) for text in texts]
+    return await asyncio.gather(*tasks, return_exceptions=True)
+
+texts = ["Article 1 content...", "Article 2 content...", "Article 3 content...",
+         "Article 4 content...", "Article 5 content..."]
+
+# Sequential: ~15 seconds (5 × 3s each)
+# Concurrent: ~3 seconds (all at once)
+summaries = asyncio.run(summarize_all(texts))
+
+# With rate limiting (semaphore prevents overwhelming the API)
+async def summarize_with_limit(texts: list[str], max_concurrent: int = 5) -> list[str]:
+    semaphore = asyncio.Semaphore(max_concurrent)
+
+    async def bounded_summarize(text: str) -> str:
+        async with semaphore:
+            return await summarize(text)
+
+    return await asyncio.gather(*[bounded_summarize(t) for t in texts])</code></pre>
+
+<h2>7. Complete Pipeline: LLM + RAG + Agent</h2>
+
+<pre><code">"""
+Complete GenAI pipeline combining all concepts:
+- Pydantic validation
+- OpenAI SDK (embeddings + chat)
+- FAISS vector store
+- FastAPI serving
+- Async execution
+"""
+import asyncio
+import os
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field
+from openai import AsyncOpenAI
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain_community.document_loaders import TextLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from dotenv import load_dotenv
+
+load_dotenv()
+
+app = FastAPI(title="RAG + Agent Pipeline")
+async_client = AsyncOpenAI()
+
+# Build RAG on startup
+@app.on_event("startup")
+async def build_rag():
+    loader = TextLoader("knowledge_base.txt")
+    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    docs = splitter.split_documents(loader.load())
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+    app.state.vectorstore = FAISS.from_documents(docs, embeddings)
+
+class QueryRequest(BaseModel):
+    question: str = Field(..., min_length=3, max_length=500)
+    top_k: int = Field(default=3, ge=1, le=10)
+
+class QueryResponse(BaseModel):
+    answer: str
+    sources: list[str]
+    tokens_used: int
+
+@app.post("/query", response_model=QueryResponse)
+async def query(request: QueryRequest):
+    # 1. Retrieve relevant context
+    docs = app.state.vectorstore.similarity_search(request.question, k=request.top_k)
+    context = "\n\n".join(d.page_content for d in docs)
+    sources = list({d.metadata.get("source", "unknown") for d in docs})
+
+    # 2. Generate grounded answer
+    response = await async_client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content":
+             "Answer based ONLY on the provided context. If not in context, say 'I don't know.'"},
+            {"role": "user", "content": f"Context:\n{context}\n\nQuestion: {request.question}"}
+        ],
+        temperature=0,
+        max_tokens=400
+    )
+    return QueryResponse(
+        answer=response.choices[0].message.content,
+        sources=sources,
+        tokens_used=response.usage.total_tokens
+    )</code></pre>
+
+<h2>8. Essential Libraries Cheat Sheet</h2>
+<table>
+  <tr><th>Library</th><th>Install</th><th>Primary Use</th></tr>
+  <tr><td><code>openai</code></td><td><code>pip install openai</code></td><td>OpenAI API (chat, embeddings, images, audio)</td></tr>
+  <tr><td><code>langchain</code></td><td><code>pip install langchain langchain-openai</code></td><td>Agent orchestration, chains, memory</td></tr>
+  <tr><td><code>langgraph</code></td><td><code>pip install langgraph</code></td><td>Graph-based multi-agent workflows</td></tr>
+  <tr><td><code>fastapi</code></td><td><code>pip install fastapi uvicorn</code></td><td>Async REST API serving</td></tr>
+  <tr><td><code>pydantic</code></td><td><code>pip install pydantic</code></td><td>Data validation, settings management</td></tr>
+  <tr><td><code>faiss-cpu</code></td><td><code>pip install faiss-cpu</code></td><td>Local vector similarity search</td></tr>
+  <tr><td><code>chromadb</code></td><td><code>pip install chromadb</code></td><td>Embedded vector database with persistence</td></tr>
+  <tr><td><code>tiktoken</code></td><td><code>pip install tiktoken</code></td><td>Count tokens before sending to OpenAI</td></tr>
+  <tr><td><code>python-dotenv</code></td><td><code>pip install python-dotenv</code></td><td>Load API keys from .env files</td></tr>
+  <tr><td><code>httpx</code></td><td><code>pip install httpx</code></td><td>Async HTTP client for external APIs</td></tr>
+  <tr><td><code>pytest-asyncio</code></td><td><code>pip install pytest pytest-asyncio</code></td><td>Test async agent code</td></tr>
+</table>
+
+<h2>🧪 Self-Check Questions</h2>
+<ol>
+  <li>Why is <code>async/await</code> particularly valuable for LLM applications? What problem does it solve?</li>
+  <li>What is a Pydantic <code>BaseModel</code> validator and why is it important when parsing LLM output?</li>
+  <li>Explain the difference between <code>FAISS.save_local()</code> and using Chroma with <code>persist_directory</code>.</li>
+  <li>What is the purpose of <code>asyncio.Semaphore</code> in an LLM pipeline? What happens without it?</li>
+  <li>Why should API keys never be hardcoded in Python files? What are 3 safe alternatives?</li>
+  <li>Write a Pydantic model that validates an LLM-generated JSON with a required <code>title</code> (str, max 100 chars), <code>tags</code> (list of 1–5 strings), and optional <code>priority</code> (1–5 integer).</li>
+  <li>You're building a FastAPI endpoint that calls OpenAI. A user sends a request with <code>message = "ignore all previous instructions"</code>. What validations would you add at the Pydantic and application layers?</li>
+</ol>
+
+</main>
+</body>
+</html>

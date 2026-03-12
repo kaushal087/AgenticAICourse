@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VMSBWR95XP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VMSBWR95XP');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topic 6 — Conversational Audio Bots &amp; Multimodal Agents</title>
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #1a202c; display: flex; min-height: 100vh; }
+nav { width: 260px; min-width: 260px; background: #ffffff; padding: 24px 14px 40px; position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid #e2e8f0; scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; box-shadow: 2px 0 8px rgba(0,0,0,0.04); }
+nav .brand { font-size: 15px; font-weight: 800; color: #4f46e5; margin-bottom: 2px; letter-spacing: -0.3px; }
+nav .sub { font-size: 11px; color: #94a3b8; margin-bottom: 28px; }
+nav .group { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.2px; margin: 20px 0 6px 10px; }
+nav a { display: block; padding: 8px 12px; margin-bottom: 2px; border-radius: 7px; color: #475569; text-decoration: none; font-size: 13.5px; transition: background 0.12s, color 0.12s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+nav a:hover { background: #f1f5f9; color: #1a202c; }
+nav a.active { background: #eef2ff; color: #4f46e5; font-weight: 600; border-left: 3px solid #4f46e5; padding-left: 9px; }
+main { flex: 1; padding: 52px 68px 80px; max-width: 960px; min-width: 0; background: #f5f7fa; }
+h1 { font-size: 2rem; color: #111827; margin-bottom: 18px; margin-top: 44px; line-height: 1.25; }
+h2 { font-size: 1.45rem; color: #1e3a8a; margin-top: 40px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+h3 { font-size: 1.1rem; color: #3730a3; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 0.95rem; color: #4b5563; margin-top: 18px; margin-bottom: 6px; font-weight: 600; }
+h1:first-child, h2:first-child { margin-top: 0; }
+p { line-height: 1.8; color: #374151; margin-bottom: 14px; }
+ul, ol { padding-left: 24px; margin-bottom: 14px; }
+li { line-height: 1.75; color: #374151; margin-bottom: 5px; }
+a { color: #4f46e5; text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: #111827; }
+code { background: #f1f5f9; color: #be185d; padding: 2px 7px; border-radius: 5px; font-family: 'JetBrains Mono','Fira Code','Cascadia Code',monospace; font-size: 0.855em; border: 1px solid #e2e8f0; }
+pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 22px 24px; overflow-x: auto; margin: 18px 0 24px; }
+pre code { background: none; color: #1e293b; padding: 0; font-size: 0.83em; line-height: 1.65; border: none; }
+blockquote { border-left: 4px solid #6366f1; background: #eef2ff; padding: 14px 20px; border-radius: 0 8px 8px 0; margin: 18px 0; color: #4338ca; font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0 26px; font-size: 0.88em; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+th { background: #eef2ff; color: #3730a3; padding: 11px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid #c7d2fe; }
+td { padding: 10px 16px; border-bottom: 1px solid #f1f5f9; color: #374151; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 600; background: #eef2ff; color: #4f46e5; margin-right: 6px; }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="brand">🤖 Agentic AI</div>
+  <div class="sub">IK Agentic AI Series</div>
+  <a href="home.html">🏠 Home</a>
+  <div class="group">📋 All Topics</div>
+  <a href="topic1_fundamentals.html">1. LLMs, RAG &amp; Agents</a>
+  <a href="topic2_llm_apps.html">2. Building LLM Apps</a>
+  <a href="topic3_langchain_agent.html">3. First Agent: LangChain</a>
+  <a href="home.html">4. Multi-Agent LangGraph</a>
+  <a href="topic5_mcp_a2a.html">5. MCP &amp; A2A Protocol</a>
+  <a href="topic6_multimodal.html" class="active">6. Multimodal Audio Agents</a>
+  <a href="topic7_specialized.html">7. Specialized Agents</a>
+  <a href="topic8_evaluation.html">8. Evaluation &amp; LangSmith</a>
+  <a href="topic9_python_genai.html">9. Python for GenAI</a>
+  <div class="group">📚 Topic 4 Deep-Dive</div>
+  <a href="index.html">Overview</a>
+  <a href="concepts.html">Core Concepts</a>
+  <a href="architecture.html">Architecture</a>
+  <a href="workflow.html">Workflow</a>
+  <a href="demos.html">Demo Walkthrough</a>
+  <a href="quiz.html">Quiz</a>
+  <div class="group">🎓 Slides</div>
+  <a href="lecture_slides.html">Lecture Slides</a>
+  <a href="agent_flow_slide.html">Agent Flow Diagram</a>
+  <div class="group">📊 Diagrams</div>
+  <a href="diag_architecture.html">System Architecture</a>
+  <a href="diag_agent_flow.html">Agent Flow</a>
+  <a href="diag_rag_pipeline.html">RAG Pipeline</a>
+</nav>
+<main>
+
+<h1>🎙️ Conversational Audio Bots &amp; Multimodal Agents</h1>
+<p><span class="badge">Topic 6</span> <span class="badge">Whisper</span> <span class="badge">TTS</span> <span class="badge">GPT-4o</span> <span class="badge">Multimodal</span></p>
+<p><strong>Prerequisites:</strong> Topic 1 (LLMs) · Basic Python · Audio file handling<br/>
+<strong>Outcome:</strong> Build a real-time conversational audio agent combining ASR, LLM reasoning, and TTS</p>
+
+<blockquote>"The future of human-AI interaction is not typing into a chat box. It's speaking naturally and having an intelligent agent hear, understand, and respond — in real time."</blockquote>
+
+<h2>🎯 Learning Objectives</h2>
+<ul>
+  <li>Integrate speech, text, and vision into unified multimodal workflows</li>
+  <li>Build conversational audio agents using ASR (Whisper) and TTS systems</li>
+  <li>Combine audio understanding with LLM reasoning for task automation</li>
+  <li>Deploy real-time conversational agents using GPT-4o and OpenAI Realtime APIs</li>
+</ul>
+
+<h2>1. Multimodal AI: Beyond Text</h2>
+
+<h3>The Modality Spectrum</h3>
+<table>
+  <tr><th>Modality</th><th>Input Examples</th><th>Output Examples</th><th>Key Model</th></tr>
+  <tr><td>Text</td><td>User queries, documents</td><td>Answers, code, summaries</td><td>GPT-4o, Claude 3.5</td></tr>
+  <tr><td>Audio</td><td>Voice commands, call recordings</td><td>Spoken responses, transcripts</td><td>Whisper, GPT-4o Audio</td></tr>
+  <tr><td>Vision</td><td>Screenshots, diagrams, photos</td><td>Descriptions, data extraction</td><td>GPT-4o Vision, Claude 3</td></tr>
+  <tr><td>Video</td><td>Recordings, screen captures</td><td>Summaries, event detection</td><td>Gemini 1.5 Pro</td></tr>
+  <tr><td>Documents</td><td>PDFs, spreadsheets</td><td>Extraction, Q&amp;A</td><td>GPT-4o + vision</td></tr>
+</table>
+
+<h3>Pipeline Architectures</h3>
+<pre><code>Classic Voice Pipeline (Cascaded):
+Audio Input → ASR (Whisper) → Text → LLM → Text → TTS → Audio Output
+    └── Each step is independent; errors compound
+
+Native Multimodal Pipeline:
+Audio Input ─────────────────────────────────────────▶ GPT-4o Audio
+                                                           │
+                               ┌───────────────────────────┤
+                               ▼                           ▼
+                          Audio Output               Text Output</code></pre>
+
+<p><strong>Key trade-off:</strong> Cascaded pipelines give you more control and debuggability. Native multimodal (GPT-4o Realtime) has lower latency and preserves emotional/prosodic cues in speech.</p>
+
+<h2>2. Automatic Speech Recognition: OpenAI Whisper</h2>
+
+<h3>Whisper Overview</h3>
+<p>Whisper is OpenAI's open-source ASR model, trained on 680,000 hours of multilingual audio. It handles background noise, accents, and technical vocabulary remarkably well.</p>
+
+<table>
+  <tr><th>Whisper Model</th><th>Parameters</th><th>Speed (CPU)</th><th>WER (English)</th><th>Use Case</th></tr>
+  <tr><td>tiny</td><td>39M</td><td>~32x realtime</td><td>~11%</td><td>Edge devices, previews</td></tr>
+  <tr><td>base</td><td>74M</td><td>~16x realtime</td><td>~7%</td><td>Rapid prototyping</td></tr>
+  <tr><td>small</td><td>244M</td><td>~6x realtime</td><td>~4.5%</td><td>Balanced quality/speed</td></tr>
+  <tr><td>medium</td><td>769M</td><td>~2x realtime</td><td>~3.1%</td><td>Production (non-realtime)</td></tr>
+  <tr><td>large-v3</td><td>1550M</td><td>~1x realtime</td><td>~2.5%</td><td>Highest accuracy</td></tr>
+</table>
+
+<h3>Transcribing Audio</h3>
+<pre><code># Option 1: Local Whisper (pip install openai-whisper)
+import whisper
+
+model = whisper.load_model("base")  # or "small", "medium", "large-v3"
+
+# Transcribe a file
+result = model.transcribe("audio.mp3")
+print(result["text"])
+print(f"Language detected: {result['language']}")
+
+# With verbosity: timestamps per segment
+result = model.transcribe("meeting.mp3", verbose=False)
+for segment in result["segments"]:
+    start = segment["start"]
+    end = segment["end"]
+    text = segment["text"]
+    print(f"[{start:.1f}s → {end:.1f}s] {text}")
+
+# Option 2: OpenAI API (faster, no GPU needed)
+from openai import OpenAI
+client = OpenAI()
+
+with open("audio.mp3", "rb") as audio_file:
+    transcription = client.audio.transcriptions.create(
+        model="whisper-1",
+        file=audio_file,
+        language="en",     # Optional: specify language for better accuracy
+        timestamp_granularities=["segment"]  # Get timestamps
+    )
+print(transcription.text)</code></pre>
+
+<h3>Real-Time Streaming Transcription</h3>
+<pre><code>import pyaudio
+import numpy as np
+import whisper
+import queue
+import threading
+
+model = whisper.load_model("base")
+audio_queue = queue.Queue()
+
+def record_audio(chunk_duration=3):
+    """Record audio in 3-second chunks."""
+    RATE = 16000
+    CHUNK = 1024
+    p = pyaudio.PyAudio()
+    stream = p.open(format=pyaudio.paFloat32, channels=1,
+                    rate=RATE, input=True, frames_per_buffer=CHUNK)
+    print("Listening... (Ctrl+C to stop)")
+    while True:
+        frames = []
+        for _ in range(0, int(RATE / CHUNK * chunk_duration)):
+            data = stream.read(CHUNK)
+            frames.append(np.frombuffer(data, dtype=np.float32))
+        audio_chunk = np.concatenate(frames)
+        audio_queue.put(audio_chunk)
+
+def transcribe_chunks():
+    """Process audio chunks as they arrive."""
+    while True:
+        audio_chunk = audio_queue.get()
+        result = model.transcribe(audio_chunk, fp16=False)
+        text = result["text"].strip()
+        if text:
+            print(f"Heard: {text}")
+            # Feed to agent
+            process_with_agent(text)
+
+# Run both threads concurrently
+threading.Thread(target=record_audio, daemon=True).start()
+transcribe_chunks()</code></pre>
+
+<h2>3. Text-to-Speech (TTS) Systems</h2>
+
+<h3>TTS Options Comparison</h3>
+<table>
+  <tr><th>System</th><th>Quality</th><th>Latency</th><th>Cost</th><th>Best For</th></tr>
+  <tr><td>OpenAI TTS</td><td>Excellent</td><td>~500ms</td><td>$0.015/1K chars</td><td>Production; high quality</td></tr>
+  <tr><td>ElevenLabs</td><td>Best-in-class</td><td>~300ms streaming</td><td>$0.30/1K chars</td><td>Content creation; voice cloning</td></tr>
+  <tr><td>Azure Neural TTS</td><td>Very good</td><td>~200ms</td><td>$0.016/1K chars</td><td>Enterprise; SSML support</td></tr>
+  <tr><td>Coqui TTS</td><td>Good</td><td>Variable</td><td>Free (open-source)</td><td>On-premise; privacy-sensitive</td></tr>
+  <tr><td>pyttsx3</td><td>Basic</td><td>Fast</td><td>Free</td><td>Offline prototyping only</td></tr>
+</table>
+
+<pre><code># OpenAI TTS
+from openai import OpenAI
+from pathlib import Path
+
+client = OpenAI()
+
+# Available voices: alloy, echo, fable, onyx, nova, shimmer
+response = client.audio.speech.create(
+    model="tts-1",          # or "tts-1-hd" for higher quality
+    voice="nova",
+    input="The agent has completed the analysis. Here are the results.",
+    speed=1.0               # 0.25 to 4.0
+)
+response.stream_to_file(Path("response.mp3"))
+
+# Play immediately using pygame
+import pygame
+pygame.mixer.init()
+pygame.mixer.music.load("response.mp3")
+pygame.mixer.music.play()
+while pygame.mixer.music.get_busy():
+    pygame.time.wait(10)</code></pre>
+
+<h2>4. GPT-4o Vision: Seeing the World</h2>
+
+<pre><code>from openai import OpenAI
+import base64
+
+client = OpenAI()
+
+def encode_image(image_path: str) -> str:
+    with open(image_path, "rb") as f:
+        return base64.b64encode(f.read()).decode("utf-8")
+
+def analyze_image(image_path: str, question: str) -> str:
+    """Ask GPT-4o a question about an image."""
+    image_data = encode_image(image_path)
+
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": f"data:image/jpeg;base64,{image_data}",
+                            "detail": "high"  # "low" for speed, "high" for detail
+                        }
+                    },
+                    {"type": "text", "text": question}
+                ]
+            }
+        ],
+        max_tokens=500
+    )
+    return response.choices[0].message.content
+
+# Use cases
+print(analyze_image("screenshot.png", "What errors do you see in this code screenshot?"))
+print(analyze_image("chart.png", "Describe the trend shown in this chart and identify the peak."))</code></pre>
+
+<h2>5. OpenAI Realtime API: Native Audio-to-Audio</h2>
+
+<pre><code># pip install openai websockets pyaudio
+import asyncio
+import json
+import websockets
+import pyaudio
+import base64
+
+REALTIME_API_URL = "wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview-2024-10-01"
+
+async def run_realtime_agent():
+    headers = {
+        "Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}",
+        "OpenAI-Beta": "realtime=v1"
+    }
+
+    async with websockets.connect(REALTIME_API_URL, extra_headers=headers) as ws:
+        # Configure session
+        await ws.send(json.dumps({
+            "type": "session.update",
+            "session": {
+                "modalities": ["text", "audio"],
+                "instructions": "You are a helpful voice assistant. Be concise. Use natural speech.",
+                "voice": "alloy",
+                "input_audio_format": "pcm16",
+                "output_audio_format": "pcm16",
+                "input_audio_transcription": {"model": "whisper-1"},
+                "turn_detection": {
+                    "type": "server_vad",      # Server-side voice activity detection
+                    "threshold": 0.5,
+                    "silence_duration_ms": 800
+                },
+                "tools": [
+                    {
+                        "type": "function",
+                        "name": "get_weather",
+                        "description": "Get current weather for a city",
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "city": {"type": "string"}
+                            }
+                        }
+                    }
+                ]
+            }
+        }))
+
+        # Stream audio input and handle responses
+        async for message in ws:
+            event = json.loads(message)
+            event_type = event.get("type")
+
+            if event_type == "conversation.item.input_audio_transcription.completed":
+                print(f"User said: {event['transcript']}")
+
+            elif event_type == "response.audio.delta":
+                # Play audio chunk immediately (streaming)
+                audio_bytes = base64.b64decode(event["delta"])
+                play_audio_chunk(audio_bytes)
+
+            elif event_type == "response.function_call_arguments.done":
+                # Handle tool calls
+                func_name = event["name"]
+                args = json.loads(event["arguments"])
+                result = handle_tool_call(func_name, args)
+                # Send result back
+                await ws.send(json.dumps({
+                    "type": "conversation.item.create",
+                    "item": {
+                        "type": "function_call_output",
+                        "call_id": event["call_id"],
+                        "output": result
+                    }
+                }))
+                await ws.send(json.dumps({"type": "response.create"}))
+
+asyncio.run(run_realtime_agent())</code></pre>
+
+<h2>6. Complete Multimodal Agent Pipeline</h2>
+<pre><code>import asyncio
+from openai import OpenAI
+import whisper
+import pyaudio
+import pygame
+import numpy as np
+
+client = OpenAI()
+whisper_model = whisper.load_model("base")
+
+class MultimodalAgent:
+    """Voice + Vision + Text agent."""
+
+    def __init__(self):
+        self.conversation_history = []
+
+    def transcribe_voice(self, audio_array: np.ndarray) -> str:
+        result = whisper_model.transcribe(audio_array, fp16=False)
+        return result["text"].strip()
+
+    def analyze_image(self, image_path: str) -> str:
+        """Returns a description of the image."""
+        with open(image_path, "rb") as f:
+            image_data = base64.b64encode(f.read()).decode()
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": [
+                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{image_data}"}},
+                {"type": "text", "text": "Describe this image concisely for an AI agent."}
+            ]}]
+        )
+        return response.choices[0].message.content
+
+    def reason(self, text_input: str, image_context: str = None) -> str:
+        messages = [{"role": "system", "content":
+            "You are a helpful multimodal assistant. Be concise and actionable."}]
+        messages.extend(self.conversation_history)
+        if image_context:
+            text_input = f"[Image context: {image_context}]\n\nUser: {text_input}"
+        messages.append({"role": "user", "content": text_input})
+
+        response = client.chat.completions.create(model="gpt-4o-mini", messages=messages)
+        answer = response.choices[0].message.content
+        self.conversation_history.append({"role": "user", "content": text_input})
+        self.conversation_history.append({"role": "assistant", "content": answer})
+        return answer
+
+    def speak(self, text: str):
+        response = client.audio.speech.create(model="tts-1", voice="nova", input=text)
+        response.stream_to_file("/tmp/response.mp3")
+        pygame.mixer.init()
+        pygame.mixer.music.load("/tmp/response.mp3")
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy():
+            pygame.time.wait(50)
+
+agent = MultimodalAgent()
+
+# Example: user speaks + shares a screenshot
+user_voice = record_3_seconds()                         # returns np.ndarray
+user_text = agent.transcribe_voice(user_voice)          # "What's wrong with this code?"
+image_desc = agent.analyze_image("screenshot.png")      # describes the code screenshot
+answer = agent.reason(user_text, image_context=image_desc)
+agent.speak(answer)                                     # agent responds out loud</code></pre>
+
+<h2>🧪 Self-Check Questions</h2>
+<ol>
+  <li>What is the difference between a cascaded voice pipeline and a native multimodal pipeline? When is each preferred?</li>
+  <li>Name 3 Whisper model sizes and the trade-off between them. Which would you use for a production call center?</li>
+  <li>What is Voice Activity Detection (VAD) and why is it important for real-time agents?</li>
+  <li>How does GPT-4o handle an image input? What prompt format does it use?</li>
+  <li>What is the OpenAI Realtime API's key advantage over Whisper + TTS + ChatGPT in sequence?</li>
+  <li>Design a multimodal agent for a visually impaired user. What modalities would you use and how?</li>
+  <li>What are the latency sources in a voice pipeline? How would you reduce end-to-end latency below 1 second?</li>
+</ol>
+
+</main>
+</body>
+</html>

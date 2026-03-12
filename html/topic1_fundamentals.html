@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VMSBWR95XP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VMSBWR95XP');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topic 1 — Fundamentals of Agentic AI</title>
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f7fa;
+    color: #1a202c;
+    display: flex;
+    min-height: 100vh;
+}
+nav {
+    width: 260px;
+    min-width: 260px;
+    background: #ffffff;
+    padding: 24px 14px 40px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid #e2e8f0;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+}
+nav .brand { font-size: 15px; font-weight: 800; color: #4f46e5; margin-bottom: 2px; letter-spacing: -0.3px; }
+nav .sub { font-size: 11px; color: #94a3b8; margin-bottom: 28px; }
+nav .group { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.2px; margin: 20px 0 6px 10px; }
+nav a { display: block; padding: 8px 12px; margin-bottom: 2px; border-radius: 7px; color: #475569; text-decoration: none; font-size: 13.5px; transition: background 0.12s, color 0.12s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+nav a:hover { background: #f1f5f9; color: #1a202c; }
+nav a.active { background: #eef2ff; color: #4f46e5; font-weight: 600; border-left: 3px solid #4f46e5; padding-left: 9px; }
+main { flex: 1; padding: 52px 68px 80px; max-width: 960px; min-width: 0; background: #f5f7fa; }
+h1 { font-size: 2rem; color: #111827; margin-bottom: 18px; margin-top: 44px; line-height: 1.25; }
+h2 { font-size: 1.45rem; color: #1e3a8a; margin-top: 40px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+h3 { font-size: 1.1rem; color: #3730a3; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 0.95rem; color: #4b5563; margin-top: 18px; margin-bottom: 6px; font-weight: 600; }
+h1:first-child, h2:first-child { margin-top: 0; }
+p { line-height: 1.8; color: #374151; margin-bottom: 14px; }
+ul, ol { padding-left: 24px; margin-bottom: 14px; }
+li { line-height: 1.75; color: #374151; margin-bottom: 5px; }
+a { color: #4f46e5; text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: #111827; }
+code { background: #f1f5f9; color: #be185d; padding: 2px 7px; border-radius: 5px; font-family: 'JetBrains Mono','Fira Code','Cascadia Code',monospace; font-size: 0.855em; border: 1px solid #e2e8f0; }
+pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 22px 24px; overflow-x: auto; margin: 18px 0 24px; }
+pre code { background: none; color: #1e293b; padding: 0; font-size: 0.83em; line-height: 1.65; border: none; }
+blockquote { border-left: 4px solid #6366f1; background: #eef2ff; padding: 14px 20px; border-radius: 0 8px 8px 0; margin: 18px 0; color: #4338ca; font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0 26px; font-size: 0.88em; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+th { background: #eef2ff; color: #3730a3; padding: 11px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid #c7d2fe; }
+td { padding: 10px 16px; border-bottom: 1px solid #f1f5f9; color: #374151; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 600; background: #eef2ff; color: #4f46e5; margin-right: 6px; }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="brand">🤖 Agentic AI</div>
+  <div class="sub">IK Agentic AI Series</div>
+  <a href="home.html">🏠 Home</a>
+  <div class="group">📋 All Topics</div>
+  <a href="topic1_fundamentals.html" class="active">1. LLMs, RAG &amp; Agents</a>
+  <a href="topic2_llm_apps.html">2. Building LLM Apps</a>
+  <a href="topic3_langchain_agent.html">3. First Agent: LangChain</a>
+  <a href="home.html">4. Multi-Agent LangGraph</a>
+  <a href="topic5_mcp_a2a.html">5. MCP &amp; A2A Protocol</a>
+  <a href="topic6_multimodal.html">6. Multimodal Audio Agents</a>
+  <a href="topic7_specialized.html">7. Specialized Agents</a>
+  <a href="topic8_evaluation.html">8. Evaluation &amp; LangSmith</a>
+  <a href="topic9_python_genai.html">9. Python for GenAI</a>
+  <div class="group">📚 Topic 4 Deep-Dive</div>
+  <a href="index.html">Overview</a>
+  <a href="concepts.html">Core Concepts</a>
+  <a href="architecture.html">Architecture</a>
+  <a href="workflow.html">Workflow</a>
+  <a href="demos.html">Demo Walkthrough</a>
+  <a href="quiz.html">Quiz</a>
+  <div class="group">🎓 Slides</div>
+  <a href="lecture_slides.html">Lecture Slides</a>
+  <a href="agent_flow_slide.html">Agent Flow Diagram</a>
+  <div class="group">📊 Diagrams</div>
+  <a href="diag_architecture.html">System Architecture</a>
+  <a href="diag_agent_flow.html">Agent Flow</a>
+  <a href="diag_rag_pipeline.html">RAG Pipeline</a>
+</nav>
+<main>
+
+<h1>🧠 Fundamentals of Agentic AI</h1>
+<p><span class="badge">Topic 1</span> <span class="badge">LLMs</span> <span class="badge">RAG</span> <span class="badge">Agents</span></p>
+<p><strong>Prerequisites:</strong> Basic Python · No prior ML required<br/>
+<strong>Outcome:</strong> Understand LLMs, build a RAG pipeline, and wire it to an agent in Python</p>
+
+<blockquote>"Before you build multi-agent systems, you must understand the atom: the LLM, the tool, and the retrieval loop."</blockquote>
+
+<h2>🎯 Learning Objectives</h2>
+<ul>
+  <li>Explain how LLMs work at an intuitive level (context, tokens, attention)</li>
+  <li>Articulate the hallucination problem and why RAG solves it</li>
+  <li>Build a working RAG pipeline using embeddings and vector search</li>
+  <li>Connect RAG as a tool inside an agent for context-aware reasoning</li>
+  <li>Implement a basic agent + RAG pipeline in Python using LangChain</li>
+</ul>
+
+<h2>1. Large Language Models (LLMs)</h2>
+
+<h3>What is an LLM?</h3>
+<p>A <strong>Large Language Model</strong> is a neural network trained on massive text corpora to predict the next token in a sequence. Despite this simple training objective, models at scale learn to reason, code, summarize, translate, and answer questions.</p>
+
+<p><strong>Key insight:</strong> LLMs are not databases. They don't "remember" facts — they learn statistical patterns. This distinction drives nearly every architectural decision in Agentic AI.</p>
+
+<h3>The Transformer Architecture (Simplified)</h3>
+<table>
+  <tr><th>Component</th><th>What it does</th><th>Why it matters for agents</th></tr>
+  <tr><td>Tokenizer</td><td>Splits text into sub-word tokens (~100k vocab)</td><td>Determines what fits in the context window</td></tr>
+  <tr><td>Embeddings</td><td>Maps tokens to high-dimensional vectors</td><td>Foundation of semantic search in RAG</td></tr>
+  <tr><td>Self-Attention</td><td>Each token "attends" to all other tokens</td><td>Enables long-range reasoning and instruction following</td></tr>
+  <tr><td>Feed-Forward Layers</td><td>Store learned factual associations</td><td>Source of both knowledge and hallucinations</td></tr>
+  <tr><td>Context Window</td><td>Max tokens the model can process at once</td><td>Hard limit on how much information an agent can use per call</td></tr>
+</table>
+
+<h3>Context Window — The Critical Constraint</h3>
+<p>The context window is the model's "working memory" — everything the model can see at once. Modern models range from 8K (older GPT-3.5) to 1M tokens (Gemini 1.5). But bigger isn't always better: cost and latency grow with context length, and models can "lose" information buried in long contexts.</p>
+
+<blockquote>Rule of thumb: Put the most important information at the start and end of the context. The "lost in the middle" problem is well-documented — models attend less to content in the middle of long prompts.</blockquote>
+
+<h3>Prompting Strategies</h3>
+<table>
+  <tr><th>Strategy</th><th>When to use</th><th>Example</th></tr>
+  <tr><td>Zero-shot</td><td>Simple, well-defined tasks</td><td>"Summarize this document in 3 bullet points."</td></tr>
+  <tr><td>Few-shot</td><td>Tasks needing format guidance</td><td>Provide 2-3 input→output examples before the task</td></tr>
+  <tr><td>Chain-of-Thought (CoT)</td><td>Multi-step reasoning</td><td>"Think step by step. First identify... then calculate..."</td></tr>
+  <tr><td>System prompt</td><td>Persona + behavior shaping</td><td>"You are a senior software engineer. Be concise and technical."</td></tr>
+  <tr><td>ReAct</td><td>Agent reasoning with tool calls</td><td>Thought → Action → Observation loop (covered in Section 3)</td></tr>
+</table>
+
+<pre><code># Zero-shot example
+from openai import OpenAI
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "You are a concise technical assistant."},
+        {"role": "user", "content": "What is the difference between RAG and fine-tuning?"}
+    ]
+)
+print(response.choices[0].message.content)</code></pre>
+
+<h2>2. Retrieval-Augmented Generation (RAG)</h2>
+
+<h3>The Problem: LLMs Hallucinate</h3>
+<p>LLMs generate plausible-sounding text — even when they don't know the answer. This is called <strong>hallucination</strong>. It happens because:</p>
+<ul>
+  <li>The model's training data has a <strong>knowledge cutoff</strong> (no recent events)</li>
+  <li>Specialized or private data was never in the training set</li>
+  <li>The model fills gaps with statistically likely (but wrong) completions</li>
+</ul>
+
+<h3>The RAG Solution</h3>
+<p><strong>RAG</strong> = Retrieval + Augmented Generation. Instead of asking the LLM to recall facts from memory, we:</p>
+<ol>
+  <li><strong>Index</strong> your documents as vector embeddings</li>
+  <li><strong>Retrieve</strong> the most relevant chunks at query time</li>
+  <li><strong>Augment</strong> the LLM prompt with retrieved context</li>
+  <li><strong>Generate</strong> a grounded, factual response</li>
+</ol>
+
+<blockquote>"RAG turns an LLM from a closed-book exam taker into an open-book exam taker. It still reasons — but now with the right information in front of it."</blockquote>
+
+<h3>Embeddings and Vector Search</h3>
+<p>An <strong>embedding</strong> is a dense numerical vector (e.g., 1536 dimensions) that captures the semantic meaning of text. Two sentences with similar meaning have vectors that are close together in this high-dimensional space.</p>
+
+<table>
+  <tr><th>Concept</th><th>Analogy</th><th>Technical detail</th></tr>
+  <tr><td>Embedding model</td><td>Translator to "meaning space"</td><td>e.g., <code>text-embedding-3-small</code>, sentence-transformers</td></tr>
+  <tr><td>Vector store</td><td>Semantic filing cabinet</td><td>FAISS, Chroma, Pinecone, Weaviate</td></tr>
+  <tr><td>Similarity search</td><td>Find nearby neighbors</td><td>Cosine similarity or dot product over indexed vectors</td></tr>
+  <tr><td>Top-k retrieval</td><td>Get the k closest documents</td><td>Typically k=3 to 5 chunks returned</td></tr>
+</table>
+
+<h3>RAG Pipeline Architecture</h3>
+<pre><code>INDEXING PHASE (run once):
+Documents → Chunking → Embedding Model → Vector Store
+
+QUERY PHASE (run per question):
+User Query → Embedding → Vector Store Search → Top-K Chunks
+         → Prompt = "Context: {chunks}\n\nQuestion: {query}" → LLM → Answer</code></pre>
+
+<h3>Building a RAG Pipeline in Python</h3>
+<pre><code>from langchain_community.document_loaders import TextLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_community.vectorstores import FAISS
+from langchain.chains import RetrievalQA
+
+# Step 1: Load and chunk documents
+loader = TextLoader("knowledge_base.txt")
+docs = loader.load()
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=500,
+    chunk_overlap=50
+)
+chunks = splitter.split_documents(docs)
+
+# Step 2: Embed and index
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+vectorstore = FAISS.from_documents(chunks, embeddings)
+retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
+
+# Step 3: Build RAG chain
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+qa_chain = RetrievalQA.from_chain_type(
+    llm=llm,
+    retriever=retriever,
+    return_source_documents=True
+)
+
+# Step 4: Query
+result = qa_chain.invoke({"query": "What are best practices for LLM production?"})
+print(result["result"])
+print("\nSources:", [d.metadata for d in result["source_documents"]])</code></pre>
+
+<h2>3. From LLM to Agent</h2>
+
+<h3>What Makes Something an "Agent"?</h3>
+<p>An agent is an LLM that can <strong>observe</strong>, <strong>reason</strong>, and <strong>act</strong> in a loop until the task is complete. The key difference from a simple LLM call:</p>
+
+<table>
+  <tr><th>LLM Call</th><th>Agent</th></tr>
+  <tr><td>Single prompt → single response</td><td>Loop: observe → reason → act → observe again</td></tr>
+  <tr><td>No tools</td><td>Can call tools (search, calculator, database, APIs)</td></tr>
+  <tr><td>Stateless</td><td>Maintains memory across steps</td></tr>
+  <tr><td>Fixed output</td><td>Self-corrects and retries on failure</td></tr>
+</table>
+
+<h3>The ReAct Pattern</h3>
+<p>ReAct (Reason + Act) is the foundational loop that powers most agents:</p>
+<pre><code>Thought: I need to find the current Python version.
+Action: search_web("latest Python version 2025")
+Observation: Python 3.13 was released in October 2024.
+
+Thought: I now have the answer.
+Action: FINAL ANSWER
+Python 3.13 is the latest stable release.</code></pre>
+
+<p>The LLM generates <code>Thought</code> and <code>Action</code>. The framework intercepts the action, calls the actual tool, and feeds back the <code>Observation</code>. The loop continues until the LLM produces a final answer.</p>
+
+<h3>Core Agent Components</h3>
+<ul>
+  <li><strong>LLM Brain:</strong> The reasoning engine (GPT-4o, Claude, Gemini)</li>
+  <li><strong>Tools:</strong> Python functions the LLM can call (search, calculator, database, code runner)</li>
+  <li><strong>Memory:</strong> Short-term (conversation history) + Long-term (vector store)</li>
+  <li><strong>Executor:</strong> The loop that runs Thought → Action → Observation</li>
+</ul>
+
+<h2>4. Connecting RAG with Agents</h2>
+
+<h3>RAG as an Agent Tool</h3>
+<p>Instead of RAG being a fixed chain, we make it a <strong>tool the agent can choose to call</strong>. The agent decides when it needs retrieved context versus when it can answer from its own knowledge.</p>
+
+<pre><code>from langchain.tools import Tool
+from langchain.agents import create_react_agent, AgentExecutor
+from langchain import hub
+
+# 1. Define RAG as a tool
+rag_tool = Tool(
+    name="knowledge_base_search",
+    description="Search the company knowledge base for internal documents, policies, and procedures.",
+    func=lambda query: qa_chain.invoke({"query": query})["result"]
+)
+
+# 2. Add other tools
+from langchain_community.tools.tavily_search import TavilySearchResults
+web_search = TavilySearchResults(max_results=3)
+
+tools = [rag_tool, web_search]
+
+# 3. Create ReAct agent
+prompt = hub.pull("hwchase17/react")
+llm = ChatOpenAI(model="gpt-4o", temperature=0)
+
+agent = create_react_agent(llm=llm, tools=tools, prompt=prompt)
+executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+
+# 4. Run
+result = executor.invoke({
+    "input": "What is our company's refund policy, and how does it compare to industry standards?"
+})
+# Agent will: search KB for refund policy, then search web for industry standards
+print(result["output"])</code></pre>
+
+<h3>Why RAG + Agent is Powerful</h3>
+<table>
+  <tr><th>Capability</th><th>RAG alone</th><th>Agent alone</th><th>RAG + Agent</th></tr>
+  <tr><td>Private data access</td><td>✅</td><td>❌</td><td>✅</td></tr>
+  <tr><td>Real-time web search</td><td>❌</td><td>✅</td><td>✅</td></tr>
+  <tr><td>Multi-step reasoning</td><td>❌</td><td>✅</td><td>✅</td></tr>
+  <tr><td>Grounded answers</td><td>✅</td><td>Varies</td><td>✅</td></tr>
+  <tr><td>Dynamic tool selection</td><td>❌</td><td>✅</td><td>✅</td></tr>
+</table>
+
+<h2>5. Full Working Example: Research Agent with RAG</h2>
+
+<pre><code>import os
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain_community.document_loaders import TextLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.tools import Tool
+from langchain.agents import create_react_agent, AgentExecutor
+from langchain import hub
+
+os.environ["OPENAI_API_KEY"] = "your-key-here"
+
+# --- Build RAG ---
+loader = TextLoader("knowledge_base.txt")
+chunks = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)\
+             .split_documents(loader.load())
+vectorstore = FAISS.from_documents(chunks, OpenAIEmbeddings())
+retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+
+def rag_search(query: str) -> str:
+    docs = retriever.invoke(query)
+    return "\n\n".join(d.page_content for d in docs)
+
+# --- Define tools ---
+tools = [
+    Tool(
+        name="internal_search",
+        func=rag_search,
+        description="Search internal knowledge base for company-specific information."
+    )
+]
+
+# --- Build agent ---
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+prompt = hub.pull("hwchase17/react")
+agent = create_react_agent(llm, tools, prompt)
+executor = AgentExecutor(agent=agent, tools=tools, verbose=True, max_iterations=5)
+
+# --- Run ---
+question = "What are the key benefits of our product according to internal docs?"
+result = executor.invoke({"input": question})
+print(result["output"])</code></pre>
+
+<h2>6. Key Takeaways</h2>
+<blockquote>
+<strong>LLM:</strong> A token-prediction engine that reasons through patterns learned from text. Not a database — grounding it with RAG is essential for factual accuracy.<br/><br/>
+<strong>RAG:</strong> Embed documents → store vectors → retrieve relevant chunks at query time → augment the prompt. Solves hallucination and knowledge cutoff problems.<br/><br/>
+<strong>Agent:</strong> LLM + Tools + Loop. The model reasons in a Thought→Action→Observation cycle, using tools (including RAG) to gather information and act.<br/><br/>
+<strong>RAG + Agent:</strong> The agent decides when to consult your knowledge base, when to search the web, and when it already knows the answer. This is the foundation of all production Agentic AI.
+</blockquote>
+
+<h2>🧪 Self-Check Questions</h2>
+<ol>
+  <li>What is a context window, and what happens when a prompt exceeds it?</li>
+  <li>Name two ways hallucinations occur in LLMs and how RAG addresses each.</li>
+  <li>What is the difference between an embedding and a vector store? How do they relate?</li>
+  <li>Describe the ReAct loop in your own words. What does each step (Thought, Action, Observation) do?</li>
+  <li>Why would you use RAG as an agent <em>tool</em> rather than a fixed preprocessing step?</li>
+  <li>You need to answer questions about a 500-page internal policy document. Would you use: (a) plain LLM, (b) fine-tuning, or (c) RAG? Justify your choice.</li>
+  <li>What is <code>chunk_size</code> in a text splitter, and how would increasing it affect retrieval quality?</li>
+</ol>
+
+</main>
+</body>
+</html>
