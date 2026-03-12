@@ -1,0 +1,219 @@
+Generative AI and LLMs: A Knowledge Base for the Multi-Agent Research System
+===========================================================================
+
+This document serves as the local knowledge base for the RAG pipeline.
+It covers core AI/ML topics relevant to the demo queries.
+
+---
+
+SECTION 1: LangGraph Overview
+------------------------------
+LangGraph is an open-source framework built by the LangChain team for creating
+stateful, graph-based multi-agent workflows. Released in 2024, it addresses the
+limitations of linear chain-based approaches by allowing developers to define
+AI workflows as directed graphs with:
+
+- Nodes: Python functions representing individual agents or processing steps
+- Edges: Transitions between nodes, which can be conditional
+- State: A shared TypedDict passed between all nodes
+- Checkpointing: Ability to save and resume workflow state
+- Streaming: Real-time streaming of intermediate outputs
+
+LangGraph is particularly well-suited for workflows requiring loops, branching
+logic, and human-in-the-loop interactions. It compiles to a highly optimized
+execution engine with built-in support for parallel node execution.
+
+Key advantages over sequential chains:
+1. Supports conditional routing based on agent outputs
+2. Enables self-correcting loops (e.g., re-research if quality is low)
+3. Provides state persistence across interruptions
+4. Integrates natively with LangSmith for observability
+
+---
+
+SECTION 2: Multi-Agent System Design Patterns
+----------------------------------------------
+Multi-agent systems organize multiple AI agents to collaborate on complex tasks.
+Three primary patterns are used in production systems:
+
+Pattern 1: Sequential Pipeline
+- Agents execute in a fixed linear sequence
+- Output of each agent becomes input to the next
+- Simple, predictable, but inflexible
+- Best for: document processing, content generation pipelines
+
+Pattern 2: Hierarchical (Supervisor-Worker)
+- A supervisor agent dynamically decides which worker agent to invoke
+- Workers specialize in specific domains (coding, search, analysis)
+- More flexible than sequential but adds routing complexity
+- Best for: multi-domain Q&A, complex decision workflows
+
+Pattern 3: Graph-Based (LangGraph)
+- Agents are nodes in a directed graph with conditional edges
+- Supports loops, parallel execution, and dynamic routing
+- Most powerful but requires upfront graph design
+- Best for: research pipelines, autonomous coding agents, complex workflows
+
+Industry adoption of multi-agent systems:
+- GitHub Copilot Workspace: planner → coder → tester → reviewer pipeline
+- Perplexity AI: parallel research agents for comprehensive answers
+- Salesforce Einstein: specialized agents per support domain
+- Microsoft 365 Copilot: multi-agent document analysis and generation
+
+---
+
+SECTION 3: RAG (Retrieval-Augmented Generation)
+-------------------------------------------------
+RAG enhances LLM responses by retrieving relevant context from external
+knowledge sources before generating answers. The core insight: don't store
+all knowledge in model weights — retrieve it dynamically at inference time.
+
+RAG Pipeline Steps:
+1. Ingestion: Load and parse source documents (PDF, text, web)
+2. Chunking: Split into 300-1000 token segments with overlap
+3. Embedding: Convert chunks to dense vectors (OpenAI text-embedding-3-small)
+4. Indexing: Store vectors in a searchable index (FAISS, Chroma, Pinecone)
+5. Retrieval: For a query, find the top-K most similar chunks via cosine similarity
+6. Augmentation: Inject retrieved chunks into the LLM's context window
+7. Generation: LLM produces an answer grounded in the retrieved context
+
+Key RAG metrics:
+- Precision: Are the retrieved chunks relevant to the query?
+- Recall: Are all relevant chunks being retrieved?
+- Faithfulness: Does the LLM answer stay grounded in retrieved context?
+- Answer Relevance: Does the final answer address the original question?
+
+Vector databases comparison:
+- FAISS (Facebook AI Similarity Search): In-memory, fast, no external service
+  Best for: development, demos, datasets under 1M vectors
+- Chroma: Local persistent store, simple API, good for development
+  Best for: local development, small to medium datasets
+- Pinecone: Managed cloud service, highly scalable, production-ready
+  Best for: production systems, large-scale enterprise deployments
+- Weaviate: Open-source, supports hybrid search (vector + keyword)
+  Best for: enterprise deployments needing both semantic and keyword search
+
+---
+
+SECTION 4: LLM Production Best Practices
+------------------------------------------
+Building production-ready LLM applications requires addressing several
+engineering challenges beyond basic prompt engineering.
+
+Reliability:
+- Always validate LLM output format (JSON parsing with try/except)
+- Implement retry logic with exponential backoff for API failures
+- Set temperature=0 for tasks requiring consistent, structured output
+- Use structured output mode (response_format=json_object) when available
+
+Cost Optimization:
+- Cache frequent queries using Redis or in-memory LRU cache
+- Use GPT-4o-mini for non-critical classification and routing tasks
+- Compress context by summarizing conversation history for long sessions
+- Batch similar requests where possible to reduce API round trips
+
+Observability:
+- Use LangSmith for tracing all LLM calls, token usage, and latency
+- Log all agent decisions and tool calls for debugging
+- Monitor p95 latency and error rates per node in multi-agent systems
+- Track cost per query to identify expensive bottlenecks
+
+Security:
+- Validate and sanitize all user inputs before passing to LLM
+- Never pass raw user input directly to tool execution (SQL injection risk)
+- Implement rate limiting to prevent API abuse
+- Use function calling (tool use) instead of parsing free-form LLM text for actions
+
+Evaluation:
+- Measure answer quality with LLM-as-judge (GPT-4 evaluating GPT-4 outputs)
+- Run regression tests on golden dataset when changing prompts
+- A/B test prompt variations to measure quality vs. cost tradeoffs
+- Use LangSmith's evaluation framework for systematic agent evaluation
+
+---
+
+SECTION 5: Agent Evaluation Framework
+---------------------------------------
+Evaluating AI agents is fundamentally harder than evaluating classification models
+because agent outputs are open-ended and may involve multiple steps.
+
+Key evaluation dimensions:
+1. Task Completion Rate: Does the agent complete the assigned task successfully?
+2. Accuracy: Are factual claims in the output correct and verifiable?
+3. Faithfulness: Does the output stay grounded in retrieved/provided context?
+4. Latency: How long does the agent take to complete the task?
+5. Cost: How many tokens and API calls does the agent consume per task?
+6. Reliability: What percentage of runs complete without errors?
+7. Safety: Does the agent ever produce harmful or policy-violating content?
+
+Automated evaluation methods:
+- Reference-based: Compare agent output to a gold standard answer
+- LLM-as-Judge: Use a strong LLM (GPT-4) to score outputs on defined criteria
+- Tool call validation: Verify that tool calls are appropriate and well-formed
+- Hallucination detection: Check if claims in output are supported by evidence
+
+LangSmith evaluation workflow:
+1. Define an evaluation dataset with inputs and expected outputs
+2. Run your agent across the entire dataset
+3. Apply evaluators (LLM judge, exact match, semantic similarity)
+4. Review failing cases and identify patterns
+5. Iterate on prompts, tools, or architecture to fix issues
+6. Re-run evaluation to confirm improvements
+
+---
+
+SECTION 6: Agentic AI Trends (2024-2025)
+------------------------------------------
+The agentic AI landscape is evolving rapidly. Key trends:
+
+1. Long-horizon task completion: Agents that work for hours/days on complex tasks.
+   Example: Devin (Cognition AI) - autonomous software engineering agent.
+
+2. Multi-agent orchestration at scale: Hundreds of specialized agents collaborating
+   on enterprise workflows. Example: Microsoft Copilot Studio multi-agent framework.
+
+3. Memory and personalization: Agents that remember user preferences and past
+   interactions across sessions. Example: ChatGPT memory, Claude Projects.
+
+4. Computer use: Agents that can control web browsers, desktop apps, and APIs.
+   Example: Anthropic's Computer Use (Claude 3.5), OpenAI Operator.
+
+5. Evaluation-driven development: Teams running thousands of automated evals
+   before deploying agent updates. LangSmith, Braintrust, and Arize dominate.
+
+6. Agent protocols: Standardized communication protocols between agents.
+   Model Context Protocol (MCP, Anthropic) for tool/context sharing.
+   Agent-to-Agent (A2A, Google) for inter-agent communication.
+
+7. Cost efficiency: GPT-4o-mini and open-source models (Llama 3, Mistral) for
+   cost-sensitive agent nodes. Only use GPT-4o where reasoning quality matters.
+
+---
+
+SECTION 7: LangChain Ecosystem Overview
+-----------------------------------------
+LangChain provides the building blocks for LLM application development:
+
+Core components:
+- LLMs/Chat Models: Abstractions over OpenAI, Anthropic, Google, etc.
+- Prompt Templates: Reusable, parameterized prompts
+- Output Parsers: Extract structured data from LLM responses
+- Chains: Compose LLM calls and processing steps linearly
+- Agents: LLMs that can use tools in a ReAct loop
+- Tools: Python functions the LLM can call
+- Memory: Store and retrieve conversation history
+- Document Loaders: Load data from files, URLs, databases
+- Text Splitters: Chunk long documents for RAG
+- Vector Stores: FAISS, Chroma, Pinecone integrations
+- Retrievers: Query vector stores and other search systems
+
+LangChain Expression Language (LCEL):
+- Declarative way to chain components using the | pipe operator
+- chain = prompt | llm | output_parser
+- Built-in streaming, async support, and tracing
+
+LangGraph extends LangChain for:
+- Stateful multi-step workflows
+- Cyclic graphs (loops) for iterative refinement
+- Human-in-the-loop interruptions and approvals
+- Parallel node execution for efficiency

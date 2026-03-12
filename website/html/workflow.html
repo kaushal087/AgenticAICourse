@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workflow — Multi-Agent LangGraph</title>
+  <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0f1117;
+    color: #e2e8f0;
+    display: flex;
+    min-height: 100vh;
+}
+nav {
+    width: 240px;
+    min-width: 240px;
+    background: #1a1d2e;
+    padding: 28px 16px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid #2d3148;
+}
+nav .brand {
+    font-size: 13px;
+    font-weight: 700;
+    color: #818cf8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+nav .sub {
+    font-size: 11px;
+    color: #64748b;
+    margin-bottom: 24px;
+}
+nav a {
+    display: block;
+    padding: 9px 12px;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.15s;
+}
+nav a:hover, nav a.active {
+    background: #2d3148;
+    color: #e2e8f0;
+}
+nav a.active {
+    border-left: 3px solid #818cf8;
+    color: #a5b4fc;
+    font-weight: 600;
+}
+main {
+    flex: 1;
+    padding: 48px 64px;
+    max-width: 900px;
+}
+h1 { font-size: 2rem; color: #e2e8f0; margin-bottom: 16px; margin-top: 40px; }
+h2 { font-size: 1.4rem; color: #c7d2fe; margin-top: 36px; margin-bottom: 12px;
+     padding-bottom: 6px; border-bottom: 1px solid #2d3148; }
+h3 { font-size: 1.1rem; color: #a5b4fc; margin-top: 24px; margin-bottom: 8px; }
+h4 { font-size: 1rem; color: #94a3b8; margin-top: 16px; margin-bottom: 6px; }
+p { line-height: 1.75; color: #cbd5e1; margin-bottom: 14px; }
+ul, ol { padding-left: 22px; margin-bottom: 14px; }
+li { line-height: 1.7; color: #cbd5e1; margin-bottom: 4px; }
+a { color: #818cf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+code {
+    background: #1e2235;
+    color: #f472b6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.875em;
+}
+pre {
+    background: #1a1d2e;
+    border: 1px solid #2d3148;
+    border-radius: 10px;
+    padding: 20px;
+    overflow-x: auto;
+    margin: 16px 0 20px;
+}
+pre code {
+    background: none;
+    color: #e2e8f0;
+    padding: 0;
+    font-size: 0.85em;
+    line-height: 1.6;
+}
+blockquote {
+    border-left: 4px solid #818cf8;
+    background: #1a1d2e;
+    padding: 12px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    color: #94a3b8;
+    font-style: italic;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 0.9em;
+}
+th {
+    background: #2d3148;
+    color: #a5b4fc;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #3d4270;
+}
+td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #1e2235;
+    color: #cbd5e1;
+}
+tr:hover td { background: #1e2235; }
+hr { border: none; border-top: 1px solid #2d3148; margin: 28px 0; }
+h1:first-child { margin-top: 0; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="brand">🤖 LangGraph</div>
+  <div class="sub">Multi-Agent Systems</div>
+  <a href="index.html" >Overview</a>
+<a href="concepts.html" >Core Concepts</a>
+<a href="architecture.html" >Architecture</a>
+<a href="workflow.html" class=active>Workflow</a>
+<a href="demos.html" >Demo Walkthrough</a>
+<a href="quiz.html" >Quiz</a>
+</nav>
+<main>
+<h1 id="workflow-execution-pipeline">⚙️ Workflow &amp; Execution Pipeline</h1>
+<h2 id="end-to-end-execution-flow">End-to-End Execution Flow</h2>
+<p>Let's trace exactly what happens when a user submits:<br />
+<strong>"Analyze the impact of generative AI on software engineering careers by 2026"</strong></p>
+<hr />
+<h2 id="step-1-graph-initialization">Step 1: Graph Initialization</h2>
+<pre><code class="language-python"># User submits query
+initial_state = {
+    &quot;query&quot;: &quot;Analyze the impact of generative AI on software engineering careers by 2026&quot;,
+    &quot;plan&quot;: [],
+    &quot;research_results&quot;: [],
+    &quot;analysis&quot;: &quot;&quot;,
+    &quot;final_report&quot;: &quot;&quot;,
+    &quot;iteration_count&quot;: 0,
+    &quot;approved&quot;: False
+}
+
+# LangGraph compiles and kicks off execution
+result = app.invoke(initial_state)
+</code></pre>
+<p>The graph starts at the <code>planner</code> node.</p>
+<hr />
+<h2 id="step-2-planner-agent">Step 2: Planner Agent</h2>
+<p><strong>Input:</strong> <code>query</code><br />
+<strong>Goal:</strong> Break the query into 3–5 focused research questions<br />
+<strong>Prompt strategy:</strong> Give the LLM a "Project Manager" persona</p>
+<pre><code>System: You are a project planner. Break down the user's research question
+        into 3-5 specific, searchable subtasks.
+
+User: &quot;Analyze the impact of generative AI on software engineering careers by 2026&quot;
+
+Expected Output (JSON):
+{
+  &quot;plan&quot;: [
+    &quot;What types of software engineering tasks are being automated by AI in 2024-2025?&quot;,
+    &quot;What do industry surveys say about AI's effect on developer productivity?&quot;,
+    &quot;What new roles are emerging at the intersection of AI and software engineering?&quot;,
+    &quot;What are major tech companies saying about AI-driven workforce changes?&quot;,
+    &quot;What do economists predict about software job growth vs. displacement by 2026?&quot;
+  ]
+}
+</code></pre>
+<p><strong>State after Planner:</strong></p>
+<pre><code class="language-python">state = {
+    &quot;query&quot;: &quot;...&quot;,
+    &quot;plan&quot;: [&quot;subtask1&quot;, &quot;subtask2&quot;, &quot;subtask3&quot;, &quot;subtask4&quot;, &quot;subtask5&quot;],
+    ...
+}
+</code></pre>
+<hr />
+<h2 id="step-3-researcher-agent">Step 3: Researcher Agent</h2>
+<p><strong>Input:</strong> <code>plan</code> (list of subtasks)<br />
+<strong>Goal:</strong> For each subtask, retrieve relevant information using tools<br />
+<strong>Tools available:</strong> web search, RAG retrieval</p>
+<p>For each subtask in <code>plan</code>:</p>
+<pre><code>Thought: I need to find information about &quot;AI automation of coding tasks&quot;
+Action: search_web(&quot;AI automation software engineering tasks 2024 2025&quot;)
+Observation: [Returns web search snippets]
+
+Thought: I also have local documents that may be relevant
+Action: rag_retrieve(&quot;AI software engineering automation&quot;)
+Observation: [Returns top-K document chunks]
+
+Thought: I have enough information to summarize this subtask
+Final: Compile findings into structured result
+</code></pre>
+<p><strong>State after Researcher:</strong></p>
+<pre><code class="language-python">state = {
+    &quot;research_results&quot;: [
+        {
+            &quot;subtask&quot;: &quot;What types of software engineering tasks are being automated?&quot;,
+            &quot;findings&quot;: &quot;GitHub Copilot handles 46% of code in repos...&quot;,
+            &quot;sources&quot;: [&quot;github.blog/2024/...&quot;, &quot;mckinsey.com/...&quot;]
+        },
+        # ... more results
+    ],
+    &quot;iteration_count&quot;: 1
+}
+</code></pre>
+<hr />
+<h2 id="step-4-analyst-agent">Step 4: Analyst Agent</h2>
+<p><strong>Input:</strong> <code>research_results</code><br />
+<strong>Goal:</strong> Synthesize findings, check quality, flag gaps<br />
+<strong>Logic:</strong> If coverage is incomplete, loop back to Researcher</p>
+<pre><code>System: You are a rigorous research analyst. Review the findings below.
+        - Identify key themes and patterns
+        - Flag any conflicting information
+        - Assess coverage: are all subtasks well-answered?
+        - Return: analysis summary + approved (true/false)
+
+Decision:
+- approved = True  → proceed to Writer
+- approved = False → loop back to Researcher with additional_queries
+</code></pre>
+<p><strong>Conditional routing function:</strong></p>
+<pre><code class="language-python">def should_continue(state: GraphState) -&gt; str:
+    &quot;&quot;&quot;Route: continue research or proceed to writing?&quot;&quot;&quot;
+    if state[&quot;approved&quot;] or state[&quot;iteration_count&quot;] &gt;= 3:
+        return &quot;done&quot;      # → Writer
+    return &quot;continue&quot;      # → Researcher (loop)
+</code></pre>
+<p><strong>State after Analyst (approved):</strong></p>
+<pre><code class="language-python">state = {
+    &quot;analysis&quot;: &quot;Key findings: AI is augmenting rather than replacing SWEs...&quot;,
+    &quot;approved&quot;: True
+}
+</code></pre>
+<hr />
+<h2 id="step-5-writer-agent">Step 5: Writer Agent</h2>
+<p><strong>Input:</strong> <code>query</code>, <code>research_results</code>, <code>analysis</code><br />
+<strong>Goal:</strong> Produce a well-structured, cited report  </p>
+<pre><code>System: You are a technical writer. Produce a well-structured report with:
+        - Executive Summary
+        - Detailed Findings (one section per subtask)
+        - Key Insights
+        - Recommendations
+        - Sources
+
+Use markdown formatting. Cite sources inline.
+</code></pre>
+<p><strong>State after Writer:</strong></p>
+<pre><code class="language-python">state = {
+    &quot;final_report&quot;: &quot;&quot;&quot;
+# Impact of Generative AI on Software Engineering Careers by 2026
+
+## Executive Summary
+Generative AI is fundamentally reshaping software engineering...
+
+## Detailed Findings
+
+### 1. Automation of Repetitive Tasks
+GitHub Copilot data shows 46% of new code is AI-generated...
+
+### 2. Developer Productivity Gains
+McKinsey reports 35-45% productivity improvement for augmented developers...
+
+[...continues...]
+
+## Sources
+1. GitHub Octoverse 2024 Report
+2. McKinsey Technology Trends Report
+&quot;&quot;&quot;
+}
+</code></pre>
+<hr />
+<h2 id="message-passing-between-agents">Message Passing Between Agents</h2>
+<p>All communication happens through the <strong>shared GraphState</strong>. No direct agent-to-agent calls.</p>
+<pre><code>┌──────────┐  writes plan  ┌────────────┐  writes results  ┌──────────┐
+│ Planner  │ ──────────▶   │ Researcher │ ──────────────▶  │ Analyst  │
+└──────────┘               └────────────┘                  └──────────┘
+     ▲                                                           │
+     │                                                  approved=True
+     │                                                           ▼
+     │                                                     ┌──────────┐
+     │               writes final_report                   │  Writer  │
+     └──────────────────────────────────────────────────   └──────────┘
+</code></pre>
+<blockquote>
+<p><strong>Why shared state instead of direct message passing?</strong><br />
+It makes the system <strong>inspectable</strong> — you can print the full state at any point. It also makes it easy to resume interrupted runs (checkpointing).</p>
+</blockquote>
+<hr />
+<h2 id="loop-detection-guard">Loop Detection &amp; Guard</h2>
+<p>To prevent infinite loops:</p>
+<pre><code class="language-python">class GraphState(TypedDict):
+    iteration_count: int  # Incremented by Researcher each iteration
+
+def should_continue(state: GraphState) -&gt; str:
+    # Hard stop at 3 iterations regardless of approval
+    if state[&quot;iteration_count&quot;] &gt;= 3:
+        return &quot;done&quot;
+    if state[&quot;approved&quot;]:
+        return &quot;done&quot;
+    return &quot;continue&quot;
+</code></pre>
+<hr />
+<h2 id="execution-timeline">Execution Timeline</h2>
+<pre><code>t=0s   User submits query
+t=1s   Planner completes (fast, single LLM call)
+t=5s   Researcher starts subtask 1 (web search + RAG)
+t=8s   Researcher completes subtask 1
+t=12s  Researcher completes all 5 subtasks
+t=15s  Analyst reviews, approves
+t=20s  Writer produces final report
+t=22s  User sees result
+</code></pre>
+<p>Total: ~20-25 seconds for a 5-subtask research query with GPT-4o.</p>
+<hr />
+<h2 id="streaming-intermediate-results">Streaming Intermediate Results</h2>
+<p>LangGraph supports streaming node outputs to the UI in real time:</p>
+<pre><code class="language-python">for event in app.stream(initial_state):
+    for node_name, node_output in event.items():
+        print(f&quot;\n🔄 [{node_name.upper()}] completed&quot;)
+        if &quot;plan&quot; in node_output:
+            print(f&quot;   Plan: {node_output['plan']}&quot;)
+        if &quot;final_report&quot; in node_output:
+            print(f&quot;\n📄 FINAL REPORT:\n{node_output['final_report']}&quot;)
+</code></pre>
+</main>
+<script>
+  // Highlight active nav link
+  const current = location.pathname.split('/').pop();
+  document.querySelectorAll('nav a').forEach(a => {
+    if (a.getAttribute('href') === current) a.classList.add('active');
+  });
+</script>
+</body>
+</html>

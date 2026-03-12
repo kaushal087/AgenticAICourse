@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo Walkthrough — Multi-Agent LangGraph</title>
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f7fa;
+    color: #1a202c;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ── Sidebar ── */
+nav {
+    width: 260px;
+    min-width: 260px;
+    background: #ffffff;
+    padding: 24px 14px 40px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid #e2e8f0;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+}
+nav .brand {
+    font-size: 15px;
+    font-weight: 800;
+    color: #4f46e5;
+    margin-bottom: 2px;
+    letter-spacing: -0.3px;
+}
+nav .sub {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-bottom: 28px;
+}
+nav .group {
+    font-size: 10px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin: 20px 0 6px 10px;
+}
+nav a {
+    display: block;
+    padding: 8px 12px;
+    margin-bottom: 2px;
+    border-radius: 7px;
+    color: #475569;
+    text-decoration: none;
+    font-size: 13.5px;
+    transition: background 0.12s, color 0.12s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+nav a:hover { background: #f1f5f9; color: #1a202c; }
+nav a.active {
+    background: #eef2ff;
+    color: #4f46e5;
+    font-weight: 600;
+    border-left: 3px solid #4f46e5;
+    padding-left: 9px;
+}
+
+/* ── Main content ── */
+main {
+    flex: 1;
+    padding: 52px 68px 80px;
+    max-width: 960px;
+    min-width: 0;
+    background: #f5f7fa;
+}
+
+/* ── Typography ── */
+h1 { font-size: 2rem; color: #111827; margin-bottom: 18px; margin-top: 44px; line-height: 1.25; }
+h2 { font-size: 1.45rem; color: #1e3a8a; margin-top: 40px; margin-bottom: 14px;
+     padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+h3 { font-size: 1.1rem; color: #3730a3; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 0.95rem; color: #4b5563; margin-top: 18px; margin-bottom: 6px; font-weight: 600; }
+h1:first-child, h2:first-child { margin-top: 0; }
+p  { line-height: 1.8; color: #374151; margin-bottom: 14px; }
+ul, ol { padding-left: 24px; margin-bottom: 14px; }
+li { line-height: 1.75; color: #374151; margin-bottom: 5px; }
+a  { color: #4f46e5; text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: #111827; }
+
+/* ── Code ── */
+code {
+    background: #f1f5f9;
+    color: #be185d;
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 0.855em;
+    border: 1px solid #e2e8f0;
+}
+pre {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 22px 24px;
+    overflow-x: auto;
+    margin: 18px 0 24px;
+}
+pre code {
+    background: none;
+    color: #1e293b;
+    padding: 0;
+    font-size: 0.83em;
+    line-height: 1.65;
+    border: none;
+}
+
+/* ── Blockquote ── */
+blockquote {
+    border-left: 4px solid #6366f1;
+    background: #eef2ff;
+    padding: 14px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 18px 0;
+    color: #4338ca;
+    font-style: italic;
+}
+
+/* ── Tables ── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 26px;
+    font-size: 0.88em;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+th {
+    background: #eef2ff;
+    color: #3730a3;
+    padding: 11px 16px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #c7d2fe;
+}
+td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #374151;
+    vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+
+/* ── Misc ── */
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
+img { max-width: 100%; border-radius: 8px; margin: 16px 0; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="brand">🤖 LangGraph</div>
+  <div class="sub">Multi-Agent Systems · IK Agentic AI</div>
+  <a href="home.html">🏠 Home</a>
+  <div class="group">📚 Documentation</div>
+  <a href="index.html">Overview</a>
+  <a href="concepts.html">Core Concepts</a>
+  <a href="architecture.html">Architecture</a>
+  <a href="workflow.html">Workflow</a>
+  <a href="demos.html" class="active">Demo Walkthrough</a>
+  <a href="quiz.html">Quiz</a>
+  <div class="group">🎓 Slides</div>
+  <a href="lecture_slides.html">Lecture Slides</a>
+  <a href="agent_flow_slide.html">Agent Flow Diagram</a>
+  <div class="group">📊 Diagrams</div>
+  <a href="diag_architecture.html">System Architecture</a>
+  <a href="diag_agent_flow.html">Agent Flow</a>
+  <a href="diag_rag_pipeline.html">RAG Pipeline</a>
+  <div class="group">📝 Quizzes</div>
+  <a href="quiz_questions.html">Quiz Reference</a>
+</nav>
+<main>
+<h1 id="demo-walkthrough">🎬 Demo Walkthrough</h1>
+<h2 id="what-the-demo-does">What the Demo Does</h2>
+<p>The demo runs a <strong>Multi-Agent Research Assistant</strong> that answers complex research questions by:</p>
+<ol>
+<li><strong>Planning</strong> — dividing the question into subtasks</li>
+<li><strong>Researching</strong> — retrieving relevant information per subtask</li>
+<li><strong>Analyzing</strong> — evaluating and synthesizing findings</li>
+<li><strong>Writing</strong> — producing a structured final report</li>
+</ol>
+<hr />
+<h2 id="demo-modes">Demo Modes</h2>
+<h3 id="option-a-cli-demo-quick">Option A: CLI Demo (Quick)</h3>
+<pre><code class="language-bash">cd code/
+python main.py
+</code></pre>
+<ul>
+<li>Prints each agent's output as it executes</li>
+<li>Shows intermediate state at each node</li>
+<li>Fast way to see the pipeline in action</li>
+</ul>
+<h3 id="option-b-streamlit-demo-interactive">Option B: Streamlit Demo (Interactive)</h3>
+<pre><code class="language-bash">cd demo/
+bash run_demo.sh
+</code></pre>
+<ul>
+<li>Web UI with a text input box</li>
+<li>Real-time streaming of agent progress</li>
+<li>Expandable sections for each agent's output</li>
+<li>Final report rendered as formatted Markdown</li>
+</ul>
+<hr />
+<h2 id="component-interaction-map">Component Interaction Map</h2>
+<pre><code>demo_app.py (Streamlit)
+    │
+    │ user_query (str)
+    ▼
+code/main.py
+    │
+    │ builds initial GraphState
+    ▼
+LangGraph app.stream()
+    │
+    ├──▶ agent.py::planner_node()
+    │       Uses: OpenAI GPT-4o
+    │       Reads: state[&quot;query&quot;]
+    │       Writes: state[&quot;plan&quot;]
+    │
+    ├──▶ agent.py::researcher_node()
+    │       Uses: OpenAI GPT-4o + tools
+    │       Calls: tools.py::search_web()
+    │       Calls: rag_pipeline.py::retrieve()
+    │       Reads: state[&quot;plan&quot;]
+    │       Writes: state[&quot;research_results&quot;]
+    │
+    ├──▶ agent.py::analyst_node()
+    │       Uses: OpenAI GPT-4o
+    │       Reads: state[&quot;research_results&quot;]
+    │       Writes: state[&quot;analysis&quot;], state[&quot;approved&quot;]
+    │
+    └──▶ agent.py::writer_node()
+            Uses: OpenAI GPT-4o
+            Reads: state[&quot;query&quot;], state[&quot;analysis&quot;], state[&quot;research_results&quot;]
+            Writes: state[&quot;final_report&quot;]
+</code></pre>
+<hr />
+<h2 id="running-the-demo-step-by-step">Running the Demo Step by Step</h2>
+<h3 id="step-1-setup">Step 1: Setup</h3>
+<pre><code class="language-bash"># Clone / navigate to project
+cd multi-agent-langgraph/
+
+# Install dependencies
+pip install -r code/requirements.txt
+
+# Set OpenAI API key
+export OPENAI_API_KEY=&quot;sk-your-key-here&quot;
+</code></pre>
+<h3 id="step-2-load-sample-data-into-rag">Step 2: Load Sample Data into RAG</h3>
+<p>The demo includes a sample knowledge base in <code>demo/sample_data/knowledge_base.txt</code>.<br />
+It gets automatically loaded and indexed when the demo starts.</p>
+<pre><code class="language-python"># This happens automatically in main.py
+rag = RAGPipeline()
+rag.ingest(&quot;demo/sample_data/knowledge_base.txt&quot;)
+</code></pre>
+<h3 id="step-3-run-a-query">Step 3: Run a Query</h3>
+<p><strong>Example query to try:</strong></p>
+<pre><code>&quot;What are the best practices for building production-ready LLM applications?&quot;
+</code></pre>
+<p><strong>Expected execution trace:</strong></p>
+<pre><code>🧠 [PLANNER] Analyzing query...
+   ✅ Plan created: 4 subtasks identified
+
+🔍 [RESEARCHER] Working on subtask 1/4...
+   🔧 Tool: search_web(&quot;LLM production best practices 2024&quot;)
+   🔧 Tool: rag_retrieve(&quot;LLM deployment reliability&quot;)
+   ✅ Subtask 1 complete
+
+🔍 [RESEARCHER] Working on subtask 2/4...
+   ...
+
+🧪 [ANALYST] Reviewing research quality...
+   ✅ Coverage: 92% - Approved for writing
+
+✍️  [WRITER] Generating final report...
+   ✅ Report complete (847 words)
+
+📄 FINAL REPORT:
+================
+# Best Practices for Production-Ready LLM Applications
+
+## Executive Summary
+...
+</code></pre>
+<hr />
+<h2 id="key-code-files-explained">Key Code Files Explained</h2>
+<h3 id="codeagentpy"><code>code/agent.py</code></h3>
+<p>Contains all four agent node functions. Each function:<br />
+- Receives <code>GraphState</code><br />
+- Builds a prompt for the LLM<br />
+- Calls GPT-4o (with or without tools)<br />
+- Returns a dict with updated state fields</p>
+<p><strong>Most important pattern:</strong> Agent functions are just regular Python functions:</p>
+<pre><code class="language-python">def planner_node(state: GraphState) -&gt; dict:
+    # Build prompt using state[&quot;query&quot;]
+    # Call LLM
+    # Parse response into plan
+    return {&quot;plan&quot;: [...]}  # Only return what changed
+</code></pre>
+<h3 id="codetoolspy"><code>code/tools.py</code></h3>
+<p>Defines tools that agents can call:<br />
+- <code>search_web(query: str) → str</code> — Tavily web search<br />
+- <code>calculate(expression: str) → str</code> — Safe math evaluation<br />
+- <code>rag_retrieve(query: str) → str</code> — Local document retrieval</p>
+<h3 id="coderag_pipelinepy"><code>code/rag_pipeline.py</code></h3>
+<p>Manages the vector store:<br />
+- <code>ingest(file_path)</code> — load and index documents<br />
+- <code>retrieve(query)</code> — find top-K relevant chunks<br />
+- Uses FAISS for vector similarity search<br />
+- Uses <code>text-embedding-3-small</code> for embeddings</p>
+<h3 id="demodemo_apppy"><code>demo/demo_app.py</code></h3>
+<p>Streamlit app that:<br />
+- Provides a text input for the query<br />
+- Shows a progress indicator while agents run<br />
+- Streams and displays each agent's output in expandable sections<br />
+- Renders the final report with Markdown formatting</p>
+<hr />
+<h2 id="sample-output">Sample Output</h2>
+<pre><code class="language-markdown"># Impact of AI on Software Engineering (2026 Analysis)
+
+## Executive Summary
+Generative AI tools are transforming software engineering by automating
+repetitive tasks while creating new demand for AI-fluent developers...
+
+## Key Findings
+
+### 1. Code Generation &amp; Automation
+- GitHub Copilot generates ~46% of code in enabled repositories
+- Unit test generation is the highest-adopted AI task (62%)
+- Code review assistance has 41% enterprise adoption rate
+
+### 2. Productivity Impact
+- Average 35% reduction in time-to-complete for standard dev tasks
+- 78% of developers report AI tools as &quot;helpful&quot; or &quot;very helpful&quot;
+- Complex architecture work shows minimal AI impact (8% efficiency gain)
+
+### 3. Emerging Roles
+- AI Engineer: 340% job posting increase (2023→2025)
+- Prompt Engineering: Becoming a core skill, not a role
+- AI Safety &amp; Evaluation: Fastest growing ML sub-discipline
+
+## Recommendations
+1. Developers should focus on AI-augmentation literacy
+2. Organizations should invest in AI tooling and workflows
+3. Curriculum should include LLM integration and agent design
+
+## Sources
+- GitHub Octoverse 2024
+- McKinsey Technology Report Q3 2024
+- Stack Overflow Developer Survey 2025
+</code></pre>
+<hr />
+<h2 id="instructor-talking-points">Instructor Talking Points</h2>
+<p><strong>During the demo, say:</strong></p>
+<ol>
+<li>
+<p><em>"Watch how the Planner breaks down one complex question — this is the key insight. Humans do this too, but we formalize it for AI."</em></p>
+</li>
+<li>
+<p><em>"Notice the Researcher is calling TWO tools per subtask. This is parallel information gathering — like a developer using both Google and internal docs."</em></p>
+</li>
+<li>
+<p><em>"The Analyst node is the most important for reliability. Without a validation step, you'd ship whatever the Researcher returned, even if it was incomplete."</em></p>
+</li>
+<li>
+<p><em>"The loop — if analyst is not satisfied, we go back to Researcher — this is what makes the system self-correcting. That's the difference between a chatbot and an agent."</em></p>
+</li>
+<li>
+<p><em>"The final report cites sources. In production, this is critical for trust and auditability of AI outputs."</em></p>
+</li>
+</ol>
+</main>
+<script>
+  // Mark the current page active in nav
+  const current = location.pathname.split('/').pop() || 'home.html';
+  document.querySelectorAll('nav a').forEach(a => {
+    if (a.getAttribute('href') === current) a.classList.add('active');
+  });
+</script>
+</body>
+</html>

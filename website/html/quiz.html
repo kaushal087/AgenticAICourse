@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz — Multi-Agent LangGraph</title>
+  <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0f1117;
+    color: #e2e8f0;
+    display: flex;
+    min-height: 100vh;
+}
+nav {
+    width: 240px;
+    min-width: 240px;
+    background: #1a1d2e;
+    padding: 28px 16px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid #2d3148;
+}
+nav .brand {
+    font-size: 13px;
+    font-weight: 700;
+    color: #818cf8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+nav .sub {
+    font-size: 11px;
+    color: #64748b;
+    margin-bottom: 24px;
+}
+nav a {
+    display: block;
+    padding: 9px 12px;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.15s;
+}
+nav a:hover, nav a.active {
+    background: #2d3148;
+    color: #e2e8f0;
+}
+nav a.active {
+    border-left: 3px solid #818cf8;
+    color: #a5b4fc;
+    font-weight: 600;
+}
+main {
+    flex: 1;
+    padding: 48px 64px;
+    max-width: 900px;
+}
+h1 { font-size: 2rem; color: #e2e8f0; margin-bottom: 16px; margin-top: 40px; }
+h2 { font-size: 1.4rem; color: #c7d2fe; margin-top: 36px; margin-bottom: 12px;
+     padding-bottom: 6px; border-bottom: 1px solid #2d3148; }
+h3 { font-size: 1.1rem; color: #a5b4fc; margin-top: 24px; margin-bottom: 8px; }
+h4 { font-size: 1rem; color: #94a3b8; margin-top: 16px; margin-bottom: 6px; }
+p { line-height: 1.75; color: #cbd5e1; margin-bottom: 14px; }
+ul, ol { padding-left: 22px; margin-bottom: 14px; }
+li { line-height: 1.7; color: #cbd5e1; margin-bottom: 4px; }
+a { color: #818cf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+code {
+    background: #1e2235;
+    color: #f472b6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.875em;
+}
+pre {
+    background: #1a1d2e;
+    border: 1px solid #2d3148;
+    border-radius: 10px;
+    padding: 20px;
+    overflow-x: auto;
+    margin: 16px 0 20px;
+}
+pre code {
+    background: none;
+    color: #e2e8f0;
+    padding: 0;
+    font-size: 0.85em;
+    line-height: 1.6;
+}
+blockquote {
+    border-left: 4px solid #818cf8;
+    background: #1a1d2e;
+    padding: 12px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    color: #94a3b8;
+    font-style: italic;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 0.9em;
+}
+th {
+    background: #2d3148;
+    color: #a5b4fc;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #3d4270;
+}
+td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #1e2235;
+    color: #cbd5e1;
+}
+tr:hover td { background: #1e2235; }
+hr { border: none; border-top: 1px solid #2d3148; margin: 28px 0; }
+h1:first-child { margin-top: 0; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="brand">🤖 LangGraph</div>
+  <div class="sub">Multi-Agent Systems</div>
+  <a href="index.html" >Overview</a>
+<a href="concepts.html" >Core Concepts</a>
+<a href="architecture.html" >Architecture</a>
+<a href="workflow.html" >Workflow</a>
+<a href="demos.html" >Demo Walkthrough</a>
+<a href="quiz.html" class=active>Quiz</a>
+</nav>
+<main>
+<h1 id="quiz-multi-agent-systems-with-langgraph">📝 Quiz — Multi-Agent Systems with LangGraph</h1>
+<p>Take this quiz to test your understanding of multi-agent systems, LangGraph, and agentic design patterns.</p>
+<hr />
+<h2 id="section-a-conceptual-questions-10-questions">Section A: Conceptual Questions (10 questions)</h2>
+<p><strong>Q1.</strong> What is the primary advantage of a multi-agent system over a single LLM call for complex tasks?</p>
+<ul>
+<li>A) Multi-agent systems are always faster</li>
+<li>B) Each agent can specialize, and complex tasks can be broken into focused subtasks</li>
+<li>C) Multi-agents use less tokens</li>
+<li>D) LangGraph requires multiple agents to function</li>
+</ul>
+<blockquote>
+<p>✅ <strong>Answer: B</strong><br />
+Specialization and task decomposition are the core advantages. Speed and cost depend on implementation.</p>
+</blockquote>
+<hr />
+<p><strong>Q2.</strong> In LangGraph, what does a "node" represent?</p>
+<ul>
+<li>A) A prompt template</li>
+<li>B) A Python function that processes the shared state</li>
+<li>C) A message in the conversation history</li>
+<li>D) A vector in the embedding space</li>
+</ul>
+<blockquote>
+<p>✅ <strong>Answer: B</strong><br />
+Nodes are Python functions (typically wrapping agent logic) that receive the <code>GraphState</code> and return updated fields.</p>
+</blockquote>
+<hr />
+<p><strong>Q3.</strong> What is <code>GraphState</code> in LangGraph?</p>
+<ul>
+<li>A) The visualization of the agent graph</li>
+<li>B) A database for storing agent outputs</li>
+<li>C) A <code>TypedDict</code> that holds all shared data passed between nodes</li>
+<li>D) An OpenAI-specific data format</li>
+</ul>
+<blockquote>
+<p>✅ <strong>Answer: C</strong><br />
+<code>GraphState</code> is Python <code>TypedDict</code> — a typed dictionary that flows through every node, carrying all information the agents need.</p>
+</blockquote>
+<hr />
+<p><strong>Q4.</strong> What is a "conditional edge" in LangGraph?</p>
+<ul>
+<li>A) An edge that only activates on weekdays</li>
+<li>B) A routing function that decides which node to visit next based on the current state</li>
+<li>C) An edge encrypted with a condition key</li>
+<li>D) A feature exclusive to the paid LangGraph tier</li>
+</ul>
+<blockquote>
+<p>✅ <strong>Answer: B</strong><br />
+Conditional edges are routing functions. They inspect the current state and return a string key indicating the next node.</p>
+</blockquote>
+<hr />
+<p><strong>Q5.</strong> In the ReAct pattern, what does the Observation step represent?</p>
+<ul>
+<li>A) The LLM's plan for next steps</li>
+<li>B) The user's input message</li>
+<li>C) The result returned by a tool after the LLM calls it</li>
+<li>D) A log entry written for debugging</li>
+</ul>
+<blockquote>
+<p>✅ <strong>Answer: C</strong><br />
+<code>Observation</code> is the tool result. The cycle is: Thought → Action → Observation → next Thought.</p>
+</blockquote>
+<hr />
+<p><strong>Q6.</strong> Which pattern describes a workflow where a <code>Supervisor</code> agent decides which <code>Worker</code> agent to call next?</p>
+<ul>
+<li>A) Sequential pipeline</li>
+<li>B) Hierarchical multi-agent system</li>
+<li>C) RAG pipeline</li>
+<li>D) Chain-of-thought prompting</li>
+</ul>
+<blockquote>
+<p>✅ <strong>Answer: B</strong><br />
+A Supervisor-Worker pattern is hierarchical. The supervisor makes routing decisions dynamically based on the task state.</p>
+</blockquote>
+<hr />
+<p><strong>Q7.</strong> Why do multi-agent systems use a shared state (like <code>GraphState</code>) instead of direct agent-to-agent message passing?</p>
+<ul>
+<li>A) Direct messaging is not supported by Python</li>
+<li>B) OpenAI does not allow inter-agent calls</li>
+<li>C) Shared state makes the system inspectable, debuggable, and supports checkpointing</li>
+<li>D) It reduces the number of API calls</li>
+</ul>
+<blockquote>
+<p>✅ <strong>Answer: C</strong><br />
+With shared state, you can print/inspect the full system context at any point. Direct message passing makes debugging harder and prevents checkpointing.</p>
+</blockquote>
+<hr />
+<p><strong>Q8.</strong> What is the purpose of an Analyst (Critic) agent in a multi-agent pipeline?</p>
+<ul>
+<li>A) To write the final report</li>
+<li>B) To evaluate the quality of research and decide whether to loop back or proceed</li>
+<li>C) To manage the API rate limits</li>
+<li>D) To convert text to embeddings</li>
+</ul>
+<blockquote>
+<p>✅ <strong>Answer: B</strong><br />
+The Analyst/Critic provides self-correction capability. Without it, the pipeline has no quality gate and may produce incomplete results.</p>
+</blockquote>
+<hr />
+<p><strong>Q9.</strong> In RAG (Retrieval-Augmented Generation), what is the role of FAISS?</p>
+<ul>
+<li>A) A large language model for text generation</li>
+<li>B) A web search engine</li>
+<li>C) An in-memory vector similarity search index</li>
+<li>D) A prompt management framework</li>
+</ul>
+<blockquote>
+<p>✅ <strong>Answer: C</strong><br />
+FAISS (Facebook AI Similarity Search) stores embeddings and retrieves the most semantically similar vectors for a query.</p>
+</blockquote>
+<hr />
+<p><strong>Q10.</strong> When should you prefer <strong>LangGraph</strong> over <strong>CrewAI</strong> for building a multi-agent system?</p>
+<ul>
+<li>A) When you want the simplest possible setup with minimal code</li>
+<li>B) When you need fine-grained control over workflow logic, conditional routing, and checkpointing</li>
+<li>C) When you are building a non-Python system</li>
+<li>D) When your agents don't need tools</li>
+</ul>
+<blockquote>
+<p>✅ <strong>Answer: B</strong><br />
+LangGraph gives you full programmatic control. CrewAI offers faster setup through higher-level abstractions but with less flexibility.</p>
+</blockquote>
+<hr />
+<h2 id="section-b-interview-style-questions">Section B: Interview-Style Questions</h2>
+<p><strong>IQ1.</strong> You're designing a multi-agent system that needs to handle 1000 research queries per hour. Walk through the architecture decisions you'd make to ensure reliability, cost efficiency, and scalability.</p>
+<p><strong>Talking points for a strong answer:</strong><br />
+- Route simple queries to single-agent path, complex to multi-agent<br />
+- Use GPT-4o-mini for Planner and Analyst nodes; GPT-4o only for Writer<br />
+- Cache frequent web search results (Redis TTL)<br />
+- Run Researcher subtasks in parallel using LangGraph parallel nodes<br />
+- Add LangSmith tracing for observability<br />
+- Implement rate limiting and exponential backoff on all API calls<br />
+- Use checkpointing so interrupted runs can resume from last successful node</p>
+<hr />
+<p><strong>IQ2.</strong> What's the difference between a "chain" in LangChain and a "graph" in LangGraph? Give an example of when you'd choose each.</p>
+<p><strong>Talking points for a strong answer:</strong><br />
+- <strong>Chain:</strong> Linear, always executes the same sequence. Example: question → RAG retrieval → answer. No loops, no branching.<br />
+- <strong>Graph:</strong> Supports conditional edges, loops, parallel execution. Example: research pipeline where Analyst may loop Researcher multiple times.<br />
+- Choose chain for: fixed, predictable pipelines; simple RAG; low latency requirements<br />
+- Choose graph for: complex workflows; quality-gating; self-correcting systems; anything requiring branching</p>
+<hr />
+<h2 id="section-c-coding-questions">Section C: Coding Questions</h2>
+<h3 id="coding-q1">Coding Q1</h3>
+<p><strong>Task:</strong> Define a <code>GraphState</code> TypedDict and a simple Planner node for a multi-agent system that researches a user query.</p>
+<pre><code class="language-python"># Your implementation here
+</code></pre>
+<p><strong>Expected answer:</strong></p>
+<pre><code class="language-python">from typing import TypedDict, List
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import SystemMessage, HumanMessage
+import json
+
+class GraphState(TypedDict):
+    query: str
+    plan: List[str]
+    research_results: List[dict]
+    analysis: str
+    final_report: str
+    iteration_count: int
+    approved: bool
+
+llm = ChatOpenAI(model=&quot;gpt-4o&quot;, temperature=0)
+
+def planner_node(state: GraphState) -&gt; dict:
+    system_prompt = &quot;&quot;&quot;You are a research planner. Given a user query, 
+    break it into 3-5 specific, searchable research questions.
+    Return a JSON object with a &quot;plan&quot; key containing a list of questions.&quot;&quot;&quot;
+
+    response = llm.invoke([
+        SystemMessage(content=system_prompt),
+        HumanMessage(content=state[&quot;query&quot;])
+    ])
+
+    data = json.loads(response.content)
+    return {&quot;plan&quot;: data[&quot;plan&quot;]}
+</code></pre>
+<hr />
+<h3 id="coding-q2">Coding Q2</h3>
+<p><strong>Task:</strong> Write a routing function <code>should_continue()</code> that decides whether an analyst-approved multi-agent workflow should loop back to the Researcher or proceed to the Writer. Include a max-iteration guard.</p>
+<pre><code class="language-python"># Your implementation here
+</code></pre>
+<p><strong>Expected answer:</strong></p>
+<pre><code class="language-python">def should_continue(state: GraphState) -&gt; str:
+    &quot;&quot;&quot;
+    Routing function for the Analyst node's conditional edge.
+
+    Returns:
+        &quot;continue&quot; → loop back to Researcher for more investigation
+        &quot;done&quot;     → proceed to Writer
+    &quot;&quot;&quot;
+    MAX_ITERATIONS = 3
+
+    # Hard stop to prevent infinite loops
+    if state[&quot;iteration_count&quot;] &gt;= MAX_ITERATIONS:
+        return &quot;done&quot;
+
+    # Analyst approved the research quality
+    if state.get(&quot;approved&quot;, False):
+        return &quot;done&quot;
+
+    # Research needs more work
+    return &quot;continue&quot;
+</code></pre>
+</main>
+<script>
+  // Highlight active nav link
+  const current = location.pathname.split('/').pop();
+  document.querySelectorAll('nav a').forEach(a => {
+    if (a.getAttribute('href') === current) a.classList.add('active');
+  });
+</script>
+</body>
+</html>
