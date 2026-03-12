@@ -300,9 +300,9 @@ with get_openai_callback() as cb:
 <h3>DSPy: Automatic Prompt Optimization</h3>
 <pre><code">import dspy
 
-# DSPy uses LLMs to automatically improve prompts
-lm = dspy.OpenAI(model="gpt-4o-mini", max_tokens=1000)
-dspy.settings.configure(lm=lm)
+# DSPy 2.x uses LM() and dspy.configure() (not dspy.OpenAI / dspy.settings)
+lm = dspy.LM("openai/gpt-4o-mini", max_tokens=1000)
+dspy.configure(lm=lm)
 
 class QA(dspy.Signature):
     """Answer questions about company policies accurately and concisely."""

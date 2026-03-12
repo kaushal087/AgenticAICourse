@@ -258,7 +258,7 @@ embeddings = [item.embedding for item in response.data]</code></pre>
 <h3>Why Pydantic in GenAI?</h3>
 <p>LLMs output text. You need structured, validated Python objects. Pydantic bridges the gap — it parses, validates, and type-checks LLM outputs, API request bodies, and agent configurations.</p>
 
-<pre><code">from pydantic import BaseModel, Field, validator, model_validator
+<pre><code">from pydantic import BaseModel, Field, field_validator, model_validator
 from typing import Optional
 from datetime import datetime
 
@@ -270,12 +270,14 @@ class AgentConfig(BaseModel):
     system_prompt: str = Field(..., min_length=10, max_length=4000)
     tools_enabled: list[str] = Field(default_factory=list)
 
-    @validator("tools_enabled", each_item=True)
-    def validate_tool_names(cls, tool):
+    @field_validator("tools_enabled", mode="before")  # Pydantic v2: field_validator replaces validator
+    @classmethod
+    def validate_tool_names(cls, tools):
         allowed = {"search_web", "python_repl", "knowledge_base", "calculator"}
-        if tool not in allowed:
-            raise ValueError(f"Unknown tool: {tool}. Allowed: {allowed}")
-        return tool
+        for tool in tools:
+            if tool not in allowed:
+                raise ValueError(f"Unknown tool: {tool}. Allowed: {allowed}")
+        return tools
 
 # LLM structured output parsing
 class SearchResult(BaseModel):
@@ -479,6 +481,7 @@ app = FastAPI(title="RAG + Agent Pipeline")
 async_client = AsyncOpenAI()
 
 # Build RAG on startup
+# Note: @app.on_event is deprecated since FastAPI 0.93; prefer lifespan context manager in new projects
 @app.on_event("startup")
 async def build_rag():
     loader = TextLoader("knowledge_base.txt")

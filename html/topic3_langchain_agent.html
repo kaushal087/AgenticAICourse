@@ -157,8 +157,8 @@ def calculate(expression: str) -> str:
         # Use ast.literal_eval for safety — never eval() raw LLM output
         import ast
         tree = ast.parse(expression, mode='eval')
-        # Only allow safe math operations
-        allowed_nodes = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Num,
+        # Only allow safe math operations (ast.Num removed — deprecated/removed in Python 3.12+; use ast.Constant)
+        allowed_nodes = (ast.Expression, ast.BinOp, ast.UnaryOp,
                         ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Pow,
                         ast.USub, ast.Constant)
         for node in ast.walk(tree):
