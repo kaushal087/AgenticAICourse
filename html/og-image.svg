@@ -49,31 +49,37 @@
   </g>
 
   <!-- Course label -->
-  <text x="128" y="89" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="600" fill="#a5b4fc" letter-spacing="2">IK AGENTIC AI COURSE</text>
+  <text x="128" y="89" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="600" fill="#a5b4fc" letter-spacing="2">AGENTIC AI COURSE</text>
 
   <!-- Main headline -->
   <text x="60" y="220" font-family="system-ui,-apple-system,sans-serif" font-size="78" font-weight="800" fill="white" letter-spacing="-1">Agentic AI</text>
   <text x="60" y="308" font-family="system-ui,-apple-system,sans-serif" font-size="78" font-weight="800" fill="#818cf8" letter-spacing="-1">Multi-Agent Systems</text>
 
-  <!-- Subtitle pill tags -->
-  <g font-family="system-ui,-apple-system,sans-serif" font-size="19" fill="#c7d2fe">
-    <rect x="60"  y="340" width="116" height="36" rx="18" fill="#4f46e5" opacity="0.6"/>
-    <text x="80"  y="363">LangChain</text>
+  <!-- Subtitle pill tags — text-anchor=middle keeps text centred in each pill -->
+  <g font-family="system-ui,-apple-system,sans-serif" font-size="19" fill="#c7d2fe" text-anchor="middle">
+    <!-- LangChain: x=60, w=132 → center=126 -->
+    <rect x="60"  y="340" width="132" height="36" rx="18" fill="#4f46e5" opacity="0.6"/>
+    <text x="126" y="363">LangChain</text>
 
-    <rect x="192" y="340" width="122" height="36" rx="18" fill="#4f46e5" opacity="0.6"/>
-    <text x="211" y="363">LangGraph</text>
+    <!-- LangGraph: x=204, w=132 → center=270 -->
+    <rect x="204" y="340" width="132" height="36" rx="18" fill="#4f46e5" opacity="0.6"/>
+    <text x="270" y="363">LangGraph</text>
 
-    <rect x="330" y="340" width="60"  height="36" rx="18" fill="#4f46e5" opacity="0.6"/>
-    <text x="349" y="363">RAG</text>
+    <!-- RAG: x=348, w=80 → center=388 -->
+    <rect x="348" y="340" width="80"  height="36" rx="18" fill="#4f46e5" opacity="0.6"/>
+    <text x="388" y="363">RAG</text>
 
-    <rect x="406" y="340" width="62"  height="36" rx="18" fill="#4f46e5" opacity="0.6"/>
-    <text x="424" y="363">MCP</text>
+    <!-- MCP: x=440, w=80 → center=480 -->
+    <rect x="440" y="340" width="80"  height="36" rx="18" fill="#4f46e5" opacity="0.6"/>
+    <text x="480" y="363">MCP</text>
 
-    <rect x="484" y="340" width="55"  height="36" rx="18" fill="#4f46e5" opacity="0.6"/>
-    <text x="501" y="363">A2A</text>
+    <!-- A2A: x=532, w=76 → center=570 -->
+    <rect x="532" y="340" width="76"  height="36" rx="18" fill="#4f46e5" opacity="0.6"/>
+    <text x="570" y="363">A2A</text>
 
-    <rect x="555" y="340" width="120" height="36" rx="18" fill="#4f46e5" opacity="0.6"/>
-    <text x="573" y="363">Evaluation</text>
+    <!-- Evaluation: x=620, w=138 → center=689 -->
+    <rect x="620" y="340" width="138" height="36" rx="18" fill="#4f46e5" opacity="0.6"/>
+    <text x="689" y="363">Evaluation</text>
   </g>
 
   <!-- Description line -->
