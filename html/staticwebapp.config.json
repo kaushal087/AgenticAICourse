@@ -1,0 +1,14 @@
+{
+  "globalHeaders": {
+    "X-Robots-Tag": "index, follow",
+    "Cache-Control": "public, max-age=3600"
+  },
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/images/*.{png,jpg,gif,svg}", "/*.{css,js,json,txt,ico}"]
+  },
+  "mimeTypes": {
+    ".svg": "image/svg+xml",
+    ".webmanifest": "application/manifest+json"
+  }
+}

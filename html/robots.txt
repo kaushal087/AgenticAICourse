@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://icy-field-015fe690f.2.azurestaticapps.net/sitemap.xml
