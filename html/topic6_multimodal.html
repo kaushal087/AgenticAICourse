@@ -128,7 +128,16 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
   .run-box { background: #f0fdf4; border: 1px solid #86efac; border-left: 4px solid #16a34a; border-radius: 0 9px 9px 0; padding: 16px 20px; margin: 20px 0 28px; }
   .run-box > strong { color: #15803d; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 10px; }
   .run-box pre { margin: 6px 0 2px; }
+  /* ── hljs overrides for dark terminal blocks ── */
+  .term code.hljs { background: transparent !important; color: #cbd5e1 !important; }
+  .term .hljs-comment,.term .hljs-meta { color: #94a3b8 !important; font-style: normal; }
+  .term .hljs-string { color: #86efac !important; }
+  .term .hljs-keyword,.term .hljs-selector-tag { color: #7dd3fc !important; }
+  .term .hljs-built_in,.term .hljs-params { color: #c4b5fd !important; }
+  .term .hljs-number,.term .hljs-literal { color: #fbbf24 !important; }
+  .term .hljs-variable { color: #fca5a5 !important; }
 </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 </head>
 <body>
 <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
@@ -556,6 +565,7 @@ agent.speak(answer)                                     # agent responds out lou
     nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeNav); });
   })();
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script>
   // Copy button for all code blocks
   (function(){
@@ -573,6 +583,26 @@ agent.speak(answer)                                     # agent responds out lou
       });
       pre.appendChild(btn);
     });
+  })();
+  // Auto-classify & syntax-highlight code blocks
+  (function(){
+    document.querySelectorAll('pre code').forEach(function(el){
+      if (el.className) return;
+      var t = el.textContent.trim();
+      if (/^(\/\/\s*(GET|POST|PUT)|[\s\n]*\{[\s\S]{0,30}"[a-z][a-z\-_]+"\s*:)/i.test(t)) {
+        el.className = 'language-json';
+      } else if (el.closest('.run-box') || el.closest('.term') ||
+                 /^(pip\s+install|export\s+\w|brew\s+|docker\s+|uvicorn\s+|python\s+-m|source\s+|redis-|sudo\s+)/m.test(t) ||
+                 /^#\s*(Install|Set your|macOS|Ubuntu|Docker|Run|Copy|For the|\d+\.)/m.test(t)) {
+        el.className = 'language-bash';
+      } else if (/[\u250c\u2510\u2514\u2518\u2500\u2502\u251c\u2524\u252c\u2534\u256c\u2554\u2557\u255a\u255d\u2550\u2551]{2,}/.test(t.slice(0,400)) ||
+                 /^(Thought:|Action:|Observation:|PLANNING |INDEXING |User Input\n|User Query\n|Classic Voice|Load Balancer\n|Orchestrator\n|Increasing |Event Sources|Documents\n|Input \u2192|# install:\n# colang)/m.test(t)) {
+        el.className = 'language-plaintext';
+      } else {
+        el.className = 'language-python';
+      }
+    });
+    if (window.hljs) hljs.highlightAll();
   })();
 </script>
 </body>
