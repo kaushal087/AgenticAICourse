@@ -118,6 +118,16 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
   .pn-btn:hover { background: #e0e7ff; text-decoration: none; }
   .pn-next { margin-left: auto; }
   @media (max-width: 480px) { .pn-btn { font-size: 0.78rem; padding: 7px 11px; } }
+  /* ── Copy buttons & terminal code blocks ── */
+  pre { position: relative; }
+  .copy-btn { position: absolute; top: 8px; right: 10px; background: rgba(79,70,229,0.88); color: #fff; border: none; border-radius: 5px; padding: 3px 10px; font-size: 0.72rem; font-family: inherit; cursor: pointer; opacity: 0; transition: opacity 0.15s; z-index: 2; letter-spacing: 0.3px; }
+  pre:hover .copy-btn, .copy-btn:focus { opacity: 1; }
+  .copy-btn.copied { background: #059669; }
+  .term { background: #0f172a !important; border-color: #334155 !important; }
+  .term code { color: #cbd5e1 !important; }
+  .run-box { background: #f0fdf4; border: 1px solid #86efac; border-left: 4px solid #16a34a; border-radius: 0 9px 9px 0; padding: 16px 20px; margin: 20px 0 28px; }
+  .run-box > strong { color: #15803d; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 10px; }
+  .run-box pre { margin: 6px 0 2px; }
 </style>
 </head>
 <body>
@@ -149,6 +159,29 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
 <p><span class="badge">Topic 6</span> <span class="badge">Whisper</span> <span class="badge">TTS</span> <span class="badge">GPT-4o</span> <span class="badge">Multimodal</span></p>
 <p><strong>Prerequisites:</strong> Topic 1 (LLMs) · Basic Python · Audio file handling<br/>
 <strong>Outcome:</strong> Build a real-time conversational audio agent combining ASR, LLM reasoning, and TTS</p>
+
+<div class="run-box">
+  <strong>&#9889; Quick Start &mdash; Install &amp; run Topic 6 code</strong>
+  <pre class="term"><code># macOS: install PortAudio first (required by PyAudio)
+brew install portaudio
+
+# Install Python dependencies
+pip install openai sounddevice numpy pygame Pillow \
+            pyaudio python-dotenv
+
+# Set your API key
+export OPENAI_API_KEY="sk-..."       # bash / zsh
+
+# Run the Whisper transcription example (copy block → save as transcribe.py):
+python transcribe.py
+
+# Run the voice bot pipeline (copy the full pipeline block):
+# Save as voice_bot.py, then:
+python voice_bot.py
+
+# Run the GPT-4o Realtime agent (copy realtime block → save as realtime_agent.py):
+python realtime_agent.py</code></pre>
+</div>
 
 <blockquote>"The future of human-AI interaction is not typing into a chat box. It's speaking naturally and having an intelligent agent hear, understand, and respond — in real time."</blockquote>
 
@@ -521,6 +554,25 @@ agent.speak(answer)                                     # agent responds out lou
     btn.addEventListener('click', function() { var open = nav.classList.toggle('open'); overlay.classList.toggle('open', open); btn.setAttribute('aria-expanded', open); });
     overlay.addEventListener('click', closeNav);
     nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeNav); });
+  })();
+</script>
+<script>
+  // Copy button for all code blocks
+  (function(){
+    document.querySelectorAll('pre').forEach(function(pre){
+      var btn = document.createElement('button');
+      btn.textContent = 'Copy';
+      btn.className = 'copy-btn';
+      btn.addEventListener('click', function(){
+        var text = (pre.querySelector('code') || pre).innerText;
+        navigator.clipboard.writeText(text).then(function(){
+          btn.textContent = '✓ Copied';
+          btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2200);
+        });
+      });
+      pre.appendChild(btn);
+    });
   })();
 </script>
 </body>

@@ -118,6 +118,16 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
   .pn-btn:hover { background: #e0e7ff; text-decoration: none; }
   .pn-next { margin-left: auto; }
   @media (max-width: 480px) { .pn-btn { font-size: 0.78rem; padding: 7px 11px; } }
+  /* ── Copy buttons & terminal code blocks ── */
+  pre { position: relative; }
+  .copy-btn { position: absolute; top: 8px; right: 10px; background: rgba(79,70,229,0.88); color: #fff; border: none; border-radius: 5px; padding: 3px 10px; font-size: 0.72rem; font-family: inherit; cursor: pointer; opacity: 0; transition: opacity 0.15s; z-index: 2; letter-spacing: 0.3px; }
+  pre:hover .copy-btn, .copy-btn:focus { opacity: 1; }
+  .copy-btn.copied { background: #059669; }
+  .term { background: #0f172a !important; border-color: #334155 !important; }
+  .term code { color: #cbd5e1 !important; }
+  .run-box { background: #f0fdf4; border: 1px solid #86efac; border-left: 4px solid #16a34a; border-radius: 0 9px 9px 0; padding: 16px 20px; margin: 20px 0 28px; }
+  .run-box > strong { color: #15803d; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 10px; }
+  .run-box pre { margin: 6px 0 2px; }
 </style>
 </head>
 <body>
@@ -149,6 +159,25 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
 <p><span class="badge">Topic 2</span> <span class="badge">FastAPI</span> <span class="badge">Streamlit</span> <span class="badge">Guardrails</span> <span class="badge">Deployment</span></p>
 <p><strong>Prerequisites:</strong> Topic 1 (LLMs, RAG, Agents) · Python intermediate<br/>
 <strong>Outcome:</strong> Design, build, and deploy a production-grade LLM application end to end</p>
+
+<div class="run-box">
+  <strong>&#9889; Quick Start &mdash; Install &amp; run Topic 2 code</strong>
+  <pre class="term"><code># Install dependencies
+pip install langchain langchain-openai openai \
+            fastapi "uvicorn[standard]" streamlit \
+            nemoguardrails python-dotenv
+
+# Set your API key
+export OPENAI_API_KEY="sk-..."       # bash / zsh
+# $env:OPENAI_API_KEY="sk-..."      # Windows PowerShell
+
+# Run a FastAPI app (copy an app block below → save as app.py):
+uvicorn app:app --reload --port 8000
+# Then open: http://localhost:8000/docs
+
+# Run a Streamlit app (copy a Streamlit block → save as ui.py):
+streamlit run ui.py</code></pre>
+</div>
 
 <blockquote>"Building with LLMs is like building with a powerful but unpredictable API. Good application architecture tames that unpredictability."</blockquote>
 
@@ -515,6 +544,25 @@ if prompt := st.chat_input("Ask a question..."):
     btn.addEventListener('click', function() { var open = nav.classList.toggle('open'); overlay.classList.toggle('open', open); btn.setAttribute('aria-expanded', open); });
     overlay.addEventListener('click', closeNav);
     nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeNav); });
+  })();
+</script>
+<script>
+  // Copy button for all code blocks
+  (function(){
+    document.querySelectorAll('pre').forEach(function(pre){
+      var btn = document.createElement('button');
+      btn.textContent = 'Copy';
+      btn.className = 'copy-btn';
+      btn.addEventListener('click', function(){
+        var text = (pre.querySelector('code') || pre).innerText;
+        navigator.clipboard.writeText(text).then(function(){
+          btn.textContent = '✓ Copied';
+          btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2200);
+        });
+      });
+      pre.appendChild(btn);
+    });
   })();
 </script>
 </body>
