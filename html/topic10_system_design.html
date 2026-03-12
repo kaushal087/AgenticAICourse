@@ -265,6 +265,12 @@ img { max-width: 100%; border-radius: 8px; margin: 16px 0; }
     pre { padding: 14px 16px; }
     table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   }
+  .page-nav { display: flex; justify-content: space-between; align-items: center; margin: 0 0 28px; padding: 14px 0; border-bottom: 2px solid #e2e8f0; gap: 10px; flex-wrap: wrap; }
+  .page-nav.bottom { margin: 40px 0 0; padding-top: 18px; border-top: 2px solid #e2e8f0; border-bottom: none; }
+  .pn-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 8px; background: #eef2ff; color: #4f46e5; font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: background 0.15s; white-space: nowrap; }
+  .pn-btn:hover { background: #e0e7ff; text-decoration: none; }
+  .pn-next { margin-left: auto; }
+  @media (max-width: 480px) { .pn-btn { font-size: 0.78rem; padding: 7px 11px; } }
 </style>
 </head>
 <body>
@@ -287,6 +293,10 @@ img { max-width: 100%; border-radius: 8px; margin: 16px 0; }
   <a href="topic10_system_design.html" class="active">10. System Design</a>
 </nav>
 <main>
+<div class="page-nav">
+  <a href="topic9_python_genai.html" class="pn-btn pn-prev">← 9. Python for GenAI</a>
+  <span></span>
+</div>
 <h1>🏗️ System Design for AI Applications</h1>
 <p>This topic covers architectural patterns and design principles for building <strong>scalable, reliable, and production-grade AI systems</strong>. Understanding these patterns is essential for senior engineering roles and AI system design interviews.</p>
 
@@ -581,6 +591,11 @@ async def call_llm_with_retry(prompt, max_retries=3):
   <li>Treat <strong>prompt injection as a security vulnerability</strong>, not an edge case</li>
   <li>Always design a <strong>graceful degradation path</strong> when LLMs fail or respond poorly</li>
 </ul>
+
+<div class="page-nav bottom">
+  <a href="topic9_python_genai.html" class="pn-btn pn-prev">← 9. Python for GenAI</a>
+  <span></span>
+</div>
 </main>
 <script>
   const current = location.pathname.split('/').pop() || 'home.html';

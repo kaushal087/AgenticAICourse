@@ -239,6 +239,12 @@ img { max-width: 100%; border-radius: 8px; margin: 16px 0; }
     pre { padding: 14px 16px; }
     table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   }
+  .page-nav { display: flex; justify-content: space-between; align-items: center; margin: 0 0 28px; padding: 14px 0; border-bottom: 2px solid #e2e8f0; gap: 10px; flex-wrap: wrap; }
+  .page-nav.bottom { margin: 40px 0 0; padding-top: 18px; border-top: 2px solid #e2e8f0; border-bottom: none; }
+  .pn-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 8px; background: #eef2ff; color: #4f46e5; font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: background 0.15s; white-space: nowrap; }
+  .pn-btn:hover { background: #e0e7ff; text-decoration: none; }
+  .pn-next { margin-left: auto; }
+  @media (max-width: 480px) { .pn-btn { font-size: 0.78rem; padding: 7px 11px; } }
 </style>
 </head>
 <body>
@@ -261,6 +267,10 @@ img { max-width: 100%; border-radius: 8px; margin: 16px 0; }
   <a href="topic10_system_design.html">10. System Design</a>
 </nav>
 <main>
+<div class="page-nav">
+  <a href="topic3_langchain_agent.html" class="pn-btn pn-prev">← 3. LangChain Agent</a>
+  <a href="topic5_mcp_a2a.html" class="pn-btn pn-next">5. MCP &amp; A2A →</a>
+</div>
 <h1 id="multi-agent-systems-with-langgraph">🤖 Multi-Agent Systems with LangGraph</h1>
 <h2 id="overview">Overview</h2>
 <p>Welcome to this deep-dive into <strong>Multi-Agent Systems</strong> — one of the most powerful patterns in modern Agentic AI engineering.</p>
@@ -387,7 +397,10 @@ img { max-width: 100%; border-radius: 8px; margin: 16px 0; }
 <li>[ ] Integrate tools (search, RAG) into individual agents</li>
 <li>[ ] Debug agent execution using LangSmith traces</li>
 </ul>
-</main>
+<div class="page-nav bottom">
+  <a href="topic3_langchain_agent.html" class="pn-btn pn-prev">← 3. LangChain Agent</a>
+  <a href="topic5_mcp_a2a.html" class="pn-btn pn-next">5. MCP &amp; A2A →</a>
+</div></main>
 <script>
   // Mark the current page active in nav
   const current = location.pathname.split('/').pop() || 'home.html';

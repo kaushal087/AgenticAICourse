@@ -112,6 +112,12 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
     pre { padding: 14px 16px; }
     table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   }
+  .page-nav { display: flex; justify-content: space-between; align-items: center; margin: 0 0 28px; padding: 14px 0; border-bottom: 2px solid #e2e8f0; gap: 10px; flex-wrap: wrap; }
+  .page-nav.bottom { margin: 40px 0 0; padding-top: 18px; border-top: 2px solid #e2e8f0; border-bottom: none; }
+  .pn-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 8px; background: #eef2ff; color: #4f46e5; font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: background 0.15s; white-space: nowrap; }
+  .pn-btn:hover { background: #e0e7ff; text-decoration: none; }
+  .pn-next { margin-left: auto; }
+  @media (max-width: 480px) { .pn-btn { font-size: 0.78rem; padding: 7px 11px; } }
 </style>
 </head>
 <body>
@@ -134,6 +140,10 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
   <a href="topic10_system_design.html">10. System Design</a>
 </nav>
 <main>
+<div class="page-nav">
+  <a href="topic6_multimodal.html" class="pn-btn pn-prev">← 6. Multimodal Agents</a>
+  <a href="topic8_evaluation.html" class="pn-btn pn-next">8. Evaluation &amp; LangSmith →</a>
+</div>
 
 <h1>🔬 Specialized Agents</h1>
 <p><span class="badge">Topic 7</span> <span class="badge">Domain AI</span> <span class="badge">Coding</span> <span class="badge">Healthcare</span> <span class="badge">Data</span></p>
@@ -470,6 +480,10 @@ print(route_and_execute("My order ORD-123456 hasn't arrived yet"))     # → sup
   <li>How would you test a coding agent's output quality? What metrics would you track?</li>
 </ol>
 
+<div class="page-nav bottom">
+  <a href="topic6_multimodal.html" class="pn-btn pn-prev">← 6. Multimodal Agents</a>
+  <a href="topic8_evaluation.html" class="pn-btn pn-next">8. Evaluation &amp; LangSmith →</a>
+</div>
 </main>
 <script>
   // Mobile nav toggle

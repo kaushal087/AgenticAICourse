@@ -262,6 +262,12 @@ img { max-width: 100%; border-radius: 8px; margin: 16px 0; }
     pre { padding: 14px 16px; }
     table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   }
+  .page-nav { display: flex; justify-content: space-between; align-items: center; margin: 0 0 28px; padding: 14px 0; border-bottom: 2px solid #e2e8f0; gap: 10px; flex-wrap: wrap; }
+  .page-nav.bottom { margin: 40px 0 0; padding-top: 18px; border-top: 2px solid #e2e8f0; border-bottom: none; }
+  .pn-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 8px; background: #eef2ff; color: #4f46e5; font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: background 0.15s; white-space: nowrap; }
+  .pn-btn:hover { background: #e0e7ff; text-decoration: none; }
+  .pn-next { margin-left: auto; }
+  @media (max-width: 480px) { .pn-btn { font-size: 0.78rem; padding: 7px 11px; } }
 </style>
 </head>
 <body>
@@ -284,6 +290,10 @@ img { max-width: 100%; border-radius: 8px; margin: 16px 0; }
   <a href="topic10_system_design.html">10. System Design</a>
 </nav>
 <main>
+<div class="page-nav">
+  <span></span>
+  <a href="topic1_fundamentals.html" class="pn-btn pn-next">1. LLMs, RAG &amp; Agents →</a>
+</div>
 <h1>🤖 Agentic AI — Multi-Agent Systems</h1>
 <p>Welcome to this comprehensive educational resource on <strong>Agentic AI</strong> and <strong>Multi-Agent Systems</strong>. This course is designed for working software engineers (5+ years) who want to master the design and implementation of production-grade AI agent systems.</p>
 
@@ -398,6 +408,11 @@ bash run_demo.sh</code></pre>
   <li><a href="https://platform.openai.com/docs/guides/function-calling">OpenAI Function Calling Guide</a></li>
   <li><a href="https://docs.crewai.com/">CrewAI Docs</a></li>
 </ul>
+
+<div class="page-nav bottom">
+  <span></span>
+  <a href="topic1_fundamentals.html" class="pn-btn pn-next">1. LLMs, RAG &amp; Agents →</a>
+</div>
 </main>
 <script>
   const current = location.pathname.split('/').pop() || 'home.html';

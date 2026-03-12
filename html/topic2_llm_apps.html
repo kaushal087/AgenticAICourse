@@ -112,6 +112,12 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
     pre { padding: 14px 16px; }
     table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   }
+  .page-nav { display: flex; justify-content: space-between; align-items: center; margin: 0 0 28px; padding: 14px 0; border-bottom: 2px solid #e2e8f0; gap: 10px; flex-wrap: wrap; }
+  .page-nav.bottom { margin: 40px 0 0; padding-top: 18px; border-top: 2px solid #e2e8f0; border-bottom: none; }
+  .pn-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 8px; background: #eef2ff; color: #4f46e5; font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: background 0.15s; white-space: nowrap; }
+  .pn-btn:hover { background: #e0e7ff; text-decoration: none; }
+  .pn-next { margin-left: auto; }
+  @media (max-width: 480px) { .pn-btn { font-size: 0.78rem; padding: 7px 11px; } }
 </style>
 </head>
 <body>
@@ -134,6 +140,10 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
   <a href="topic10_system_design.html">10. System Design</a>
 </nav>
 <main>
+<div class="page-nav">
+  <a href="topic1_fundamentals.html" class="pn-btn pn-prev">← 1. LLMs, RAG &amp; Agents</a>
+  <a href="topic3_langchain_agent.html" class="pn-btn pn-next">3. LangChain Agent →</a>
+</div>
 
 <h1>🏗️ Building Applications with LLMs and Agents</h1>
 <p><span class="badge">Topic 2</span> <span class="badge">FastAPI</span> <span class="badge">Streamlit</span> <span class="badge">Guardrails</span> <span class="badge">Deployment</span></p>
@@ -489,6 +499,10 @@ if prompt := st.chat_input("Ask a question..."):
   <li>You're building an LLM app for healthcare. List 5 items on your security/safety checklist.</li>
 </ol>
 
+<div class="page-nav bottom">
+  <a href="topic1_fundamentals.html" class="pn-btn pn-prev">← 1. LLMs, RAG &amp; Agents</a>
+  <a href="topic3_langchain_agent.html" class="pn-btn pn-next">3. LangChain Agent →</a>
+</div>
 </main>
 <script>
   // Mobile nav toggle

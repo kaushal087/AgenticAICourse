@@ -112,6 +112,12 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
     pre { padding: 14px 16px; }
     table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   }
+  .page-nav { display: flex; justify-content: space-between; align-items: center; margin: 0 0 28px; padding: 14px 0; border-bottom: 2px solid #e2e8f0; gap: 10px; flex-wrap: wrap; }
+  .page-nav.bottom { margin: 40px 0 0; padding-top: 18px; border-top: 2px solid #e2e8f0; border-bottom: none; }
+  .pn-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 8px; background: #eef2ff; color: #4f46e5; font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: background 0.15s; white-space: nowrap; }
+  .pn-btn:hover { background: #e0e7ff; text-decoration: none; }
+  .pn-next { margin-left: auto; }
+  @media (max-width: 480px) { .pn-btn { font-size: 0.78rem; padding: 7px 11px; } }
 </style>
 </head>
 <body>
@@ -134,6 +140,10 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
   <a href="topic10_system_design.html">10. System Design</a>
 </nav>
 <main>
+<div class="page-nav">
+  <a href="topic5_mcp_a2a.html" class="pn-btn pn-prev">← 5. MCP &amp; A2A</a>
+  <a href="topic7_specialized.html" class="pn-btn pn-next">7. Specialized Agents →</a>
+</div>
 
 <h1>🎙️ Conversational Audio Bots &amp; Multimodal Agents</h1>
 <p><span class="badge">Topic 6</span> <span class="badge">Whisper</span> <span class="badge">TTS</span> <span class="badge">GPT-4o</span> <span class="badge">Multimodal</span></p>
@@ -495,6 +505,10 @@ agent.speak(answer)                                     # agent responds out lou
   <li>What are the latency sources in a voice pipeline? How would you reduce end-to-end latency below 1 second?</li>
 </ol>
 
+<div class="page-nav bottom">
+  <a href="topic5_mcp_a2a.html" class="pn-btn pn-prev">← 5. MCP &amp; A2A</a>
+  <a href="topic7_specialized.html" class="pn-btn pn-next">7. Specialized Agents →</a>
+</div>
 </main>
 <script>
   // Mobile nav toggle
