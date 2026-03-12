@@ -7,12 +7,11 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-VMSBWR95XP');
 </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🏠 Home — Multi-Agent LangGraph</title>
+  <title>🏠 Home — Agentic AI Course</title>
   <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -22,8 +21,6 @@ body {
     display: flex;
     min-height: 100vh;
 }
-
-/* ── Sidebar ── */
 nav {
     width: 260px;
     min-width: 260px;
@@ -79,8 +76,6 @@ nav a.active {
     border-left: 3px solid #4f46e5;
     padding-left: 9px;
 }
-
-/* ── Main content ── */
 main {
     flex: 1;
     padding: 52px 68px 80px;
@@ -88,8 +83,6 @@ main {
     min-width: 0;
     background: #f5f7fa;
 }
-
-/* ── Typography ── */
 h1 { font-size: 2rem; color: #111827; margin-bottom: 18px; margin-top: 44px; line-height: 1.25; }
 h2 { font-size: 1.45rem; color: #1e3a8a; margin-top: 40px; margin-bottom: 14px;
      padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
@@ -102,8 +95,6 @@ li { line-height: 1.75; color: #374151; margin-bottom: 5px; }
 a  { color: #4f46e5; text-decoration: none; }
 a:hover { text-decoration: underline; }
 strong { color: #111827; }
-
-/* ── Code ── */
 code {
     background: #f1f5f9;
     color: #be185d;
@@ -129,8 +120,6 @@ pre code {
     line-height: 1.65;
     border: none;
 }
-
-/* ── Blockquote ── */
 blockquote {
     border-left: 4px solid #6366f1;
     background: #eef2ff;
@@ -140,8 +129,6 @@ blockquote {
     color: #4338ca;
     font-style: italic;
 }
-
-/* ── Tables ── */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -168,193 +155,185 @@ td {
 }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: #f8fafc; }
-
-/* ── Misc ── */
 hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
 img { max-width: 100%; border-radius: 8px; margin: 16px 0; }
-</style>
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+.topic-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px 22px;
+    text-decoration: none;
+    color: #1a202c;
+    transition: box-shadow 0.15s, border-color 0.15s;
+    display: block;
+}
+.topic-card:hover {
+    box-shadow: 0 4px 16px rgba(79,70,229,0.12);
+    border-color: #a5b4fc;
+    text-decoration: none;
+}
+.topic-card .num {
+    font-size: 12px;
+    font-weight: 700;
+    color: #6366f1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+.topic-card h3 {
+    font-size: 1rem;
+    color: #1e3a8a;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+.topic-card p {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.55;
+}
+  </style>
 </head>
 <body>
 <nav>
-  <div class="brand">🤖 LangGraph</div>
+  <div class="brand">🤖 Agentic AI</div>
   <div class="sub">Multi-Agent Systems · IK Agentic AI</div>
   <a href="home.html" class="active">🏠 Home</a>
-  <div class="group">📋 All Topics</div>
+  <div class="group">📋 Topics</div>
   <a href="topic1_fundamentals.html">1. LLMs, RAG &amp; Agents</a>
   <a href="topic2_llm_apps.html">2. Building LLM Apps</a>
-  <a href="topic3_langchain_agent.html">3. First Agent: LangChain</a>
-  <a href="home.html">4. Multi-Agent LangGraph</a>
+  <a href="topic3_langchain_agent.html">3. LangChain Agent</a>
+  <a href="topic4_overview.html">4. Multi-Agent LangGraph</a>
   <a href="topic5_mcp_a2a.html">5. MCP &amp; A2A Protocol</a>
-  <a href="topic6_multimodal.html">6. Multimodal Audio Agents</a>
+  <a href="topic6_multimodal.html">6. Multimodal Agents</a>
   <a href="topic7_specialized.html">7. Specialized Agents</a>
   <a href="topic8_evaluation.html">8. Evaluation &amp; LangSmith</a>
   <a href="topic9_python_genai.html">9. Python for GenAI</a>
-  <div class="group">📚 Topic 4 Deep-Dive</div>
-  <a href="index.html">Overview</a>
-  <a href="concepts.html">Core Concepts</a>
-  <a href="architecture.html">Architecture</a>
-  <a href="workflow.html">Workflow</a>
-  <a href="demos.html">Demo Walkthrough</a>
-  <a href="quiz.html">Quiz</a>
-  <div class="group">🎓 Slides</div>
-  <a href="lecture_slides.html">Lecture Slides</a>
-  <a href="agent_flow_slide.html">Agent Flow Diagram</a>
-  <div class="group">📊 Diagrams</div>
-  <a href="diag_architecture.html">System Architecture</a>
-  <a href="diag_agent_flow.html">Agent Flow</a>
-  <a href="diag_rag_pipeline.html">RAG Pipeline</a>
-  <div class="group">📝 Quizzes</div>
-  <a href="quiz_questions.html">Quiz Reference</a>
+  <a href="topic10_system_design.html">10. System Design</a>
 </nav>
 <main>
-<h1 id="build-a-multi-agent-system-with-crewai-langgraph">🤖 Build a Multi-Agent System with CrewAI &amp; LangGraph</h1>
+<h1>🤖 Agentic AI — Multi-Agent Systems</h1>
+<p>Welcome to this comprehensive educational resource on <strong>Agentic AI</strong> and <strong>Multi-Agent Systems</strong>. This course is designed for working software engineers (5+ years) who want to master the design and implementation of production-grade AI agent systems.</p>
+
 <blockquote>
-<p><strong>Interview Kickstart — Agentic AI Instructor Demo</strong><br />
-<strong>Topic 4:</strong> Build a Multi-Agent System with CrewAI / AutoGen and LangGraph<br />
-<strong>Audience:</strong> Working professionals (5+ years SWE) transitioning to Generative AI<br />
-<strong>Session Duration:</strong> 30–45 minutes  </p>
+<p><strong>Audience:</strong> Senior engineers transitioning to Generative AI &nbsp;|&nbsp;
+<strong>Format:</strong> Self-paced reading + hands-on code labs</p>
 </blockquote>
+
 <hr />
-<h2 id="what-youll-learn">🎯 What You'll Learn</h2>
-<p>By the end of this session, you will be able to:</p>
-<ol>
-<li>Explain <strong>why multi-agent systems</strong> outperform single-agent pipelines</li>
-<li>Understand <strong>LangGraph's stateful graph execution model</strong></li>
-<li>Design <strong>agent roles</strong>: Planner, Researcher, Analyst, Writer</li>
-<li>Implement <strong>inter-agent communication</strong> and shared state</li>
-<li>Run a working <strong>multi-agent research assistant</strong> end to end</li>
-</ol>
-<hr />
-<h2 id="project-structure">📁 Project Structure</h2>
-<pre><code>multi-agent-langgraph/
-│
-├── README.md                    ← This file
-│
-├── website/                     ← MkDocs / Docusaurus-ready docs
-│   ├── index.md                 ← Overview &amp; why this topic matters
-│   ├── concepts.md              ← Core theory, mental models
-│   ├── architecture.md          ← System design &amp; components
-│   ├── workflow.md              ← Step-by-step execution pipeline
-│   ├── demos.md                 ← Demo explanation &amp; component walkthrough
-│   └── quiz.md                  ← Self-assessment questions
-│
-├── slides/
-│   ├── lecture_slides.md        ← 12-slide deck (Markdown/Marp format)
-│   └── diagrams/                ← Mermaid source for all diagrams
-│
-├── code/
-│   ├── main.py                  ← Entry point
-│   ├── agent.py                 ← Agent definitions (Planner, Researcher, etc.)
-│   ├── tools.py                 ← Tool integrations (search, calculator, etc.)
-│   ├── rag_pipeline.py          ← RAG pipeline (vector store + retrieval)
-│   └── requirements.txt         ← All dependencies
-│
-├── demo/
-│   ├── demo_app.py              ← Streamlit interactive demo
-│   ├── run_demo.sh              ← One-command launcher
-│   └── sample_data/
-│       └── knowledge_base.txt   ← Sample documents for RAG
-│
-├── diagrams/                    ← Architecture PNGs (generated from Mermaid)
-│   ├── architecture.md          ← Mermaid source: system architecture
-│   ├── agent_flow.md            ← Mermaid source: agent execution flow
-│   └── rag_pipeline.md          ← Mermaid source: RAG pipeline
-│
-├── notebooks/
-│   └── exploration.ipynb        ← Step-by-step Jupyter walkthrough
-│
-└── quizzes/
-    └── quiz_questions.md        ← 10 conceptual + 2 coding questions
-</code></pre>
-<hr />
-<h2 id="quick-start">🚀 Quick Start</h2>
-<h3 id="prerequisites">Prerequisites</h3>
+
+<h2>🎯 What You Will Learn</h2>
+<p>By completing this course you will be able to:</p>
 <ul>
-<li>Python 3.10+</li>
-<li>OpenAI API key (set as <code>OPENAI_API_KEY</code> environment variable)</li>
+  <li>Explain how LLMs, RAG, and tool-use combine to create intelligent agents</li>
+  <li>Design and implement multi-agent pipelines using LangChain and LangGraph</li>
+  <li>Understand and apply the MCP and Agent-to-Agent (A2A) communication protocols</li>
+  <li>Build multimodal, specialized, and evaluation-aware agents</li>
+  <li>Apply system-design principles to architect scalable, production AI systems</li>
+  <li>Write Python code for GenAI applications end-to-end</li>
 </ul>
-<h3 id="1-install-dependencies">1. Install dependencies</h3>
-<pre><code class="language-bash">cd code/
-pip install -r requirements.txt
-</code></pre>
-<h3 id="2-set-your-api-key">2. Set your API key</h3>
-<pre><code class="language-bash">export OPENAI_API_KEY=&quot;sk-...&quot;
-</code></pre>
-<h3 id="3-run-the-cli-demo">3. Run the CLI demo</h3>
-<pre><code class="language-bash">python main.py
-</code></pre>
-<h3 id="4-run-the-streamlit-demo">4. Run the Streamlit demo</h3>
-<pre><code class="language-bash">cd demo/
-bash run_demo.sh
-</code></pre>
+
 <hr />
-<h2 id="key-concepts-covered">🧠 Key Concepts Covered</h2>
+
+<h2>📚 Course Topics</h2>
+<div class="topic-grid">
+  <a class="topic-card" href="topic1_fundamentals.html">
+    <div class="num">Topic 1</div>
+    <h3>LLMs, RAG &amp; Agents</h3>
+    <p>Core foundations — how language models work, retrieval-augmented generation, and the anatomy of an AI agent.</p>
+  </a>
+  <a class="topic-card" href="topic2_llm_apps.html">
+    <div class="num">Topic 2</div>
+    <h3>Building LLM Apps</h3>
+    <p>LLM application architecture, prompt engineering, chain-of-thought, and production deployment patterns.</p>
+  </a>
+  <a class="topic-card" href="topic3_langchain_agent.html">
+    <div class="num">Topic 3</div>
+    <h3>LangChain Agent</h3>
+    <p>Build your first ReAct agent with LangChain — tools, memory, and structured output.</p>
+  </a>
+  <a class="topic-card" href="topic4_overview.html">
+    <div class="num">Topic 4</div>
+    <h3>Multi-Agent LangGraph</h3>
+    <p>Stateful graph orchestration with LangGraph — Planner, Researcher, Analyst, and Writer agents.</p>
+  </a>
+  <a class="topic-card" href="topic5_mcp_a2a.html">
+    <div class="num">Topic 5</div>
+    <h3>MCP &amp; A2A Protocol</h3>
+    <p>Model Context Protocol and Agent-to-Agent communication standards for interoperable agent ecosystems.</p>
+  </a>
+  <a class="topic-card" href="topic6_multimodal.html">
+    <div class="num">Topic 6</div>
+    <h3>Multimodal Agents</h3>
+    <p>Agents that process text, images, and audio — vision models, speech recognition, and tool integration.</p>
+  </a>
+  <a class="topic-card" href="topic7_specialized.html">
+    <div class="num">Topic 7</div>
+    <h3>Specialized Agents</h3>
+    <p>Domain-specific agents for coding, data analysis, finance, and healthcare use cases.</p>
+  </a>
+  <a class="topic-card" href="topic8_evaluation.html">
+    <div class="num">Topic 8</div>
+    <h3>Evaluation &amp; LangSmith</h3>
+    <p>Measuring agent quality — tracing, benchmarking, and observability with LangSmith.</p>
+  </a>
+  <a class="topic-card" href="topic9_python_genai.html">
+    <div class="num">Topic 9</div>
+    <h3>Python for GenAI</h3>
+    <p>Python patterns, async programming, and libraries essential for building GenAI applications.</p>
+  </a>
+  <a class="topic-card" href="topic10_system_design.html">
+    <div class="num">Topic 10</div>
+    <h3>System Design</h3>
+    <p>Architecture patterns for scalable AI systems — design interviews, trade-offs, and production considerations.</p>
+  </a>
+</div>
+
+<hr />
+
+<h2>🛠 Tech Stack</h2>
 <table>
-<thead>
-<tr>
-<th>Concept</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Multi-Agent Systems</strong></td>
-<td>Independent agents collaborating on complex tasks</td>
-</tr>
-<tr>
-<td><strong>LangGraph</strong></td>
-<td>State-machine graph for orchestrating agent workflows</td>
-</tr>
-<tr>
-<td><strong>Agent Roles</strong></td>
-<td>Planner → Researcher → Analyst → Writer pipeline</td>
-</tr>
-<tr>
-<td><strong>Shared State</strong></td>
-<td>GraphState TypedDict passed between nodes</td>
-</tr>
-<tr>
-<td><strong>Tool Use</strong></td>
-<td>Web search, calculator, RAG retrieval</td>
-</tr>
-<tr>
-<td><strong>RAG Integration</strong></td>
-<td>FAISS-based vector store for knowledge retrieval</td>
-</tr>
-<tr>
-<td><strong>Human-in-the-Loop</strong></td>
-<td>Interrupt graph for supervisor approval</td>
-</tr>
-</tbody>
+  <thead><tr><th>Component</th><th>Technology</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td>LLM Orchestration</td><td>LangGraph, LangChain</td><td>Graph-based agent workflows</td></tr>
+    <tr><td>Language Model</td><td>OpenAI GPT-4o</td><td>Reasoning backbone</td></tr>
+    <tr><td>Vector Store</td><td>FAISS, Chroma</td><td>RAG retrieval</td></tr>
+    <tr><td>Demo UI</td><td>Streamlit</td><td>Interactive demonstrations</td></tr>
+    <tr><td>Observability</td><td>LangSmith</td><td>Tracing &amp; evaluation</td></tr>
+    <tr><td>Runtime</td><td>Python 3.11+</td><td>All agent code</td></tr>
+  </tbody>
 </table>
+
 <hr />
-<h2 id="tech-stack">🛠 Tech Stack</h2>
-<ul>
-<li><strong>LangGraph</strong> — graph-based agent orchestration</li>
-<li><strong>LangChain</strong> — LLM abstraction, tools, chains</li>
-<li><strong>OpenAI GPT-4o</strong> — reasoning backbone</li>
-<li><strong>FAISS</strong> — vector similarity search for RAG</li>
-<li><strong>Streamlit</strong> — interactive demo UI</li>
-</ul>
+
+<h2>🚀 Quick Start</h2>
+<p>Clone the repository, install dependencies, and run the multi-agent demo:</p>
+<pre><code class="language-bash">git clone &lt;repo-url&gt;
+cd multi-agent-langgraph/code
+pip install -r requirements.txt
+export OPENAI_API_KEY="sk-..."
+python main.py</code></pre>
+<p>For the interactive Streamlit demo:</p>
+<pre><code class="language-bash">cd demo/
+bash run_demo.sh</code></pre>
+
 <hr />
-<h2 id="instructor-notes">📝 Instructor Notes</h2>
+
+<h2>📚 References</h2>
 <ul>
-<li><strong>Assumption about students:</strong> Familiar with Python, REST APIs, and basic ML concepts. No prior LangChain/LangGraph experience assumed.</li>
-<li><strong>Teaching flow:</strong> Start with the analogy → draw the architecture → walk the code → run the demo → quiz.</li>
-<li><strong>Common confusion:</strong> Students often confuse "chains" (sequential) vs "graphs" (conditional branching). Emphasize this early.</li>
-<li><strong>Interview angle:</strong> Multi-agent system design is a common senior ML Engineer interview topic at FAANG.</li>
-</ul>
-<hr />
-<h2 id="references">📚 References</h2>
-<ul>
-<li><a href="https://langchain-ai.github.io/langgraph/">LangGraph Documentation</a></li>
-<li><a href="https://python.langchain.com/">LangChain Docs</a></li>
-<li><a href="https://docs.crewai.com/">CrewAI Docs</a></li>
-<li><a href="https://platform.openai.com/docs/guides/function-calling">OpenAI Function Calling</a></li>
+  <li><a href="https://langchain-ai.github.io/langgraph/">LangGraph Documentation</a></li>
+  <li><a href="https://python.langchain.com/">LangChain Docs</a></li>
+  <li><a href="https://platform.openai.com/docs/guides/function-calling">OpenAI Function Calling Guide</a></li>
+  <li><a href="https://docs.crewai.com/">CrewAI Docs</a></li>
 </ul>
 </main>
 <script>
-  // Mark the current page active in nav
   const current = location.pathname.split('/').pop() || 'home.html';
   document.querySelectorAll('nav a').forEach(a => {
     if (a.getAttribute('href') === current) a.classList.add('active');
@@ -362,4 +341,3 @@ bash run_demo.sh
 </script>
 </body>
 </html>
-<- calc.js: financialFreedomYear() utility CI/CD test: Thu Mar 12 23:13:24 IST 2026 -->

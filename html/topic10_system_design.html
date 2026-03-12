@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VMSBWR95XP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VMSBWR95XP');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Design — Agentic AI Course</title>
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f7fa;
+    color: #1a202c;
+    display: flex;
+    min-height: 100vh;
+}
+nav {
+    width: 260px;
+    min-width: 260px;
+    background: #ffffff;
+    padding: 24px 14px 40px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid #e2e8f0;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+}
+nav .brand {
+    font-size: 15px;
+    font-weight: 800;
+    color: #4f46e5;
+    margin-bottom: 2px;
+    letter-spacing: -0.3px;
+}
+nav .sub {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-bottom: 28px;
+}
+nav .group {
+    font-size: 10px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin: 20px 0 6px 10px;
+}
+nav a {
+    display: block;
+    padding: 8px 12px;
+    margin-bottom: 2px;
+    border-radius: 7px;
+    color: #475569;
+    text-decoration: none;
+    font-size: 13.5px;
+    transition: background 0.12s, color 0.12s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+nav a:hover { background: #f1f5f9; color: #1a202c; }
+nav a.active {
+    background: #eef2ff;
+    color: #4f46e5;
+    font-weight: 600;
+    border-left: 3px solid #4f46e5;
+    padding-left: 9px;
+}
+main {
+    flex: 1;
+    padding: 52px 68px 80px;
+    max-width: 960px;
+    min-width: 0;
+    background: #f5f7fa;
+}
+h1 { font-size: 2rem; color: #111827; margin-bottom: 18px; margin-top: 44px; line-height: 1.25; }
+h2 { font-size: 1.45rem; color: #1e3a8a; margin-top: 40px; margin-bottom: 14px;
+     padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+h3 { font-size: 1.1rem; color: #3730a3; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 0.95rem; color: #4b5563; margin-top: 18px; margin-bottom: 6px; font-weight: 600; }
+h1:first-child, h2:first-child { margin-top: 0; }
+p  { line-height: 1.8; color: #374151; margin-bottom: 14px; }
+ul, ol { padding-left: 24px; margin-bottom: 14px; }
+li { line-height: 1.75; color: #374151; margin-bottom: 5px; }
+a  { color: #4f46e5; text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: #111827; }
+code {
+    background: #f1f5f9;
+    color: #be185d;
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 0.855em;
+    border: 1px solid #e2e8f0;
+}
+pre {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 22px 24px;
+    overflow-x: auto;
+    margin: 18px 0 24px;
+}
+pre code {
+    background: none;
+    color: #1e293b;
+    padding: 0;
+    font-size: 0.83em;
+    line-height: 1.65;
+    border: none;
+}
+blockquote {
+    border-left: 4px solid #6366f1;
+    background: #eef2ff;
+    padding: 14px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 18px 0;
+    color: #4338ca;
+    font-style: italic;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 26px;
+    font-size: 0.88em;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+th {
+    background: #eef2ff;
+    color: #3730a3;
+    padding: 11px 16px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #c7d2fe;
+}
+td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #374151;
+    vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
+img { max-width: 100%; border-radius: 8px; margin: 16px 0; }
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+.topic-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px 22px;
+    text-decoration: none;
+    color: #1a202c;
+    transition: box-shadow 0.15s, border-color 0.15s;
+    display: block;
+}
+.topic-card:hover {
+    box-shadow: 0 4px 16px rgba(79,70,229,0.12);
+    border-color: #a5b4fc;
+    text-decoration: none;
+}
+.topic-card .num {
+    font-size: 12px;
+    font-weight: 700;
+    color: #6366f1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+.topic-card h3 {
+    font-size: 1rem;
+    color: #1e3a8a;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+.topic-card p {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.55;
+}
+  </style>
+</head>
+<body>
+<nav>
+  <div class="brand">🤖 Agentic AI</div>
+  <div class="sub">Multi-Agent Systems · IK Agentic AI</div>
+  <a href="home.html">🏠 Home</a>
+  <div class="group">📋 Topics</div>
+  <a href="topic1_fundamentals.html">1. LLMs, RAG &amp; Agents</a>
+  <a href="topic2_llm_apps.html">2. Building LLM Apps</a>
+  <a href="topic3_langchain_agent.html">3. LangChain Agent</a>
+  <a href="topic4_overview.html">4. Multi-Agent LangGraph</a>
+  <a href="topic5_mcp_a2a.html">5. MCP &amp; A2A Protocol</a>
+  <a href="topic6_multimodal.html">6. Multimodal Agents</a>
+  <a href="topic7_specialized.html">7. Specialized Agents</a>
+  <a href="topic8_evaluation.html">8. Evaluation &amp; LangSmith</a>
+  <a href="topic9_python_genai.html">9. Python for GenAI</a>
+  <a href="topic10_system_design.html" class="active">10. System Design</a>
+</nav>
+<main>
+<h1>🏗️ System Design for AI Applications</h1>
+<p>This topic covers architectural patterns and design principles for building <strong>scalable, reliable, and production-grade AI systems</strong>. Understanding these patterns is essential for senior engineering roles and AI system design interviews.</p>
+
+<hr />
+
+<h2>Why System Design Matters for AI Engineers</h2>
+<p>AI systems face unique design challenges compared to traditional software:</p>
+<ul>
+  <li><strong>Non-determinism:</strong> LLM outputs are probabilistic — you must design for variability</li>
+  <li><strong>Latency:</strong> LLM inference is slow (1–30 seconds) — caching and async patterns are critical</li>
+  <li><strong>Cost:</strong> Every token costs money — efficient prompt design and caching reduce expenses significantly</li>
+  <li><strong>Observability:</strong> Traditional logging is insufficient — you need trace-level visibility into agent reasoning</li>
+  <li><strong>Safety:</strong> Output moderation, hallucination detection, and guardrails are first-class concerns</li>
+</ul>
+
+<hr />
+
+<h2>Core Architectural Patterns</h2>
+
+<h3>1. Single-Agent Architecture</h3>
+<p>The simplest pattern: one LLM with tools, a system prompt, and memory.</p>
+<pre><code>User Input
+    │
+    ▼
+┌─────────────────────────┐
+│  Agent (LLM + Tools)    │
+│  ┌──────────────────┐   │
+│  │  System Prompt   │   │
+│  │  Tool Registry   │   │
+│  │  Memory Store    │   │
+│  └──────────────────┘   │
+└────────────┬────────────┘
+             │
+             ▼
+         Response</code></pre>
+<p><strong>Use when:</strong> Single domain, low complexity, &lt;5 tools, response time &lt; 10s acceptable.</p>
+
+<h3>2. Pipeline Architecture (Chain)</h3>
+<p>Sequential processing through specialized stages.</p>
+<pre><code>Input → [Preprocessor] → [LLM Chain] → [Postprocessor] → Output
+                              │
+                         [Tool Calls]</code></pre>
+<p><strong>Use when:</strong> Fixed workflow with no branching, ETL-style data transformation.</p>
+
+<h3>3. Multi-Agent Supervisor Architecture</h3>
+<p>A supervisor agent orchestrates specialist agents.</p>
+<pre><code>User Query
+    │
+    ▼
+┌──────────────┐
+│  Supervisor  │ ←── decides routing
+└──────┬───────┘
+       │
+   ┌───┴──────────────────┐
+   │           │           │
+   ▼           ▼           ▼
+[Research]  [Coding]  [Analysis]
+  Agent      Agent     Agent
+   │           │           │
+   └───────────┴───────────┘
+               │
+               ▼
+          Final Response</code></pre>
+<p><strong>Use when:</strong> Multiple domains, dynamic routing, parallel execution needed.</p>
+
+<h3>4. Hierarchical Multi-Agent Architecture</h3>
+<p>Multiple tiers of agents — supervisors managing sub-supervisors.</p>
+<pre><code>Orchestrator
+├── Supervisor A
+│   ├── Agent A1 (specialized)
+│   └── Agent A2 (specialized)
+└── Supervisor B
+    ├── Agent B1 (specialized)
+    └── Agent B2 (specialized)</code></pre>
+<p><strong>Use when:</strong> Enterprise-scale tasks, thousands of subtasks, team-level organization needed.</p>
+
+<h3>5. Event-Driven Agent Architecture</h3>
+<p>Agents triggered by events from queues or streams.</p>
+<pre><code>Event Sources (Kafka, SQS, webhooks)
+    │
+    ▼
+Event Router
+    │
+    ├──▶ Agent Pool (scales horizontally)
+    │         │
+    │    [Process Event]
+    │         │
+    └──▶ Result Store → Downstream Systems</code></pre>
+<p><strong>Use when:</strong> High throughput, asynchronous processing, real-time data pipelines.</p>
+
+<hr />
+
+<h2>RAG System Design</h2>
+<p>Retrieval-Augmented Generation (RAG) is the most commonly deployed AI architecture in production.</p>
+
+<h3>Basic RAG Pipeline</h3>
+<pre><code>Documents
+    │
+    ▼ (Ingestion)
+[Chunker] → [Embedder] → [Vector Store]
+                               │
+User Query                     │
+    │                          │
+    ▼                          │
+[Query Embedder] ──────────────┤
+                               │
+                               ▼
+                      [Similarity Search]
+                               │
+                               ▼
+                    Top-K Chunks + Query
+                               │
+                               ▼
+                       [LLM Generator]
+                               │
+                               ▼
+                           Response</code></pre>
+
+<h3>Advanced RAG Design Decisions</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Decision</th>
+      <th>Options</th>
+      <th>Trade-offs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Chunking strategy</td>
+      <td>Fixed-size, semantic, recursive</td>
+      <td>Fixed: simple; semantic: better recall, slower</td>
+    </tr>
+    <tr>
+      <td>Embedding model</td>
+      <td>OpenAI ada-002, BGE, local models</td>
+      <td>OpenAI: best quality; local: cheaper, private</td>
+    </tr>
+    <tr>
+      <td>Vector store</td>
+      <td>FAISS (local), Pinecone, Weaviate, Chroma</td>
+      <td>FAISS: fast dev; Pinecone: managed, scalable</td>
+    </tr>
+    <tr>
+      <td>Retrieval method</td>
+      <td>Dense, sparse (BM25), hybrid</td>
+      <td>Hybrid gives best recall in production</td>
+    </tr>
+    <tr>
+      <td>Re-ranking</td>
+      <td>Cross-encoder, Cohere Rerank</td>
+      <td>Improves precision, adds latency</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2>Scalability &amp; Performance</h2>
+
+<h3>Caching Strategies</h3>
+<ul>
+  <li><strong>Semantic caching:</strong> Cache by query embedding similarity (e.g., GPTCache). Reduces LLM calls by 30–70% for repetitive queries.</li>
+  <li><strong>Prompt caching:</strong> OpenAI and Anthropic cache repeated system prompts. Reduces cost for long system prompts.</li>
+  <li><strong>Result caching:</strong> Redis-based exact-match caching for deterministic queries.</li>
+</ul>
+
+<h3>Latency Optimization</h3>
+<table>
+  <thead>
+    <tr><th>Technique</th><th>Latency Reduction</th><th>Trade-off</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Streaming responses</td><td>Perceived 5–10× faster</td><td>Complexity in UI</td></tr>
+    <tr><td>Parallel tool calls</td><td>2–4× faster for multi-tool</td><td>Resource usage</td></tr>
+    <tr><td>Smaller, faster models</td><td>3–10× lower latency</td><td>Quality reduction</td></tr>
+    <tr><td>Semantic caching</td><td>Near-zero for cache hits</td><td>Cache invalidation</td></tr>
+    <tr><td>Async agent execution</td><td>Proportional to parallelism</td><td>Complexity</td></tr>
+  </tbody>
+</table>
+
+<h3>Horizontal Scaling</h3>
+<pre><code>Load Balancer
+    │
+    ├──▶ Agent Worker 1 (stateless)
+    ├──▶ Agent Worker 2 (stateless)
+    └──▶ Agent Worker N (stateless)
+              │
+    ┌─────────┴───────────┐
+    │                     │
+[Redis State Store]  [Vector Store]
+    │                     │
+[Session Memory]    [Document Index]</code></pre>
+<p>Keep agent workers <strong>stateless</strong> — externalize state to Redis or a database so any worker can handle any request.</p>
+
+<hr />
+
+<h2>Reliability &amp; Fault Tolerance</h2>
+
+<h3>Retry and Fallback Patterns</h3>
+<pre><code class="language-python"># Exponential backoff with fallback model
+async def call_llm_with_retry(prompt, max_retries=3):
+    for attempt in range(max_retries):
+        try:
+            return await primary_model.ainvoke(prompt)
+        except RateLimitError:
+            await asyncio.sleep(2 ** attempt)
+        except ModelUnavailableError:
+            return await fallback_model.ainvoke(prompt)  # downgrade
+    raise MaxRetriesExceeded()</code></pre>
+
+<h3>Circuit Breaker for Agent Tools</h3>
+<p>Prevent cascading failures when external APIs (search, databases) are slow or down:</p>
+<ul>
+  <li><strong>Closed:</strong> Normal operation, calls pass through</li>
+  <li><strong>Open:</strong> Failures exceeded threshold, calls fail fast with cached/default response</li>
+  <li><strong>Half-open:</strong> Probe to check if service recovered</li>
+</ul>
+
+<hr />
+
+<h2>Security Considerations</h2>
+
+<h3>Prompt Injection Defense</h3>
+<p>Prompt injection is the #1 threat for LLM applications — malicious content in retrieved documents or user input can hijack agent behavior.</p>
+<ul>
+  <li>Separate system instructions from user/external content using delimiters and roles</li>
+  <li>Validate tool call arguments before execution — never execute arbitrary code from LLM output</li>
+  <li>Use allowlists for tool names and parameters</li>
+  <li>Apply output moderation before returning to users</li>
+</ul>
+
+<h3>Data Privacy</h3>
+<ul>
+  <li>PII detection and redaction before sending to LLM APIs</li>
+  <li>Tenant isolation in multi-tenant RAG systems (per-tenant namespaces in vector stores)</li>
+  <li>Audit logging of all LLM inputs and outputs for compliance</li>
+</ul>
+
+<hr />
+
+<h2>Observability Stack</h2>
+<table>
+  <thead>
+    <tr><th>Layer</th><th>Tool</th><th>What to Track</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>LLM Traces</td><td>LangSmith, Langfuse</td><td>Prompts, completions, latency, cost per call</td></tr>
+    <tr><td>Application Metrics</td><td>Prometheus + Grafana</td><td>Request rate, p50/p95 latency, error rate</td></tr>
+    <tr><td>Agent Behavior</td><td>LangSmith Evaluators</td><td>Tool call accuracy, output quality scores</td></tr>
+    <tr><td>Infrastructure</td><td>Datadog, CloudWatch</td><td>CPU, memory, API quota usage</td></tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2>System Design Interview Framework</h2>
+<p>When asked to design an AI system in an interview, use this structured approach:</p>
+<ol>
+  <li><strong>Clarify requirements</strong> — scale, latency SLA, accuracy requirements, budget, data privacy</li>
+  <li><strong>High-level design</strong> — choose single-agent vs multi-agent, RAG vs fine-tuning, sync vs async</li>
+  <li><strong>Data flow</strong> — ingestion pipeline, retrieval, LLM call, post-processing</li>
+  <li><strong>Scale bottlenecks</strong> — where will it break at 10×, 100× load?</li>
+  <li><strong>Reliability</strong> — retry logic, fallbacks, graceful degradation</li>
+  <li><strong>Cost optimization</strong> — caching, model tiering, batching</li>
+  <li><strong>Monitoring</strong> — what metrics prove the system is healthy?</li>
+</ol>
+
+<h3>Example: Design a Customer Support AI Agent</h3>
+<table>
+  <thead>
+    <tr><th>Dimension</th><th>Decision</th><th>Rationale</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Architecture</td><td>Multi-agent: classifier + specialist agents</td><td>Different intent requires different tools/prompts</td></tr>
+    <tr><td>Knowledge</td><td>RAG over product docs + ticket history</td><td>Fresh, company-specific; fine-tuning too expensive</td></tr>
+    <tr><td>Latency</td><td>Streaming + async tool calls</td><td>Target &lt; 3s first token, &lt; 15s full response</td></tr>
+    <tr><td>Reliability</td><td>Fallback to human escalation</td><td>Agent confidence &lt; threshold → hand off</td></tr>
+    <tr><td>Safety</td><td>Output moderation + tone classifier</td><td>Prevent inappropriate responses at scale</td></tr>
+    <tr><td>Scale</td><td>Stateless workers + Redis state</td><td>Horizontal scaling, 10k concurrent sessions</td></tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2>Key Takeaways</h2>
+<ul>
+  <li>Choose the <strong>simplest architecture</strong> that meets your requirements — don't over-engineer</li>
+  <li>Design for <strong>observability from day one</strong> — you cannot improve what you cannot measure</li>
+  <li>Keep agent workers <strong>stateless</strong> — externalize all state</li>
+  <li>Implement <strong>semantic caching</strong> to reduce both latency and cost in production</li>
+  <li>Treat <strong>prompt injection as a security vulnerability</strong>, not an edge case</li>
+  <li>Always design a <strong>graceful degradation path</strong> when LLMs fail or respond poorly</li>
+</ul>
+</main>
+<script>
+  const current = location.pathname.split('/').pop() || 'home.html';
+  document.querySelectorAll('nav a').forEach(a => {
+    if (a.getAttribute('href') === current) a.classList.add('active');
+  });
+</script>
+</body>
+</html>
