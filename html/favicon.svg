@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Rounded indigo background -->
+  <rect width="32" height="32" rx="7" fill="#4f46e5"/>
+  <!-- Neural-network / multi-agent graph icon -->
+  <!-- Connection lines (drawn first so nodes sit on top) -->
+  <line x1="16" y1="8.5"  x2="8"  y2="19"   stroke="white" stroke-width="1.4" stroke-opacity="0.55"/>
+  <line x1="16" y1="8.5"  x2="24" y2="19"   stroke="white" stroke-width="1.4" stroke-opacity="0.55"/>
+  <line x1="8"  y1="19"   x2="12.5" y2="27" stroke="white" stroke-width="1.4" stroke-opacity="0.45"/>
+  <line x1="24" y1="19"   x2="19.5" y2="27" stroke="white" stroke-width="1.4" stroke-opacity="0.45"/>
+  <line x1="8"  y1="19"   x2="19.5" y2="27" stroke="white" stroke-width="1.4" stroke-opacity="0.28"/>
+  <line x1="24" y1="19"   x2="12.5" y2="27" stroke="white" stroke-width="1.4" stroke-opacity="0.28"/>
+  <line x1="8"  y1="19"   x2="24"   y2="19" stroke="white" stroke-width="1.4" stroke-opacity="0.30"/>
+  <!-- Nodes -->
+  <circle cx="16"  cy="8.5" r="3"   fill="white"/>
+  <circle cx="8"   cy="19"  r="2.5" fill="#a5b4fc"/>
+  <circle cx="24"  cy="19"  r="2.5" fill="#a5b4fc"/>
+  <circle cx="12.5" cy="27" r="2"   fill="#c7d2fe"/>
+  <circle cx="19.5" cy="27" r="2"   fill="#c7d2fe"/>
+</svg>
